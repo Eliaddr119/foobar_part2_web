@@ -31,14 +31,14 @@ const SignIn = () => {
     <div>
       <h2>Sign In</h2>
       <form>
-        <label>User Name: </label>
+        <label>User Name:</label>
         <input
           type="userName"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
         <div>
-          <label>Password: </label>
+          <label>Password:</label>
           <input
             type="password"
             value={password}
@@ -49,10 +49,14 @@ const SignIn = () => {
         <button type="button" class="btn btn-primary btn-sm" onClick={handleSignIn}>
           Sign In
         </button>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        {errorMessage && <div class="alert alert-warning" role="alert">
+          {errorMessage}</div>}
       </form>
     </div>
   );
 };
 
 export default SignIn;
+
+
+
