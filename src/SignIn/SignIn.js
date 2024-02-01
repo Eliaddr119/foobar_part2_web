@@ -6,6 +6,7 @@ import { isUserRegistered } from '../userService';
 const SignIn = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = () => {
     // Check if the user is registered
@@ -16,6 +17,7 @@ const SignIn = () => {
       console.log('Sign in successful!');
     } else {
       console.log('Invalid email or password. Please try again.');
+      setErrorMessage('Invalid email or password. Please try again.');
     }
   };
 
@@ -41,12 +43,13 @@ const SignIn = () => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handleKeyPress}
+          onKeyDown={handleKeyPress} // enter key trigger password check
         />
 
         <button type="button" onClick={handleSignIn}>
           Sign In
         </button>
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       </form>
     </div>
   );
