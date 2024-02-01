@@ -1,6 +1,7 @@
 // src/components/SignIn.js
 import React, { useState } from 'react';
 import { isUserRegistered } from '../userService';
+import './SignIn.css';
 
 
 const SignIn = () => {
@@ -28,7 +29,7 @@ const SignIn = () => {
     }
   };
   return (
-    <div>
+    <div className='sign-in-container'>
       <h2>Sign In</h2>
       <form>
         <label>User Name:</label>
