@@ -31,22 +31,22 @@ const SignIn = () => {
     <div>
       <h2>Sign In</h2>
       <form>
-        <label>User Name:</label>
+        <label>User Name: </label>
         <input
           type="userName"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handleKeyPress} // enter key trigger password check
-        />
-
-        <button type="button" onClick={handleSignIn}>
+        <div>
+          <label>Password: </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyPress} // enter key trigger password check
+          />
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onClick={handleSignIn}>
           Sign In
         </button>
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
