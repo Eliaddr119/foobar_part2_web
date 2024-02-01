@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { isUserRegistered } from '../userService';
 import './SignIn.css';
+import fooBarIcon from './fooBarIcon.jpg'; // Adjust the path accordingly
 
 
 const SignIn = () => {
@@ -30,6 +31,7 @@ const SignIn = () => {
   };
   return (
     <div className='sign-in-container'>
+      <img src={fooBarIcon} alt="FooBar Icon" className="icon-img" />
       <h2>Sign In</h2>
       <form>
         <label>User Name:</label>
