@@ -1,0 +1,72 @@
+[
+    {
+        "username": "Josh Cohen",
+        "postTime": "2/2/24",
+        "content" : "Can't remember the last time when it was raining this much, wow!",
+        "likes": "4",
+        "commentsCount":"2"
+    },
+    {
+        "username": "Sarah Thompson",
+        "postTime": "2/2/24",
+        "content" : "Exploring new places is my favorite hobby! Just discovered this hidden gem. 😍",
+        "likes": 10,
+        "commentsCount": 5
+    },
+    {
+        "username": "Mike Smith",
+        "postTime": "2/2/24",
+        "content" : "Sunday brunch with friends is always a great idea!",
+        "likes": 15,
+        "commentsCount": 3
+    },
+    {
+        "username": "Emma Davis",
+        "postTime": "2/2/24",
+        "content" : "Movie night at home 🎬 What's your favorite movie?",
+        "likes": 8,
+        "commentsCount": 7
+    },
+    {
+        "username": "Chris Johnson",
+        "postTime": "2/2/24",
+        "content" : "Just finished a challenging workout. Feeling pumped!",
+        "likes": 12,
+        "commentsCount": 4
+    },
+    {
+        "username": "Olivia Miller",
+        "postTime": "2/2/24",
+        "content" : "Baking cookies and the whole house smells amazing!",
+        "likes": 20,
+        "commentsCount": 6
+    },
+    {
+        "username": "Daniel White",
+        "postTime": "2/2/24",
+        "content" : "Quiet night with a good book. Any book recommendations?",
+        "likes": 6,
+        "commentsCount": 2
+    },
+    {
+        "username": "Sophia Harris",
+        "postTime": "2/2/24",
+        "content" : "Celebrating my pet's birthday! 🎉🐾",
+        "likes": 18,
+        "commentsCount": 8
+    },
+    {
+        "username": "Alex Turner",
+        "postTime": "2/2/24",
+        "content" : "Chasing sunsets. Nature is the best artist!",
+        "likes": 25,
+        "commentsCount": 10
+    },
+    {
+        "username": "Natalie Brown",
+        "postTime": "2/2/24",
+        "content" : "Trying out a new recipe for dinner tonight. Fingers crossed it turns out delicious!",
+        "likes": 7,
+        "commentsCount": 3
+    }
+]

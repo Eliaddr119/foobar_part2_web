@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import SignIn from './SignIn/SignIn';
+import FeedPage from './PostFeed/FeedPage/FeedPage';
+
 
 function App() {
   return (
@@ -10,7 +12,9 @@ function App() {
       </header>
       <body>
         <div>
-          <SignIn />
+        </div>
+        <div>
+          <FeedPage />
         </div>
       </body>
     </div>

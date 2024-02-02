@@ -1,0 +1,23 @@
+.SideMenu {
+    width: 250 px;
+    float: left;
+}
+
+
+.list-group-item:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
+    border-color: whitesmoke;
+}
+
+.list-group-item {
+    font-size: xx-large ;
+    text-align: auto;
+    padding-top: 60px;
+    padding: auto;
+    
+}
+
+
+
+
