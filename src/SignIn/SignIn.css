@@ -1,4 +1,11 @@
 /* SignIn.css */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    /* Light gray background */
+}
+
 .sign-in-container {
     display: flex;
     flex-direction: column;
@@ -6,41 +13,71 @@
     justify-content: center;
     height: 100vh;
     position: relative;
-    /* Set the container to a relative position */
 }
 
 .icon-img {
     position: absolute;
-    top: 10px;
-    /* Adjust the top position as needed */
-    left: 10px;
-    /* Adjust the left position as needed */
+    top: 20px;
+    left: 20px;
     width: 50px;
-    /* Adjust the width as needed */
     height: auto;
-    /* Maintain aspect ratio */
 }
 
 form {
     width: 300px;
     text-align: center;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #ffffff;
+    /* White background */
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Subtle box shadow for depth */
+}
+
+h2 {
+    color: #333333;
+    /* Dark gray heading color */
 }
 
 label {
     display: block;
     margin-bottom: 8px;
+    color: #666666;
+    /* Medium gray label color */
 }
 
 input {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 16px;
+    border: 1px solid #cccccc;
+    /* Light gray border */
+    border-radius: 5px;
 }
 
 button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    /* Green button color */
+    color: #ffffff;
+    /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth transition on hover */
+
+}
+
+button:hover {
+    background-color: #45a049;
+    /* Darker green on hover */
+}
+
+.alert {
     margin-top: 16px;
+    color: #d9534f;
+    /* Red alert text color */
 }
