@@ -49,10 +49,10 @@ label {
 
 input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 16px;
+    padding: 1px;
+    margin-bottom: 10px;
+    /* Add margin-bottom to create space between input and button */
     border: 1px solid #cccccc;
-    /* Light gray border */
     border-radius: 5px;
 }
 
@@ -68,7 +68,6 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     /* Smooth transition on hover */
-
 }
 
 button:hover {
