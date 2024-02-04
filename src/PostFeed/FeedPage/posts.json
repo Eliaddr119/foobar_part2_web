@@ -1,12 +1,14 @@
 [
     {
+        "id": "1",
         "username": "Josh Cohen",
         "postTime": "2/2/24",
         "content" : "Can't remember the last time when it was raining this much, wow!",
-        "likes": "4",
+        "likes": 4,
         "commentsCount":"2"
     },
     {
+        "id": "2",
         "username": "Sarah Thompson",
         "postTime": "2/2/24",
         "content" : "Exploring new places is my favorite hobby! Just discovered this hidden gem. 😍",
@@ -14,6 +16,7 @@
         "commentsCount": 5
     },
     {
+        "id": "3",
         "username": "Mike Smith",
         "postTime": "2/2/24",
         "content" : "Sunday brunch with friends is always a great idea!",
@@ -21,6 +24,7 @@
         "commentsCount": 3
     },
     {
+        "id": "4",          
         "username": "Emma Davis",
         "postTime": "2/2/24",
         "content" : "Movie night at home 🎬 What's your favorite movie?",
@@ -28,6 +32,7 @@
         "commentsCount": 7
     },
     {
+        "id": "5",
         "username": "Chris Johnson",
         "postTime": "2/2/24",
         "content" : "Just finished a challenging workout. Feeling pumped!",
@@ -35,6 +40,7 @@
         "commentsCount": 4
     },
     {
+        "id": "6",
         "username": "Olivia Miller",
         "postTime": "2/2/24",
         "content" : "Baking cookies and the whole house smells amazing!",
@@ -42,6 +48,7 @@
         "commentsCount": 6
     },
     {
+        "id": "7",
         "username": "Daniel White",
         "postTime": "2/2/24",
         "content" : "Quiet night with a good book. Any book recommendations?",
@@ -49,6 +56,7 @@
         "commentsCount": 2
     },
     {
+        "id": "8",
         "username": "Sophia Harris",
         "postTime": "2/2/24",
         "content" : "Celebrating my pet's birthday! 🎉🐾",
@@ -56,6 +64,7 @@
         "commentsCount": 8
     },
     {
+        "id": "9",
         "username": "Alex Turner",
         "postTime": "2/2/24",
         "content" : "Chasing sunsets. Nature is the best artist!",
@@ -63,6 +72,7 @@
         "commentsCount": 10
     },
     {
+        "id": "10",
         "username": "Natalie Brown",
         "postTime": "2/2/24",
         "content" : "Trying out a new recipe for dinner tonight. Fingers crossed it turns out delicious!",

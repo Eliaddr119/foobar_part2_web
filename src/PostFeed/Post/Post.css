@@ -1,4 +1,5 @@
 .postRectangle {
+    margin-top: 100px;
     margin-bottom: 100px;
     background-color: whitesmoke;
     padding: 30px;
@@ -16,6 +17,6 @@
     margin: 0;
 }
 
-.btn-outline-primary {
+.btn-outline-success {
     width: 270px;
 }
