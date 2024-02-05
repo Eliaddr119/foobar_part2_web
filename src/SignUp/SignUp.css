@@ -121,3 +121,13 @@ button:hover {
     border: none;
     cursor: pointer;
 }
+
+.click-here {
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.click-here:hover {
+    color: #007bff;
+}

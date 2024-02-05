@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import userIcon from '../Assets/person.png';
 import passwordIcon from '../Assets/password.png';
 import imgIcon from '../Assets/image.svg';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './SignUp.css';
 
 function SignUp() {
@@ -46,7 +46,7 @@ function SignUp() {
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
 
     const isPasswordIsStrong = passwordStrength(password);
@@ -121,7 +121,7 @@ function SignUp() {
           <div className='card-header'>Create a new account</div>
           {isSuccess && <div className="success-message">Signup successful!</div>}
           <div className='card-body'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
               {error && <div className="error-message">{error}</div>}
               <div className="input-wrapper">
                 <input type='text' placeholder='Username' className='input-field' required value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -142,17 +142,21 @@ function SignUp() {
                 <input type='text' placeholder='Display Name' className='input-field' required value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
                 <img src={userIcon} alt="User Icon" className="input-icon" />
               </div>
-              <br /> 
+              <br />
               <div className="input-wrapper" >
-              <img src={imgIcon} alt="User Icon" className="input-icon" id = "imag-icon" />
+                <img src={imgIcon} alt="img Icon" className="input-icon" id="imag-icon" />
               </div>
               <div className="profile-w">
-              <label htmlFor='image' id="profile" className='input-label'>Profile Image</label>
-              <input type='file' id='image' name='image' className='input-field' required onChange={handleImageUpload} />
+                <label htmlFor='image' id="profile" className='input-label'>Profile Image</label>
+                <input type='file' id='image' name='image' className='input-field' required onChange={handleImageUpload} />
               </div>
               <br />
               {image && <img src={image} alt='' className='uploaded-image' />}
               <button type='submit'>Sign Up</button>
+              <text>Back to Sign In </text>
+              <Link to="/SignIn">
+                <span className="click-here">click here</span>
+              </Link>
             </form>
           </div>
         </div>

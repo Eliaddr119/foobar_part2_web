@@ -1,13 +1,16 @@
 // src/components/SignIn.js
 import React, { useState } from 'react';
 import { isUserRegistered } from '../userService';
+import { useNavigate,Link} from 'react-router-dom';
+import userIcon from '../Assets/person.png';
+import passwordIcon from '../Assets/password.png';
 import './SignIn.css';
 
 const SignIn = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
+  const Navigate = useNavigate();
   const handleSignIn = () => {
     // Check if the user is registered
     const userExists = isUserRegistered(userName, password);
@@ -15,10 +18,10 @@ const SignIn = () => {
     if (userExists) {
       // Add authentication logic here
       console.log('Sign in successful!');
-      // todo -  navigate to post page
+      Navigate('/FeedPage');
     } else {
-      console.log('Invalid email or password. Please try again.');
-      setErrorMessage('Invalid email or password. Please try again.');
+      console.log('Invalid UserName or Password. Please try again.');
+      setErrorMessage('Invalid UserName or Password. Please try again.');
     }
   };
 
@@ -33,34 +36,30 @@ const SignIn = () => {
     <div className='sign-in-container'>
       <h1 className='header'>FOOBAR</h1>
       <div className='registration-card-container'>
-        <div className='registration-card'>
+        <div className='registration-card' id='r-c'>
           <div className='card-header'>Sign In</div>
           <form>
             {errorMessage && <div className="error-message">{errorMessage}</div>}
             <div className="input-wrapper">
-              <input
-                type='text'
-                placeholder='User Name'
-                className='input-field'
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
+              <input type='text' placeholder='User Name' className='input-field' value={userName} onChange={(e) => setUserName(e.target.value)}/>
+              <img src={userIcon} alt="User Icon" className="input-icon" />
             </div>
             <br />
             <div className="input-wrapper">
-              <input
-                type='password'
-                placeholder='Password'
-                className='input-field'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyDown={handleKeyPress}
-              />
+              <input type='password' placeholder='Password' className='input-field' value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyPress}/>
+              <img src={passwordIcon} alt="password Icon" className="input-icon" />
             </div>
             <br />
-            <button type="button" className="btn btn-primary btn-sm" onClick={handleSignIn}>
+            <div className='sign-up-sign-in'>
+            <button type="button" id="btt-st" className="btn btn-primary btn-sm" onClick={handleSignIn}>
               Sign In
             </button>
+            <text>Don't have an acount </text>
+              <Link to="/SignIn">
+                <span className="click-here">click here</span>
+              </Link>
+                <text> to create one</text>
+            </div>
           </form>
         </div>
       </div>
