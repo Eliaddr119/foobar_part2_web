@@ -1,0 +1,26 @@
+.postRectangle {
+    background-color: rgb(232, 253, 232);
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.Post{
+    margin-bottom: 100px;
+}
+
+
+
+.rounded-circle {
+    height: 75px;
+    align-self: start;
+}
+
+.fs-7 {
+    font-size: medium;
+    padding: 0;
+    margin: 0;
+}
+
+.btn-outline-success {
+    width: 33%;
+}

@@ -1,0 +1,9 @@
+#commentRectangle{
+    border-color: black;
+    background-color: rgb(232, 253, 232);
+    border-radius: 25px;
+    margin-top: 20px;
+    text-align: start;
+    width: 90%;
+    align-self: self-start;
+}
