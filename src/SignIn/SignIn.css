@@ -16,14 +16,6 @@ body {
     position: relative;
 }
 
-.icon-img {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 50px;
-    height: auto;
-}
-
 form {
     text-align: center;
     margin: 0 auto;
@@ -52,7 +44,12 @@ input {
     border-radius: 5px;
 }
 
-button {
+.alert {
+    margin-top: 16px;
+    color: #d9534f;
+}
+
+#btt-st{
     width: 100%;
     padding: 10px;
     background-color: #2dd27d; /* Matched color with the button in the sign-up page */
@@ -63,12 +60,9 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-button:hover {
+#btt-st:hover {
     background-color: green;
 }
-
-.alert {
-    margin-top: 16px;
-    color: #d9534f;
+#r-c{
+    width: 90%;
 }
