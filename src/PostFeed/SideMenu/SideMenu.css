@@ -1,5 +1,5 @@
 
-#sideMenu:hover {
+.list-group-item:hover {
     cursor: pointer;
     background-color: whitesmoke;
     border-color: whitesmoke;
