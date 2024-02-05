@@ -1,26 +1,26 @@
 import "./Post.css";
-import {useState} from 'react';
-import { useRef } from 'react';
+import "../Comment/Comment.js";
+import { useState } from "react";
+import { useRef } from "react";
+import Comment from "../Comment/Comment.js";
 
 function Post(post) {
+  const [commentList, setPostsList] = useState(post.comments);
   var likeinit = Number(post.likes);
   const [likes, setLikes] = useState(likeinit);
   const likeButtonRef = useRef(null);
   const handleLikeClick = () => {
-   if (likes === post.likes) {
-    setLikes(likes+1);
-    likeButtonRef.current.classList.toggle('active');
-   }
-   else {
-    setLikes(likes-1);
-    likeButtonRef.current.classList.remove('active');
-   }
-   
-   
-  }
-
+    if (likes === post.likes) {
+      setLikes(likes + 1);
+      likeButtonRef.current.classList.toggle("active");
+    } else {
+      setLikes(likes - 1);
+      likeButtonRef.current.classList.remove("active");
+    }
+  };
 
   return (
+    <div className="Post">
     <div className="container-fluid">
       <div className="postRectangle">
         <div className="d-flex">
@@ -30,7 +30,7 @@ function Post(post) {
             src="https://bootdey.com/img/Content/avatar/avatar1.png"
           />
           <div className="fs-2 ms-2 pb-4">
-            {post.username}
+            {post.user.displayName}
             <p className="fs-5 ">{post.postTime}</p>
           </div>
         </div>
@@ -41,7 +41,15 @@ function Post(post) {
           <span className="fs-4 ms-2">{likes}</span>
           <div className="text-end fs-4">{post.commentsCount} Comments</div>
           <div className="btn-group-lg text-center mt-3" role="group">
-            <button onClick={handleLikeClick} type="button" role="button"  ref={likeButtonRef} data-bs-toggle="button" aria-pressed="true" className="btn btn-outline-success">
+            <button
+              onClick={handleLikeClick}
+              type="button"
+              role="button"
+              ref={likeButtonRef}
+              data-bs-toggle="button"
+              aria-pressed="true"
+              className="btn btn-outline-success"
+            >
               <i className="me-2 bi bi-hand-thumbs-up-fill"></i> Like
             </button>
             <button type="button" className="btn btn-outline-success">
@@ -55,6 +63,12 @@ function Post(post) {
           </div>
         </div>
       </div>
+      <div className="container-fluid">
+        {commentList.map((comment) => (
+          <Comment {...comment} />
+        ))}
+      </div>
+    </div>
     </div>
   );
 }

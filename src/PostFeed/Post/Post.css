@@ -1,9 +1,14 @@
 .postRectangle {
-    margin-bottom: 100px;
     background-color: rgb(232, 253, 232);
     padding: 30px;
     border-radius: 25px;
 }
+
+.Post{
+    margin-bottom: 100px;
+}
+
+
 
 .rounded-circle {
     height: 75px;
@@ -17,5 +22,5 @@
 }
 
 .btn-outline-success {
-    width: 270px;
+    width: 33%;
 }
