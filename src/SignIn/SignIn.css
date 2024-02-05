@@ -1,9 +1,10 @@
 /* SignIn.css */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    /* Light gray background */
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-in-container {
@@ -24,59 +25,50 @@ body {
 }
 
 form {
-    width: 300px;
     text-align: center;
     margin: 0 auto;
-    background-color: #ffffff;
-    /* White background */
+    background-color: #fff; /* White background */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Subtle box shadow for depth */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    align-items: flex-start; /* Align children at the start of the cross axis (vertically) */
 }
 
 h2 {
-    color: #333333;
-    /* Dark gray heading color */
+    color: cadetblue; /* Matched color with the header in the sign-up page */
 }
 
 label {
     display: block;
     margin-bottom: 8px;
     color: #666666;
-    /* Medium gray label color */
 }
 
 input {
     width: 100%;
-    padding: 1px;
+    padding: 10px;
     margin-bottom: 10px;
-    /* Add margin-bottom to create space between input and button */
-    border: 1px solid #cccccc;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4caf50;
-    /* Green button color */
-    color: #ffffff;
-    /* White text color */
-    border: none;
+    background-color: #2dd27d; /* Matched color with the button in the sign-up page */
+    border: 1px solid black;
+    color: #fff;
+    font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    /* Smooth transition on hover */
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #45a049;
-    /* Darker green on hover */
+    background-color: green;
 }
 
 .alert {
     margin-top: 16px;
     color: #d9534f;
-    /* Red alert text color */
 }
