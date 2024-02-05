@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import userIcon from '../Assets/person.png';
 import passwordIcon from '../Assets/password.png';
 import imgIcon from '../Assets/image.svg';
+import {useNavigate} from 'react-router-dom';
 import './SignUp.css';
 
 function SignUp() {
@@ -12,7 +13,7 @@ function SignUp() {
   const [displayName, setDisplayName] = useState('');
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
-
+  const nevigate = useNavigate();
   useEffect(() => {
     if (error) {
       setTimeout(() => setError(null), 4_000);
@@ -73,7 +74,6 @@ function SignUp() {
         setError('Username already exists.');
         return;
       }
-
       // Add the new user to the array
       storedUsers.push(user);
 
@@ -93,6 +93,7 @@ function SignUp() {
       setConfirmPassword('');
       setDisplayName('');
       setImage(null);
+      nevigate('/SignIn');
 
       // ... (e.g., redirect to a different page or display a success message)
 
