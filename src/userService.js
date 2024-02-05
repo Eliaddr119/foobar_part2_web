@@ -2,7 +2,7 @@
 
 // Function to get all registered users from localStorage
 export const getAllUsers = () => {
-    const usersJSON = localStorage.getItem('users');
+    const usersJSON = sessionStorage.getItem('users');
     return usersJSON ? JSON.parse(usersJSON) : [];
 };
 
@@ -16,5 +16,5 @@ export const isUserRegistered = (userName, password) => {
 export const registerUser = (user) => {
     const users = getAllUsers();
     users.push(user);
-    localStorage.setItem('users', JSON.stringify(users));
+    sessionStorage.setItem('users', JSON.stringify(users));
 };
