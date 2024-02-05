@@ -16,6 +16,7 @@ const SignIn = () => {
     if (userExists) {
       // Add authentication logic here
       console.log('Sign in successful!');
+      // todo -  navigate to post page
     } else {
       console.log('Invalid email or password. Please try again.');
       setErrorMessage('Invalid email or password. Please try again.');
