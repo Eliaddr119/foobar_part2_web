@@ -1,0 +1,19 @@
+.writePostRectangle{
+    margin-top: 100px;
+    margin-bottom: 75px;
+    background-color: rgb(224, 251, 224);
+    padding: 30px;
+    border-radius: 100px;
+    border-color: black;
+    border-style:ridge;
+}
+
+.postUpFont {
+    margin-bottom: 10px;
+    font-size: x-large;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+#uploadInput{
+    border-radius: 100px;
+}

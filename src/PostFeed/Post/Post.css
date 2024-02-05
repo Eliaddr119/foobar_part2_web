@@ -1,7 +1,6 @@
 .postRectangle {
-    margin-top: 100px;
     margin-bottom: 100px;
-    background-color: whitesmoke;
+    background-color: rgb(224, 251, 224);
     padding: 30px;
     border-radius: 25px;
 }

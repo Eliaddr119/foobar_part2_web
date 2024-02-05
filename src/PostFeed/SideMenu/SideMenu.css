@@ -1,8 +1,7 @@
 
 .list-group-item:hover {
     cursor: pointer;
-    background-color: whitesmoke;
-    border-color: whitesmoke;
+    background-color: rgb(247, 255, 247);;
     border-radius: 20px;
 }
 
