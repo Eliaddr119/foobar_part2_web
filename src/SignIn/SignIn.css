@@ -29,7 +29,9 @@ form {
 h2 {
     color: cadetblue; /* Matched color with the header in the sign-up page */
 }
-
+h1.header{
+    margin-inline-start: -54px;
+}
 label {
     display: block;
     margin-bottom: 8px;
