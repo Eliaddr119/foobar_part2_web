@@ -18,3 +18,10 @@ export const registerUser = (user) => {
     users.push(user);
     sessionStorage.setItem('users', JSON.stringify(users));
 };
+
+export const findUser = (username) => {
+    const storedUsers = JSON.parse(sessionStorage.getItem('users')) || [];
+    const userFound = storedUsers.find(user => user.username === username);
+    return userFound;
+
+}

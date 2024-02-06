@@ -9,13 +9,13 @@ function FeedPage() {
   const [postsList, setPostsList] = useState(posts);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" id="feedContainer">
       <div className="row">
         <Navbar />
       </div>
 
       <div className="row mt-5">
-        <div className="col-3  ">
+        <div className="col-3"  id="sideCol">
           <div className>
             <SideMenu />
           </div>

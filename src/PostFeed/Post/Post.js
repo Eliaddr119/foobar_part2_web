@@ -6,9 +6,12 @@ import { useRef } from "react";
 import Comment from "../Comment/Comment.js";
 
 function Post(post) {
-  const [commentList, setPostsList] = useState(post.comments);
+  const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
   const [writeCommentShow, setWriteCommentShow] = useState(false);
+  const [commentInput, setCommentInput] = useState("");
+  const [countComments, setCommentCount] = useState(Number(post.commentsCount));
+
   var likeinit = Number(post.likes);
   const [likes, setLikes] = useState(likeinit);
   const likeButtonRef = useRef(null);
@@ -29,10 +32,32 @@ function Post(post) {
     setWriteCommentShow(false);
   };
 
+  const handleSubmit = (event) => {
+    const storedUserObject = sessionStorage.getItem("current_usr");
+    const currentUser = JSON.parse(storedUserObject);
+    event.preventDefault();
+    const newComment = {id: "c" + Number(post.commentsCount) + 1,
+      user: {
+        username: currentUser.username,
+        displayName: currentUser.displayName,
+      },
+      commentTime: "Just Now",
+      content: commentInput,
+    };
+    setCommentList([...commentList, newComment]);
+    setCommentCount(countComments+1);
+    setCommentInput("")
+    handleClose();
+  };
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setCommentInput(value)
+  };
+
   return (
     <>
-      <Modal 
-        id = "AddCommentModal"
+      <Modal
+        id="AddCommentModal"
         size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -42,12 +67,24 @@ function Post(post) {
         <Modal.Header closeButton>
           <Modal.Title>Add a comment</Modal.Title>
         </Modal.Header>
-        <form id="textBox"><input placeholder="Write your comment here" id="commentInput"></input></form>
+        <form id="textBox" onSubmit={handleSubmit}>
+          <input
+            name="commentContent"
+            value={commentInput}
+            onChange={handleChange}
+            placeholder="Write your comment here"
+            id="commentInput"
+          ></input>
+        </form>
         <Modal.Footer>
-          <button className="btn btn-outline-secondary"  onClick={handleClose}>
+          <button className="btn btn-outline-secondary" onClick={handleClose}>
             Close
           </button>
-          <button className="btn btn-outline-success" onClick={handleClose}>
+          <button
+            className="btn btn-outline-success"
+            type="submit"
+            onClick={handleSubmit}
+          >
             Publish
           </button>
         </Modal.Footer>
@@ -55,7 +92,7 @@ function Post(post) {
 
       <div className="Post">
         <div className="container-fluid">
-          <div className="postRectangle">
+          <div id="postRectangle">
             <div className="d-flex">
               <img
                 className="rounded-circle"
@@ -77,7 +114,7 @@ function Post(post) {
                   onClick={() => setCommentShow(!commentShow)}
                   id="commentsButton"
                 >
-                  {post.commentsCount} Comments
+                  {countComments} Comments
                 </button>
               </div>
               <div className="btn-group-lg text-center mt-3" role="group">

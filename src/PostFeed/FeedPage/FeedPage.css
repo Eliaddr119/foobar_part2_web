@@ -3,3 +3,15 @@ div.sticky {
     position: sticky;
     top: 0;
 }
+
+#sideCol {
+    align-self: flex-start;
+}
+
+#feedContainer{
+    justify-content: first baseline;
+}
+
+body{
+    display: inline;
+}

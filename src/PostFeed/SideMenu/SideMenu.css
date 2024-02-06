@@ -15,7 +15,7 @@
 #sideMenu{
 margin-top: 105px;
 width: 250 px;
-    float: left;
+flex:auto;
 }
 
 

@@ -1,6 +1,6 @@
 // src/components/SignIn.js
 import React, { useState } from 'react';
-import { isUserRegistered } from '../userService';
+import { findUser, isUserRegistered } from '../userService';
 import { useNavigate,Link} from 'react-router-dom';
 import userIcon from '../Assets/person.png';
 import passwordIcon from '../Assets/password.png';
@@ -18,6 +18,7 @@ const SignIn = () => {
     if (userExists) {
       // Add authentication logic here
       console.log('Sign in successful!');
+      sessionStorage.setItem('current_usr',JSON.stringify(findUser(userName)));
       Navigate('/FeedPage');
     } else {
       console.log('Invalid UserName or Password. Please try again.');

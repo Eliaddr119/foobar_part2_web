@@ -1,11 +1,11 @@
-.postRectangle {
+#postRectangle {
     background-color: rgb(232, 253, 232);
-    padding: 30px;
+    padding: 5%;
     border-radius: 25px;
 }
 
 .Post{
-    margin-bottom: 100px;
+    margin-bottom: 10%;
 }
 
 
