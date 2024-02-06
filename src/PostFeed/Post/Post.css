@@ -24,3 +24,27 @@
 .btn-outline-success {
     width: 33%;
 }
+
+#commentsButton{
+    border-style: none;
+    padding: 0%;
+    background-color: transparent;
+}
+
+#addCommentModal{
+    padding: 100px;
+    border-radius: 25%;
+}
+
+#commentInput{
+    padding-bottom: 5%;
+    width: 95%;
+    margin: 2%;
+    border-color: whitesmoke;
+    
+}
+
+#textBox{
+    text-align: center;
+    border-radius: 10%;
+}

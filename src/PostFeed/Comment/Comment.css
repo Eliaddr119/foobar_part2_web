@@ -7,3 +7,9 @@
     width: 90%;
     align-self: self-start;
 }
+
+#commentImage{
+    height: 50px;
+    align-self: start;
+    margin: 2%;
+}
