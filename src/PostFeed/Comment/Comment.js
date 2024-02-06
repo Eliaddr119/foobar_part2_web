@@ -6,13 +6,14 @@ function Comment(comment) {
       <div id="commentRectangle">
         <div className="d-flex">
           <img
-            className="rounded-circle"
+          id="commentImage"
+            className="rounded-circle" 
             alt="avatar1"
             src="https://bootdey.com/img/Content/avatar/avatar1.png"
           />
           <div className="fs-2 ms-2">
             {comment.user.displayName}
-            <p className="fs-5 ">{comment.postTime}</p>
+            <p className="fs-5 ">{comment.commentTime}</p>
           </div>
         </div>
 
