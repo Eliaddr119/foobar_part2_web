@@ -1,7 +1,7 @@
 import './App.css';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import SignIn from '../SignIn/SignIn';
-import SignUp from "../SignUp/SignUp";
+import SignUp from "../SignUp/signUp";
 import FeedPage from '../PostFeed/FeedPage/FeedPage';
 
 function App() {
