@@ -1,14 +1,12 @@
 #navHead{
     color: white;
     font-size:50pt;
-    font-family:sans-serif-klavika
+    font-family:sans-serif-klavika;
 }
 
 #formBar {
     width: 50%;
     margin-right: 1%;
-    align-content: end;
-    align-items: end;
     text-align: end;
 }
 

@@ -8,14 +8,10 @@ div.sticky {
     align-self: flex-start;
 }
 
-#feedContainer{
-    justify-content: first baseline;
-}
-
 
 
 .writePostRectangle{
-    margin-top: 100px;
+    margin-top: 500px;
     margin-bottom: 50px;
     background-color: rgb(232, 253, 232);
     padding: 30px;
@@ -33,7 +29,6 @@ div.sticky {
 
 #uploadInput{
     border-radius: 100px;
-    padding: 50%;
 }
 
 #postUploadButton{
@@ -43,6 +38,5 @@ div.sticky {
     margin-left: 25%;
 }
 
-#textBoxPost{
-    width:fit-content
-}
+
+

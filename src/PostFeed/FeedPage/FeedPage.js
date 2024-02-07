@@ -3,7 +3,7 @@ import SideMenu from "../SideMenu/SideMenu";
 import posts from "./posts.json";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
-import { Modal } from "bootstrap"
+import { Modal } from "bootstrap";
 
 function FeedPage() {
   const [postsList, setPostsList] = useState(posts);
@@ -17,7 +17,7 @@ function FeedPage() {
       return;
     }
     const newPost = {
-      id:  toString(postsList.length + 1),
+      id: toString(postsList.length + 1),
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
@@ -26,7 +26,7 @@ function FeedPage() {
       content: postInput,
       likes: 0,
       commentsCount: "0",
-      comments:[]
+      comments: [],
     };
     setPostsList([...postsList, newPost]);
     setpostInput("");
@@ -100,19 +100,19 @@ function FeedPage() {
           </div>
           <div class="col-6  ">
             <div className="row">
-            <div className="container-fluid">
-              <div className="writePostRectangle">
-              <div className="postUpFont">Upload A Post</div>
-              <input
-                className="form-control"
-                id="uploadInput"
-                type="text"
-                placeholder="Write about something !"
-                aria-label="Write about something !"
-                data-bs-toggle="modal"
-                data-bs-target="#postModal"
-              ></input>
-              </div>
+              <div className="container-fluid">
+                <div className="writePostRectangle">
+                  <div className="postUpFont">Upload A Post</div>
+                  <input
+                    className="form-control"
+                    id="uploadInput"
+                    type="text"
+                    placeholder="Write about something !"
+                    aria-label="Write about something !"
+                    data-bs-toggle="modal"
+                    data-bs-target="#postModal"
+                  ></input>
+                </div>
               </div>
             </div>
             {postsList.map((post, key) => (
