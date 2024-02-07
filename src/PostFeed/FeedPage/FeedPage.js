@@ -90,8 +90,9 @@ function FeedPage() {
 
       <Navbar />
       <div className="row mt-5"></div>
-      <div className="row mt-5 mb-5"></div>
+      <div className="row mt-5 mb-5" ></div>
       <div className="row mt-5 mb-5 ">
+
         <div className="col-3" id="sideCol">
           <div className>
             <SideMenu />
@@ -101,19 +102,19 @@ function FeedPage() {
         <div class="col-6" id="postCol">
           <div className="container-fluid" id="writePostRectangle">
             <form>
-              <div className="postUpFont">Upload A Post</div>
-              <input
-                className="form-control"
-                id="uploadInput"
-                type="text"
-                placeholder="Write about something !"
-                aria-label="Write about something !"
-                data-bs-toggle="modal"
-                data-bs-target="#postModal"
-              ></input>
+            <div className="postUpFont">Upload A Post</div>
+            <input
+              className="form-control"
+              id="uploadInput"
+              type="text"
+              placeholder="Write about something !"
+              aria-label="Write about something !"
+              data-bs-toggle="modal"
+              data-bs-target="#postModal"
+            ></input>
             </form>
           </div>
-
+          
           {postsList.map((post, key) => (
             <Post {...post} key={post.id} />
           ))}
