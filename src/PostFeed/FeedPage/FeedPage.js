@@ -87,10 +87,10 @@ function FeedPage() {
           </div>
         </div>
       </div>
+
+      <body>
       <div className="container-fluid" id="feedContainer">
-        <div className="row">
-          <Navbar />
-        </div>
+        <Navbar/>
 
         <div className="row mt-5">
           <div className="col-3" id="sideCol">
@@ -120,7 +120,9 @@ function FeedPage() {
             ))}
           </div>
         </div>
+        
       </div>
+      </body>
     </>
   );
 }
