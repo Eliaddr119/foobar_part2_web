@@ -3,12 +3,12 @@ import "../Comment/Comment.js";
 import { useState } from "react";
 import { useRef } from "react";
 import Comment from "../Comment/Comment.js";
-import { Modal } from "bootstrap";
+import { Modal } from "bootstrap"
+
 
 function Post(post) {
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
-  const [writeCommentShow, setWriteCommentShow] = useState(false);
   const [commentInput, setCommentInput] = useState("");
   const [countComments, setCommentCount] = useState(Number(post.commentsCount));
 
@@ -26,11 +26,9 @@ function Post(post) {
   };
 
  
-  const handleClose = () => {
-    setWriteCommentShow(false);
-  };
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = (event,postId) => {
     const storedUserObject = sessionStorage.getItem("current_usr");
     const currentUser = JSON.parse(storedUserObject);
     event.preventDefault();
@@ -79,12 +77,12 @@ function Post(post) {
               ></button>
             </div>
             <div className="modal-body">
-              <form id="textBox" onSubmit={handleSubmit}>
+              <form id="textBox" onSubmit={(e) => handleSubmit(e, post.id)}>
                 <input
                   name="commentContent"
                   value={commentInput}
                   onChange={handleChange}
-                  placeholder="Write your comment here"
+                  placeholder="Write your comment here..."
                   id="commentInput"
                 ></input>
               </form>
@@ -139,11 +137,9 @@ function Post(post) {
               <div className="btn-group-lg text-center mt-3" role="group">
                 <button
                   onClick={handleLikeClick}
-                  type="button"
-                  role="button"
+
                   ref={likeButtonRef}
-                  data-bs-toggle="button"
-                  aria-pressed="true"
+                
                   className="btn btn-outline-success"
                 >
                   <i className="me-2 bi bi-hand-thumbs-up-fill"></i> Like
@@ -167,6 +163,7 @@ function Post(post) {
           <div className="container-fluid">
             {commentShow &&
               commentList.map((comment) => <Comment {...comment} />)}
+              
           </div>
         </div>
       </div>
