@@ -88,41 +88,37 @@ function FeedPage() {
         </div>
       </div>
 
-      <body>
-      <div className="container-fluid" id="feedContainer">
-        <Navbar/>
-
-        <div className="row mt-5">
-          <div className="col-3" id="sideCol">
-            <div className>
-              <SideMenu />
-            </div>
-          </div>
-          <div class="col-6  ">
-            <div className="row">
-              <div className="container-fluid">
-                <div className="writePostRectangle">
-                  <div className="postUpFont">Upload A Post</div>
-                  <input
-                    className="form-control"
-                    id="uploadInput"
-                    type="text"
-                    placeholder="Write about something !"
-                    aria-label="Write about something !"
-                    data-bs-toggle="modal"
-                    data-bs-target="#postModal"
-                  ></input>
-                </div>
-              </div>
-            </div>
-            {postsList.map((post, key) => (
-              <Post {...post} key={post.id} />
-            ))}
+      <Navbar />
+      <div className="row mt-5"></div>
+      <div className="row mt-5 mb-5"></div>
+      <div className="row mt-5 mb-5 ">
+        <div className="col-3" id="sideCol">
+          <div className>
+            <SideMenu />
           </div>
         </div>
-        
+
+        <div class="col-6" id="postCol">
+          <div className="container-fluid" id="writePostRectangle">
+            <form>
+              <div className="postUpFont">Upload A Post</div>
+              <input
+                className="form-control"
+                id="uploadInput"
+                type="text"
+                placeholder="Write about something !"
+                aria-label="Write about something !"
+                data-bs-toggle="modal"
+                data-bs-target="#postModal"
+              ></input>
+            </form>
+          </div>
+
+          {postsList.map((post, key) => (
+            <Post {...post} key={post.id} />
+          ))}
+        </div>
       </div>
-      </body>
     </>
   );
 }

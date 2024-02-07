@@ -10,11 +10,11 @@ div.sticky {
 
 
 
-.writePostRectangle{
-    margin-top: 500px;
-    margin-bottom: 50px;
+#writePostRectangle{
+    margin-top: 100px;
+    margin-bottom: 50%;
     background-color: rgb(232, 253, 232);
-    padding: 30px;
+    padding: 50px;
     border-radius: 30px;
     border-color: black;
     border-style:ridge;
@@ -37,6 +37,21 @@ div.sticky {
     width: 50%;
     margin-left: 25%;
 }
+
+.custom-margin-top{
+    margin-top: 50%;
+}
+
+#postCol{
+    align-self: center;
+    margin-top: 200px;
+}
+
+#addPostCont{
+    height: 100;
+}
+
+
 
 
 
