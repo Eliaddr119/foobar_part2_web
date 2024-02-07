@@ -3,6 +3,7 @@ import "../Comment/Comment.js";
 import { useState } from "react";
 import { useRef } from "react";
 import Comment from "../Comment/Comment.js";
+import { Modal } from "bootstrap";
 
 function Post(post) {
   const [commentList, setCommentList] = useState(post.comments);
@@ -24,11 +25,18 @@ function Post(post) {
     }
   };
 
+ 
+  const handleClose = () => {
+    setWriteCommentShow(false);
+  };
 
   const handleSubmit = (event) => {
     const storedUserObject = sessionStorage.getItem("current_usr");
     const currentUser = JSON.parse(storedUserObject);
     event.preventDefault();
+    if (commentInput ==="") {
+      return;
+    }
     const newComment = {
       id: "c" + Number(post.commentsCount) + 1,
       user: {
@@ -52,12 +60,12 @@ function Post(post) {
     <>
       <div
         className="modal fade"
-        id="addCommentModal"
+        id="exampleModal"
         tabindex="-1"
         aria-labelledby="commentModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-xl">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="commentModalLabel">
@@ -144,7 +152,7 @@ function Post(post) {
                   type="button"
                   className="btn btn-outline-success"
                   data-bs-toggle="modal"
-                  data-bs-target="#addCommentModal"
+                  data-bs-target="#exampleModal"
                 >
                   <i className="me-2 bi bi-chat-left-fill"></i>
                   Comment
