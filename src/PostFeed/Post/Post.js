@@ -1,6 +1,5 @@
 import "./Post.css";
 import "../Comment/Comment.js";
-import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import { useRef } from "react";
 import Comment from "../Comment/Comment.js";
@@ -25,18 +24,13 @@ function Post(post) {
     }
   };
 
-  const handleCommentAdd = () => {
-    setWriteCommentShow(true);
-  };
-  const handleClose = () => {
-    setWriteCommentShow(false);
-  };
 
   const handleSubmit = (event) => {
     const storedUserObject = sessionStorage.getItem("current_usr");
     const currentUser = JSON.parse(storedUserObject);
     event.preventDefault();
-    const newComment = {id: "c" + Number(post.commentsCount) + 1,
+    const newComment = {
+      id: "c" + Number(post.commentsCount) + 1,
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
@@ -45,50 +39,67 @@ function Post(post) {
       content: commentInput,
     };
     setCommentList([...commentList, newComment]);
-    setCommentCount(countComments+1);
-    setCommentInput("")
-    handleClose();
+    setCommentCount(countComments + 1);
+    setCommentInput("");
+    setCommentShow(true);
   };
   const handleChange = (event) => {
     const value = event.target.value;
-    setCommentInput(value)
+    setCommentInput(value);
   };
 
   return (
     <>
-      <Modal
-        id="AddCommentModal"
-        size="xl"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={writeCommentShow}
-        onHide={handleClose}
+      <div
+        className="modal fade"
+        id="addCommentModal"
+        tabindex="-1"
+        aria-labelledby="commentModalLabel"
+        aria-hidden="true"
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Add a comment</Modal.Title>
-        </Modal.Header>
-        <form id="textBox" onSubmit={handleSubmit}>
-          <input
-            name="commentContent"
-            value={commentInput}
-            onChange={handleChange}
-            placeholder="Write your comment here"
-            id="commentInput"
-          ></input>
-        </form>
-        <Modal.Footer>
-          <button className="btn btn-outline-secondary" onClick={handleClose}>
-            Close
-          </button>
-          <button
-            className="btn btn-outline-success"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Publish
-          </button>
-        </Modal.Footer>
-      </Modal>
+        <div className="modal-dialog modal-dialog-centered modal-xl">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="commentModalLabel">
+                Add a comment
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form id="textBox" onSubmit={handleSubmit}>
+                <input
+                  name="commentContent"
+                  value={commentInput}
+                  onChange={handleChange}
+                  placeholder="Write your comment here"
+                  id="commentInput"
+                ></input>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-outline-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                className="btn btn-outline-success"
+                type="submit"
+                onClick={handleSubmit}
+                data-bs-dismiss="modal"
+              >
+                Publish
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="Post">
         <div className="container-fluid">
@@ -132,7 +143,8 @@ function Post(post) {
                 <button
                   type="button"
                   className="btn btn-outline-success"
-                  onClick={handleCommentAdd}
+                  data-bs-toggle="modal"
+                  data-bs-target="#addCommentModal"
                 >
                   <i className="me-2 bi bi-chat-left-fill"></i>
                   Comment
