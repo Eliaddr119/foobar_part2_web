@@ -21,6 +21,8 @@ div.sticky {
     box-shadow: 5px 5px 5px gray;
 }
 
+
+
 .postUpFont {
     margin-bottom: 10px;
     font-size: x-large;
@@ -49,6 +51,10 @@ div.sticky {
 
 #addPostCont{
     height: 100;
+}
+
+.form-check-input-checked{
+    color: green;
 }
 
 

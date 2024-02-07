@@ -107,26 +107,26 @@ function Post(post) {
         </div>
       </div>
 
-      <div className="Post">
+      <div className="container-fluid">
+      <div className="card text-bg-light" id="postCard">
         <div className="container-fluid">
-          <div id="postRectangle">
             <div className="d-flex">
               <img
                 className="rounded-circle"
                 alt="avatar1"
                 src="https://bootdey.com/img/Content/avatar/avatar1.png"
               />
-              <div className="fs-2 ms-2 pb-4">
+              <h5 className="fs-2 ms-2 pb-4">
                 {post.user.displayName}
                 <p className="fs-5 ">{post.postTime}</p>
-              </div>
+              </h5>
             </div>
 
             <span className="container-fluid fs-3 pb-5">{post.content}</span>
             <div className="ms-2 pt-2">
               <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
               <span className="fs-4 ms-2">{likes}</span>
-              <div className="text-end fs-4">
+              <div className="text-end fs-4" id="commentCountText">
                 <button
                   onClick={() => setCommentShow(!commentShow)}
                   id="commentsButton"
@@ -161,11 +161,12 @@ function Post(post) {
             </div>
           </div>
           <div className="container-fluid">
-            {commentShow &&
-              commentList.map((comment) => <Comment {...comment} />)}
+            
               
-          </div>
         </div>
+      </div>
+      {commentShow &&
+              commentList.map((comment) => <Comment {...comment} />)}
       </div>
     </>
   );

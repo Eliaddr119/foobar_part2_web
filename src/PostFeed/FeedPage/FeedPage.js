@@ -8,6 +8,15 @@ import { Modal } from "bootstrap";
 function FeedPage() {
   const [postsList, setPostsList] = useState(posts);
   const [postInput, setpostInput] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState("light");
+
+  const toggleDarkMode = () => {
+    if (isDarkMode === "light") {
+      setIsDarkMode("dark");
+    } else {
+      setIsDarkMode("light");
+    }
+  };
 
   const handleSubmit = (event, postId) => {
     const storedUserObject = sessionStorage.getItem("current_usr");
@@ -31,12 +40,24 @@ function FeedPage() {
     setPostsList([...postsList, newPost]);
     setpostInput("");
   };
+
   const handleChange = (event) => {
     const value = event.target.value;
     setpostInput(value);
   };
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleSwitchChange = () => {
+    setIsChecked(!isChecked);
+    if (!isChecked) {
+      setIsDarkMode("dark");
+    } else {
+      setIsDarkMode("light");
+    }
+  };
   return (
-    <>
+    <body data-bs-theme={isDarkMode}>
       <div
         className="modal fade"
         id="postModal"
@@ -90,9 +111,8 @@ function FeedPage() {
 
       <Navbar />
       <div className="row mt-5"></div>
-      <div className="row mt-5 mb-5" ></div>
+      <div className="row mt-5 mb-5"></div>
       <div className="row mt-5 mb-5 ">
-
         <div className="col-3" id="sideCol">
           <div className>
             <SideMenu />
@@ -102,25 +122,40 @@ function FeedPage() {
         <div class="col-6" id="postCol">
           <div className="container-fluid" id="writePostRectangle">
             <form>
-            <div className="postUpFont">Upload A Post</div>
-            <input
-              className="form-control"
-              id="uploadInput"
-              type="text"
-              placeholder="Write about something !"
-              aria-label="Write about something !"
-              data-bs-toggle="modal"
-              data-bs-target="#postModal"
-            ></input>
+              <div className="postUpFont">Upload A Post</div>
+              <input
+                className="form-control"
+                id="uploadInput"
+                type="text"
+                placeholder="Write about something !"
+                aria-label="Write about something !"
+                data-bs-toggle="modal"
+                data-bs-target="#postModal"
+              ></input>
             </form>
           </div>
-          
+
           {postsList.map((post, key) => (
-            <Post {...post} key={post.id} />
+            <Post {...post} key={post.id} data-bs-theme="dark" />
           ))}
         </div>
+
+        <div className="col-3" id="darkModeSwitch">
+          <div className="form-check form-switch"  >
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="switch"
+              checked={isChecked}
+              onChange={handleSwitchChange}
+            />
+            <label class="form-check-label" for="flexSwitchCheckDefault">
+              dark Mode
+            </label>
+          </div>
+        </div>
       </div>
-    </>
+    </body>
   );
 }
 export default FeedPage;

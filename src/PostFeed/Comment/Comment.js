@@ -3,7 +3,7 @@ import "./Comment.css";
 function Comment(comment) {
   return (
     <div className="container-fluid">
-      <div id="commentRectangle">
+      <div className="card text-bg-light" id="commentCard">
         <div className="d-flex">
           <img
           id="commentImage"

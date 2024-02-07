@@ -14,3 +14,15 @@
     align-self: start;
     margin: 2%;
 }
+
+#commentCard {
+    
+    margin-top: 10px;
+    border-color: transparent;
+    border-radius: 15px;
+    width: 80%;
+    padding: 1%;
+    border-color: whitesmoke;
+    border-style: ridge;
+    
+}
