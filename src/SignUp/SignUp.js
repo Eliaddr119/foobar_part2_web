@@ -113,8 +113,9 @@ function SignUp() {
     return hasUppercase && hasLowercase && hasNumber && hasMinLength;
   };
 
-  return (
-    <div className='container'>
+  return ( 
+    <div id='signUpBody'>
+    <div id="signUpContainer" className='container'>
       <h1 className='header'>FOOBAR</h1>
       <div className='registration-card-container'>
         <div className='registration-card'>
@@ -152,7 +153,7 @@ function SignUp() {
               </div>
               <br />
               {image && <img src={image} alt='' className='uploaded-image' />}
-              <button type='submit'>Sign Up</button>
+              <button id="signUpButton" type='submit'>Sign Up</button>
               <text>Back to Sign In </text>
               <Link to="/SignIn">
                 <span className="click-here">click here</span>
@@ -161,6 +162,7 @@ function SignUp() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

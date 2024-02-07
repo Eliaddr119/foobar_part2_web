@@ -34,20 +34,21 @@ const SignIn = () => {
   };
 
   return (
+    <div id="signInBody">
     <div className='sign-in-container'>
       <h1 className='header'>FOOBAR</h1>
       <div className='registration-card-container'>
         <div className='registration-card' id='r-c'>
           <div className='card-header'>Sign In</div>
-          <form>
+          <form id="signInForm">
             {errorMessage && <div className="error-message">{errorMessage}</div>}
             <div className="input-wrapper">
-              <input type='text' placeholder='User Name' className='input-field' value={userName} onChange={(e) => setUserName(e.target.value)}/>
+              <input  type='text' placeholder='User Name' className='input-field' value={userName} onChange={(e) => setUserName(e.target.value)}/>
               <img src={userIcon} alt="User Icon" className="input-icon" />
             </div>
             <br />
             <div className="input-wrapper">
-              <input type='password' placeholder='Password' className='input-field' value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyPress}/>
+              <input  type='password' placeholder='Password' className='input-field' value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={handleKeyPress}/>
               <img src={passwordIcon} alt="password Icon" className="input-icon" />
             </div>
             <br />
@@ -64,6 +65,7 @@ const SignIn = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };
