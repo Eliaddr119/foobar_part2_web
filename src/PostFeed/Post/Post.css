@@ -57,5 +57,20 @@
     padding: 2%;
     border-color: transparent;
     border-radius: 15px;
+}
 
+
+#postImage {
+    object-fit: contain;
+    /* Or "contain" or "fill" */
+    width: 75%;
+    height: auto;
+}
+
+#imageContainer {
+    margin-top: 5%;
+    width: 100% ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

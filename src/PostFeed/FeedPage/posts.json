@@ -3,12 +3,14 @@
         "id": "1",
         "user": {
             "username": "josh_cohen",
-            "displayName": "Josh Cohen"
+            "displayName": "Josh Cohen",
+            "image":"../../Assets/download.jpg"
         },
         "postTime": "2/2/2024",
         "content": "Can't remember the last time when it was raining this much, wow!",
         "likes": 4,
         "commentsCount": "2",
+        
         "comments": [
             {
                 "id": "c1",

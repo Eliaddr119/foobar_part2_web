@@ -3,9 +3,8 @@ import "../Comment/Comment.js";
 import { useState } from "react";
 import { useRef } from "react";
 import Comment from "../Comment/Comment.js";
-import { Modal } from "bootstrap"
-import userService, { getTodayDate } from "../..//userService"
-
+import { Modal } from "bootstrap";
+import userService, { getTodayDate } from "../..//userService";
 
 function Post(post) {
   const [commentList, setCommentList] = useState(post.comments);
@@ -17,7 +16,9 @@ function Post(post) {
   const [likes, setLikes] = useState(likeinit);
   const likeButtonRef = useRef(null);
   const handleLikeClick = () => {
-    {console.log("like pressed in" + post.id)}
+    {
+      console.log("like pressed in" + post.id);
+    }
     if (likes === post.likes) {
       setLikes(likes + 1);
       likeButtonRef.current.classList.toggle("active");
@@ -27,15 +28,11 @@ function Post(post) {
     }
   };
 
- 
-
-
   const handleSubmit = (event) => {
-  
     const storedUserObject = sessionStorage.getItem("current_usr");
     const currentUser = JSON.parse(storedUserObject);
     event.preventDefault();
-    if (commentInput ==="") {
+    if (commentInput === "") {
       return;
     }
     const todayDate = getTodayDate();
@@ -44,12 +41,12 @@ function Post(post) {
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
-        image: currentUser.image
+        image: currentUser.image,
       },
       commentTime: todayDate,
       content: commentInput,
     };
-    setCommentList(prevList => [...prevList, newComment]);
+    setCommentList((prevList) => [...prevList, newComment]);
     setCommentCount(countComments + 1);
     setCommentInput("");
     setCommentShow(true);
@@ -58,6 +55,10 @@ function Post(post) {
     const value = event.target.value;
     setCommentInput(value);
   };
+
+  
+
+
 
   return (
     <>
@@ -107,14 +108,15 @@ function Post(post) {
               >
                 Publish
               </button>
+              
             </div>
           </div>
         </div>
       </div>
 
       <div className="container-fluid">
-      <div className="card text-bg-light" id="postCard">
-        <div className="container-fluid">
+        <div className="card text-bg-light" id="postCard">
+          <div className="container-fluid">
             <div className="d-flex">
               <img
                 className="rounded-circle"
@@ -125,26 +127,39 @@ function Post(post) {
                 {post.user.displayName}
                 <p className="fs-5 ">{post.postTime}</p>
               </h5>
+              
             </div>
+            
 
             <span className="container-fluid fs-3 pb-5">{post.content}</span>
+            
             <div className="ms-2 pt-2">
+            
               <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
+              
               <span className="fs-4 ms-2">{likes}</span>
+              
               <div className="text-end fs-4" id="commentCountText">
+              
                 <button
                   onClick={() => setCommentShow(!commentShow)}
                   id="commentsButton"
                 >
                   {countComments} Comments
                 </button>
+                
+              </div>
+              <div className="container" id="imageContainer"  >
+              <img 
+                alt=""
+                src={post.image}
+                id="postImage"
+              />
               </div>
               <div className="btn-group-lg text-center mt-3" role="group">
                 <button
                   onClick={handleLikeClick}
-
                   ref={likeButtonRef}
-                
                   className="btn btn-outline-success"
                 >
                   <i className="me-2 bi bi-hand-thumbs-up-fill"></i> Like
@@ -164,15 +179,11 @@ function Post(post) {
                 </button>
               </div>
             </div>
-          </div>
-          <div className="container-fluid">
             
-              
+          </div>
+          <div className="container-fluid"></div>
         </div>
-      </div>
-      {commentShow &&
-              commentList.map((comment) => <Comment {...comment} />)}
-      
+        {commentShow && commentList.map((comment) => <Comment {...comment} />)}
       </div>
     </>
   );
