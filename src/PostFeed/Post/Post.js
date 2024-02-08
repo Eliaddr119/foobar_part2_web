@@ -31,7 +31,7 @@ function Post(post) {
   return (
     <>
       <div className="container-fluid">
-        <div className="card text-bg-light" id="postCard">
+        <div className="card " id="postCard">
           <div className="container-fluid">
             <div className="d-flex">
               <img

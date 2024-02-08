@@ -31,7 +31,6 @@
     border-style: none;
     padding: 0%;
     background-color: transparent;
-    color: black;
 }
 
 #addCommentModal {
@@ -49,6 +48,7 @@
     border-radius: 15px;
     border-color: lightgray;
     border-style: ridge;
+    
 }
 
 

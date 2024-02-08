@@ -1,12 +1,11 @@
-.writePostRectangle{
+#writePostRectangle{
     margin-top: 100px;
     margin-bottom: 50px;
-    background-color: rgb(232, 253, 232);
     padding: 30px;
     border-radius: 30px;
     border-color: black;
     border-style:ridge;
-    box-shadow: 5px 5px 5px gray;
+    box-shadow: 2px 2px 2px gray;
 }
 
 .postUpFont {
@@ -17,6 +16,7 @@
 
 #uploadInput{
     border-radius: 100px;
+    padding: 2%;
 }
 
 #postUploadButton{
