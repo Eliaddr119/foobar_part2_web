@@ -1,0 +1,39 @@
+#commentInput {
+    
+    width: 80%;
+    margin: 2%;
+    border-color: whitesmoke;
+    border-radius: 15px;
+    padding: 1%;
+
+}
+
+#textBox {
+    text-align: center;
+    border-radius: 10%;
+}
+
+#addCommentCard {
+    
+    border-color: transparent;
+    border-radius: 25px;
+    width: 70%;
+    padding: 1%;
+    border-style: ridge;
+    align-self: start;
+    
+}
+
+#roundImg {
+    justify-content: flex-start;
+    float: left;
+    margin-top: 1%;
+    height: 65px;
+    width: 65px;
+    
+}
+
+#commentPublishButton{
+    width: 9%;
+}
+
