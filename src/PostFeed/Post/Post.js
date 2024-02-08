@@ -17,7 +17,6 @@ function Post(post) {
   const likeButtonRef = useRef(null);
   const handleLikeClick = () => {
     {
-      console.log("like pressed in" + post.id);
     }
     if (likes === post.likes) {
       setLikes(likes + 1);

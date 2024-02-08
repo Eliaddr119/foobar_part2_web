@@ -5,6 +5,7 @@ import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Modal } from "bootstrap";
 import userService, { getTodayDate } from "../..//userService";
+import WritePost from "../Post/WritePost";
 
 function FeedPage() {
   const [postsList, setPostsList] = useState(posts);
@@ -19,37 +20,7 @@ function FeedPage() {
     }
   };
 
-  const handleSubmit = (event, postId) => {
-    const storedUserObject = sessionStorage.getItem("current_usr");
-    const currentUser = JSON.parse(storedUserObject);
-    event.preventDefault();
-    if (postInput === "" && postImage === null) {
-      return;
-    }
-    const todayDate = getTodayDate();
-    const newPost = {
-      id: toString(postsList.length + 1),
-      user: {
-        username: currentUser.username,
-        displayName: currentUser.displayName,
-        image: currentUser.image,
-      },
-      postTime: todayDate,
-      content: postInput,
-      likes: 0,
-      commentsCount: "0",
-      comments: [],
-      image: postImage
-    };
-    setPostsList([newPost, ...postsList]);
-    setpostInput("");
-    setImage(null);
-  };
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setpostInput(value);
-  };
+  
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -96,69 +67,6 @@ function FeedPage() {
 
   return (
     <body data-bs-theme={isDarkMode}>
-      <div
-        className="modal fade"
-        id="postModal"
-        tabindex="-1"
-        aria-labelledby="postModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="postModalLabel">
-                Upload a post
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form id="textBoxPost" onSubmit={handleSubmit}>
-                <input
-                  name="commentContent"
-                  value={postInput}
-                  onChange={handleChange}
-                  placeholder="Write your post here...."
-                  id="commentInput"
-                ></input>
-
-                <div><label htmlFor="fileInput" className="imageUpLabel">
-                  <h4>Upload An Image</h4>   
-                </label></div>
-                <input
-                  type="file"
-                  id="imageAdd"
-                  name="image"
-                  className="input"
-                  required
-                  onChange={handleImageUpload}
-                />
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn btn-outline-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                className="btn btn-outline-success"
-                type="submit"
-                onClick={handleSubmit}
-                data-bs-dismiss="modal"
-              >
-                Publish
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <Navbar />
       <div className="row mt-5"></div>
       <div className="row mt-5 mb-5"></div>
@@ -170,21 +78,9 @@ function FeedPage() {
         </div>
 
         <div class="col-6" id="postCol">
-          <div className="container-fluid" id="writePostRectangle">
-            <form>
-              <div className="postUpFont">Upload A Post</div>
-              <input
-                className="form-control"
-                id="uploadInput"
-                type="text"
-                placeholder="Write about something !"
-                aria-label="Write about something !"
-                data-bs-toggle="modal"
-                data-bs-target="#postModal"
-              ></input>
-            </form>
-          </div>
+          
 
+          <WritePost postsList={postsList} setPostsList={setPostsList}/>
           {listOfPosts}
         </div>
 
