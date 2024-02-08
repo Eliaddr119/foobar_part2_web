@@ -4,6 +4,7 @@ import posts from "./posts.json";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Modal } from "bootstrap";
+import userService, { getTodayDate } from "../..//userService"
 
 function FeedPage() {
   const [postsList, setPostsList] = useState(posts);
@@ -25,19 +26,21 @@ function FeedPage() {
     if (postInput === "") {
       return;
     }
+    const todayDate = getTodayDate();
     const newPost = {
       id: toString(postsList.length + 1),
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
+        image: currentUser.image
       },
-      commentTime: "Just Now",
+      postTime:todayDate,
       content: postInput,
       likes: 0,
       commentsCount: "0",
       comments: [],
     };
-    setPostsList([...postsList, newPost]);
+    setPostsList([newPost, ...postsList]);
     setpostInput("");
   };
 
@@ -56,6 +59,10 @@ function FeedPage() {
       setIsDarkMode("light");
     }
   };
+
+  const listOfPosts = postsList.map((post, key) => {
+    return <Post {...post} key={post.id} data-bs-theme="dark" />;
+  });
   return (
     <body data-bs-theme={isDarkMode}>
       <div
@@ -135,13 +142,11 @@ function FeedPage() {
             </form>
           </div>
 
-          {postsList.map((post, key) => (
-            <Post {...post} key={post.id} data-bs-theme="dark" />
-          ))}
+          {listOfPosts}
         </div>
 
         <div className="col-3" id="darkModeSwitch">
-          <div className="form-check form-switch"  >
+          <div className="form-check form-switch">
             <input
               className="form-check-input"
               type="checkbox"

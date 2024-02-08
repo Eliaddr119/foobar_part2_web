@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import Comment from "../Comment/Comment.js";
 import { Modal } from "bootstrap"
+import userService, { getTodayDate } from "../..//userService"
 
 
 function Post(post) {
@@ -16,6 +17,7 @@ function Post(post) {
   const [likes, setLikes] = useState(likeinit);
   const likeButtonRef = useRef(null);
   const handleLikeClick = () => {
+    {console.log("like pressed in" + post.id)}
     if (likes === post.likes) {
       setLikes(likes + 1);
       likeButtonRef.current.classList.toggle("active");
@@ -28,23 +30,26 @@ function Post(post) {
  
 
 
-  const handleSubmit = (event,postId) => {
+  const handleSubmit = (event) => {
+  
     const storedUserObject = sessionStorage.getItem("current_usr");
     const currentUser = JSON.parse(storedUserObject);
     event.preventDefault();
     if (commentInput ==="") {
       return;
     }
+    const todayDate = getTodayDate();
     const newComment = {
       id: "c" + Number(post.commentsCount) + 1,
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
+        image: currentUser.image
       },
-      commentTime: "Just Now",
+      commentTime: todayDate,
       content: commentInput,
     };
-    setCommentList([...commentList, newComment]);
+    setCommentList(prevList => [...prevList, newComment]);
     setCommentCount(countComments + 1);
     setCommentInput("");
     setCommentShow(true);
@@ -114,7 +119,7 @@ function Post(post) {
               <img
                 className="rounded-circle"
                 alt="avatar1"
-                src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                src={post.user.image}
               />
               <h5 className="fs-2 ms-2 pb-4">
                 {post.user.displayName}
@@ -167,6 +172,7 @@ function Post(post) {
       </div>
       {commentShow &&
               commentList.map((comment) => <Comment {...comment} />)}
+      
       </div>
     </>
   );
