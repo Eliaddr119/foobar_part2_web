@@ -7,9 +7,9 @@ function Comment(comment) {
         <div className="d-flex">
           <img
           id="commentImage"
-            className="rounded-circle" 
-            alt="avatar1"
-            src="https://bootdey.com/img/Content/avatar/avatar1.png"
+          className="rounded-circle" 
+          alt="avatar1"
+            src={comment.user.image}
           />
           <div className="fs-2 ms-2">
             {comment.user.displayName}

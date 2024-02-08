@@ -4,6 +4,7 @@ import posts from "./posts.json";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { Modal } from "bootstrap";
+import userService, { getTodayDate } from "../..//userService";
 
 function FeedPage() {
   const [postsList, setPostsList] = useState(posts);
@@ -22,23 +23,27 @@ function FeedPage() {
     const storedUserObject = sessionStorage.getItem("current_usr");
     const currentUser = JSON.parse(storedUserObject);
     event.preventDefault();
-    if (postInput === "") {
+    if (postInput === "" && postImage === null) {
       return;
     }
+    const todayDate = getTodayDate();
     const newPost = {
       id: toString(postsList.length + 1),
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
+        image: currentUser.image,
       },
-      commentTime: "Just Now",
+      postTime: todayDate,
       content: postInput,
       likes: 0,
       commentsCount: "0",
       comments: [],
+      image: postImage
     };
-    setPostsList([...postsList, newPost]);
+    setPostsList([newPost, ...postsList]);
     setpostInput("");
+    setImage(null);
   };
 
   const handleChange = (event) => {
@@ -56,6 +61,39 @@ function FeedPage() {
       setIsDarkMode("light");
     }
   };
+
+  const listOfPosts = postsList.map((post, key) => {
+    return <Post {...post} key={post.id} data-bs-theme="dark" />;
+  });
+
+  const [postImage, setImage] = useState(null);
+  const [error, setError] = useState(null);
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    if (!file) {
+      setImage(null);
+      return;
+    }
+    // Check if the file is an image
+    if (!file.type.startsWith("image/")) {
+      setError("Only image files are allowed.");
+      // Clear the error message after 3 seconds
+      setTimeout(() => setError(""), 3_000);
+      // Clear the file input
+      event.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   return (
     <body data-bs-theme={isDarkMode}>
       <div
@@ -87,6 +125,18 @@ function FeedPage() {
                   placeholder="Write your post here...."
                   id="commentInput"
                 ></input>
+
+                <div><label htmlFor="fileInput" className="imageUpLabel">
+                  <h4>Upload An Image</h4>   
+                </label></div>
+                <input
+                  type="file"
+                  id="imageAdd"
+                  name="image"
+                  className="input"
+                  required
+                  onChange={handleImageUpload}
+                />
               </form>
             </div>
             <div className="modal-footer">
@@ -135,13 +185,11 @@ function FeedPage() {
             </form>
           </div>
 
-          {postsList.map((post, key) => (
-            <Post {...post} key={post.id} data-bs-theme="dark" />
-          ))}
+          {listOfPosts}
         </div>
 
         <div className="col-3" id="darkModeSwitch">
-          <div className="form-check form-switch"  >
+          <div className="form-check form-switch">
             <input
               className="form-check-input"
               type="checkbox"

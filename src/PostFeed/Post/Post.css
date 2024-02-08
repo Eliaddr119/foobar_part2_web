@@ -4,7 +4,7 @@
     border-radius: 25px;
 }
 
-.Post{
+.Post {
     margin-bottom: 50px;
     margin-top: 25px;
 }
@@ -26,27 +26,27 @@
     width: 33%;
 }
 
-#commentsButton{
+#commentsButton {
     border-style: none;
     padding: 0%;
     background-color: transparent;
     color: black;
 }
 
-#addCommentModal{
+#addCommentModal {
     padding: 100px;
     border-radius: 25%;
 }
 
-#commentInput{
+#commentInput {
     padding-bottom: 5%;
     width: 95%;
     margin: 2%;
     border-color: whitesmoke;
-    
+
 }
 
-#textBox{
+#textBox {
     text-align: center;
     border-radius: 10%;
 }
@@ -57,7 +57,20 @@
     padding: 2%;
     border-color: transparent;
     border-radius: 15px;
-
 }
 
 
+#postImage {
+    object-fit: contain;
+    /* Or "contain" or "fill" */
+    width: 75%;
+    height: auto;
+}
+
+#imageContainer {
+    margin-top: 5%;
+    width: 100% ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
