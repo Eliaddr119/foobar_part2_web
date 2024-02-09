@@ -2,11 +2,11 @@ import "./Comment.css";
 import "../Post/Post"
 
 
-function Comment({commentList,setCommentList,countComments,setCommentCoung,comment}) {
+function Comment({commentList,setCommentList,countComments,setCommentCount,comment}) {
 
     const deleteComment = () => {
       setCommentList(prevList => prevList.filter(item => item.id !== comment.id));
-      setCommentCoung(countComments - 1);
+      setCommentCount(countComments - 1);
       
     }
   return (

@@ -12,7 +12,7 @@ function CommentList(
   
 
   return commentList.map((comment) => (
-    <Comment  setCommentList={setCommentList} commentList={commentList} countComments={countComments} setCommentCoung={setCommentCount} comment={comment}/>
+    <Comment commentList={commentList} setCommentList={setCommentList}  countComments={countComments} setCommentCount={setCommentCount} comment={comment}/>
   ));
 }
 export default CommentList;

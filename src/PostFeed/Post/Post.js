@@ -101,7 +101,7 @@ function Post(post, { isDarkMode }) {
           />
         </div>
 
-        {commentShow && <CommentList post={post}/>}
+        {commentShow && <CommentList post={post} countComments={countComments} setCommentCount={setCommentCount}/>}
       </div>
     </>
   );
