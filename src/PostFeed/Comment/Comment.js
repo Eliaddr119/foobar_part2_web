@@ -2,7 +2,7 @@ import "./Comment.css";
 import "../Post/Post"
 
 
-function Comment({commentList,setCommentList,comment}) {
+function Comment({commentList,setCommentList,countComments,setCommentCoung,comment}) {
 
     const deleteComment = () => {
       setCommentList(prevList => prevList.filter(item => item.id !== comment.id));
