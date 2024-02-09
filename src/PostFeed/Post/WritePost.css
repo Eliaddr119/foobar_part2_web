@@ -6,6 +6,8 @@
     border-color: black;
     border-style:ridge;
     box-shadow: 2px 2px 2px gray;
+    background-color: rgb(232, 253, 232);
+    color: black;
 }
 
 .postUpFont {
@@ -24,4 +26,12 @@
     margin-top: 1%;
     width: 50%;
     margin-left: 25%;
+}
+
+#postInput{
+    width: 95%;
+    margin: 2%;
+    border-color: whitesmoke;
+    border-radius: 15px;
+    padding: 1%;
 }

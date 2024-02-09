@@ -95,11 +95,11 @@ function WritePost({postsList, setPostsList}) {
             <div className="modal-body">
               <form id="textBoxPost" onSubmit={handleSubmit}>
                 <input
-                  name="commentContent"
+                  name="postContent"
                   value={postInput}
                   onChange={handleChange}
                   placeholder="Write your post here...."
-                  id="commentInput"
+                  id="postInput"
                 ></input>
 
                 <div>

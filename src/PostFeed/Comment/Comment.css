@@ -12,8 +12,20 @@
     border-color: transparent;
     border-radius: 25px;
     width: 80%;
-    border-color: lightgray;
+    border-color: black;
     border-style: ridge;
     
     
+}
+
+#editOptions {
+    align-self: self-end;
+    margin: 1%;
+    margin-bottom: 0%;
+}
+
+#editOptions {
+    align-self: self-end;
+    margin: 1%;
+    margin-bottom: 0%;
 }
