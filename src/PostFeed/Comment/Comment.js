@@ -6,6 +6,7 @@ function Comment({commentList,setCommentList,countComments,setCommentCoung,comme
 
     const deleteComment = () => {
       setCommentList(prevList => prevList.filter(item => item.id !== comment.id));
+      setCommentCoung(countComments - 1);
       
     }
   return (
