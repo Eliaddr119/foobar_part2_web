@@ -58,7 +58,7 @@ function AddComment({
           placeholder="Comment on post..."
           id="commentInput"
         ></input>
-        <button onClick={(e) => handleSubmit(e)} id="commentPublishButton"className="btn btn-outline-success" type="submit">publish</button>
+        <button id="commentPublishButton"className="btn btn-outline-success" type="submit">publish</button>
       </form>
       </span>
     

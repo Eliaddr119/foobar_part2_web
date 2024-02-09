@@ -130,7 +130,7 @@ const editEligble = () => {
           />
         </div>
 
-        {commentShow && <CommentList post={post} countComments={countComments} setCommentCount={setCommentCount}/>}
+        {commentShow && <CommentList post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
       </div>
     </>
   );

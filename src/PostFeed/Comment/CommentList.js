@@ -5,14 +5,17 @@ function CommentList(
   {post,
   countComments,
   setCommentCount,
+  setCommentList,
+  commentList,
 }
 ) {
-  const [commentList, setCommentList] = useState(post.comments);
+
 
   
 
   return commentList.map((comment) => (
-    <Comment commentList={commentList} setCommentList={setCommentList}  countComments={countComments} setCommentCount={setCommentCount} comment={comment}/>
+
+      <Comment commentList={commentList} setCommentList={setCommentList} countComments={countComments} setCommentCount={setCommentCount} comment={comment} />
   ));
 }
 export default CommentList;
