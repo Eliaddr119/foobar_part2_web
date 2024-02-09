@@ -34,7 +34,7 @@ function FeedPage() {
   };
 
   const listOfPosts = postsList.map((post, key) => {
-    return <Post {...post} key={post.id} isDarkMode={isDarkMode} />;
+    return <Post post={post} key={post.id} postsList={postsList} setPostsList={setPostsList} />;
   });
 
   const [postImage, setImage] = useState(null);

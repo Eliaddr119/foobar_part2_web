@@ -7,9 +7,16 @@ import { Modal } from "bootstrap";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
 
-function Post(post, { isDarkMode }) {
+function Post({post,postsList,setPostsList} ) {
+
+  const storedUserObject = sessionStorage.getItem("current_usr");
+    const currentUser = JSON.parse(storedUserObject);
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
+
+  const deletePost = () => {
+    setPostsList(prevList => prevList.filter(item => item.id !== post.id));
+  }
 
   const [countComments, setCommentCount] = useState(Number(post.commentsCount));
 
@@ -27,23 +34,45 @@ function Post(post, { isDarkMode }) {
       likeButtonRef.current.classList.remove("active");
     }
   };
+const editEligble = () => {
+  if (currentUser.username === post.user.username) {
+    return true;
+  }
+  return false;
+}
 
+  const[canEdit,setCanEdit] = useState(editEligble);
 
+  
+  
   return (
     <>
       <div className="container-fluid">
         <div className="card bg-light" id="postCard">
-          <div class="btn-group" id="editOptions">
-            <button
-              class="btn btn-success btn-sm dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Small button
+        
+        {canEdit &&<div class="btn-group" id="editOptions">
+        <button
+          class="btn btn-success btn-sm dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          
+          Post Options
+        </button>
+        <ul class="dropdown-menu text-center">
+          <li>
+            <button class="dropdown-item" onClick={deletePost} >
+              Delete Post
             </button>
-            <ul class="dropdown-menu">...</ul>
-          </div>
+          </li>
+          <li>
+            <button class="dropdown-item">
+              Edit Post
+            </button>
+          </li>
+        </ul>
+      </div>}
           <div className="container-fluid">
             <div className="d-flex">
               <img

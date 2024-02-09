@@ -32,7 +32,10 @@ function AddComment({
       commentTime: todayDate,
       content: commentInput,
     };
-    setCommentList((prevList) => [...prevList, newComment]);
+
+    const updatedComments = [...commentList,newComment];
+
+    setCommentList(updatedComments);
     setCommentCount(countComments + 1);
     setCommentInput("");
     setCommentShow(true);
@@ -55,7 +58,7 @@ function AddComment({
           placeholder="Comment on post..."
           id="commentInput"
         ></input>
-        <button id="commentPublishButton"className="btn btn-outline-success" type="submit">publish</button>
+        <button onClick={(e) => handleSubmit(e)} id="commentPublishButton"className="btn btn-outline-success" type="submit">publish</button>
       </form>
       </span>
     
