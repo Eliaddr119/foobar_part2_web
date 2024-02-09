@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useRef } from "react";
 import Comment from "../Comment/Comment.js";
 import { Modal } from "bootstrap";
-
 import AddComment from "../Comment/AddComment.js";
+import CommentList from "../Comment/CommentList.js";
 
-function Post(post,{isDarkMode}) {
+function Post(post, { isDarkMode }) {
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
 
@@ -28,10 +28,22 @@ function Post(post,{isDarkMode}) {
     }
   };
 
+
   return (
     <>
-      <div className="container-fluid" >
+      <div className="container-fluid">
         <div className="card bg-light" id="postCard">
+          <div class="btn-group" id="editOptions">
+            <button
+              class="btn btn-success btn-sm dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Small button
+            </button>
+            <ul class="dropdown-menu">...</ul>
+          </div>
           <div className="container-fluid">
             <div className="d-flex">
               <img
@@ -89,7 +101,7 @@ function Post(post,{isDarkMode}) {
           />
         </div>
 
-        {commentShow && commentList.map((comment) => <Comment {...comment} />)}
+        {commentShow && <CommentList post={post}/>}
       </div>
     </>
   );

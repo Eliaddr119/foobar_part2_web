@@ -16,3 +16,9 @@
     border-style: ridge;
     
 }
+
+#editOptions {
+    align-self: self-end;
+    margin: 1%;
+    margin-bottom: 0%;
+}

@@ -1,6 +1,8 @@
 import "./AddComment.css"
 import  { getTodayDate } from "../..//userService";
 import { useState } from "react";
+
+
 function AddComment({
   commentList,
   setCommentList,
@@ -9,6 +11,7 @@ function AddComment({
   post,
   setCommentShow
 }) {
+  
   const [commentInput, setCommentInput] = useState("");
   const storedUserObject = sessionStorage.getItem("current_usr");
   const currentUser = JSON.parse(storedUserObject);
