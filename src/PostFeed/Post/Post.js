@@ -7,7 +7,7 @@ import { Modal } from "bootstrap";
 
 import AddComment from "../Comment/AddComment.js";
 
-function Post(post) {
+function Post(post,{isDarkMode}) {
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
 
@@ -30,8 +30,8 @@ function Post(post) {
 
   return (
     <>
-      <div className="container-fluid">
-        <div className="card " id="postCard">
+      <div className="container-fluid" >
+        <div className="card bg-light" id="postCard">
           <div className="container-fluid">
             <div className="d-flex">
               <img
