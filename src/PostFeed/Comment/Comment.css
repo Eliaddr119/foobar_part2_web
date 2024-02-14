@@ -24,3 +24,17 @@
 
 }
 
+#commentEditInput{
+    border-color: whitesmoke;
+    border-radius: 10px;
+    margin-right: 10px;
+    width: 85%;
+}
+
+#commentEditConfirm{
+    width: 10%;
+    
+    padding: 1%;
+    margin-bottom: 10px;
+}
+
