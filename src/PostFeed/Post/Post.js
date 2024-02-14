@@ -117,7 +117,7 @@ const editEligble = () => {
                   Share
                 </button>
               </div>
-            </div>
+            
           </div>
           <AddComment
             post={post}
@@ -127,6 +127,7 @@ const editEligble = () => {
             countComments={countComments}
             setCommentShow={setCommentShow}
           />
+        </div>
         </div>
 
         {commentShow && <CommentList post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
