@@ -170,7 +170,7 @@ function Comment({
 
         <div className="ms-2 pt-2"></div>
       </div>
-    </div>
+    </div></>
   );
 }
 export default Comment;
