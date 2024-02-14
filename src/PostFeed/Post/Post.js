@@ -2,8 +2,6 @@ import "./Post.css";
 import "../Comment/Comment.js";
 import { useState } from "react";
 import { useRef } from "react";
-import Comment from "../Comment/Comment.js";
-import { Modal } from "bootstrap";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
 
@@ -47,9 +45,10 @@ const editEligble = () => {
   
   return (
     <>
+    
       <div className="container-fluid">
         <div className="card bg-light" id="postCard">
-        
+        <div className="container">
         {canEdit &&<div class="btn-group" id="editOptions">
         <button
           class="btn btn-success btn-sm dropdown-toggle"
@@ -87,11 +86,11 @@ const editEligble = () => {
             </div>
 
             <span className="container-fluid fs-3 pb-5">{post.content}</span>
-
+            </div>
             <div className="ms-2 pt-2">
               <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
 
-              <span className="fs-4 ms-2">{likes}</span>
+              <span className="fs-4 ms-2">{likes}</span></div>
 
               <div className="text-end fs-4" id="commentCountText">
                 <button
@@ -131,7 +130,6 @@ const editEligble = () => {
         </div>
 
         {commentShow && <CommentList post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
-      </div>
     </>
   );
 }
