@@ -3,8 +3,6 @@ import SideMenu from "../SideMenu/SideMenu";
 import posts from "./posts.json";
 import { useState } from "react";
 import Navbar from "../Navbar/Navbar";
-import { Modal } from "bootstrap";
-import userService, { getTodayDate } from "../..//userService";
 import WritePost from "../Post/WritePost";
 
 function FeedPage() {
@@ -33,7 +31,7 @@ function FeedPage() {
     }
   };
 
-  const listOfPosts = postsList.map((post, key) => {
+  const listOfPosts = postsList.map((post) => {
     return <Post post={post} key={post.id} postsList={postsList} setPostsList={setPostsList} />;
   });
 

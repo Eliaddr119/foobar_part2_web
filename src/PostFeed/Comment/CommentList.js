@@ -15,7 +15,7 @@ function CommentList(
 
   return commentList.map((comment) => (
 
-      <Comment commentList={commentList} setCommentList={setCommentList} countComments={countComments} setCommentCount={setCommentCount} comment={comment} />
+      <Comment key={comment.id} commentList={commentList} setCommentList={setCommentList} countComments={countComments} setCommentCount={setCommentCount} comment={comment} />
   ));
 }
 export default CommentList;

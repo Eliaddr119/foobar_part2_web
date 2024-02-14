@@ -209,7 +209,7 @@ const editEligble = () => {
         </div>
         </div>
 
-        {commentShow && <CommentList post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
+        {commentShow && <CommentList key={post.id} post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
     </>
   );
 }
