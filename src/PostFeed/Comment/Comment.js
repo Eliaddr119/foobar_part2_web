@@ -38,6 +38,7 @@ function Comment({
     comment.content = commentInput;
     setCommentList(commentList);
     setShowEdit(false);
+
   };
   const handleChange = (event) => {
     const value = event.target.value;
@@ -101,12 +102,15 @@ function Comment({
                 onChange={handleChange}
               ></input>
               <button
-                className="btn btn-outline-success"
+                className="btn btn-success"
                 type="submit"
                 id="commentEditConfirm"
               >
-                publish
+                Confirm
               </button>
+              <button className="btn btn-outline-secondary" id="commentEditCancelButton" onClick={() => setShowEdit(false)}>
+                  Cancel
+                </button>
             </form>
           </span>
         )}

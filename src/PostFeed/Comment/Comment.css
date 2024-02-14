@@ -28,13 +28,17 @@
     border-color: whitesmoke;
     border-radius: 10px;
     margin-right: 10px;
-    width: 85%;
+    width: 75%;
 }
 
 #commentEditConfirm{
-    width: 10%;
-    
-    padding: 1%;
+    width: 15%;
     margin-bottom: 10px;
+    float: right;
+}
+
+#commentEditCancelButton{
+    float: right;
+    margin-right: 1%;
 }
 

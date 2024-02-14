@@ -80,3 +80,13 @@
     justify-content: center;
     align-items: center;
 }
+
+#postEditConfirm{
+    float: right;
+    width: 20%;
+}
+
+#postEditCancelButton{
+    float: right;
+    margin-right: 1%;
+}
