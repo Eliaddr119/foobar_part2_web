@@ -50,7 +50,7 @@ function SignUp() {
     event.preventDefault();
 
     const isPasswordIsStrong = passwordStrength(password);
-    const isPasswordMatch = password === confirmPassword;
+    const isPasswordMatch = passwordMatch(password, confirmPassword);
 
     if (!isPasswordIsStrong) {
       setError('Password must contain at least one uppercase letter, one lowercase letter, one number, and 8 characters.');
@@ -103,6 +103,10 @@ function SignUp() {
     }
 
   };
+
+  const passwordMatch = (password, confirmPassword) => {
+    return password === confirmPassword;
+  }
 
   const passwordStrength = (password) => {
     const hasUppercase = /[A-Z]/.test(password);
