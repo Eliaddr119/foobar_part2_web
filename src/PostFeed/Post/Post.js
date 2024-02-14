@@ -2,8 +2,6 @@ import "./Post.css";
 import "../Comment/Comment.js";
 import { useState } from "react";
 import { useRef } from "react";
-import Comment from "../Comment/Comment.js";
-import { Modal } from "bootstrap";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
 
@@ -41,15 +39,62 @@ const editEligble = () => {
   return false;
 }
 
-  const[canEdit,setCanEdit] = useState(editEligble);
+  const[canEdit] = useState(editEligble);
 
-  
+  const [showEdit, setShowEdit] = useState(false);
+  const [postInput, setPostInput] = useState(post.content);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (postInput === "") {
+      return;
+    }
+    post.content = postInput;
+    post.image= postImage;
+    setPostsList(postsList);
+    setShowEdit(false);
+  };
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setPostInput(value);
+  };
+
+
+
+  const [postImage, setImage] = useState(post.image);
+  const [error, setError] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+
+    if (!file) {
+      setImage(null);
+      return;
+    }
+    // Check if the file is an image
+    if (!file.type.startsWith("image/")) {
+      setError("Only image files are allowed.");
+      // Clear the error message after 3 seconds
+      setTimeout(() => setError(""), 3_000);
+      // Clear the file input
+      event.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
   
   return (
     <>
+    
       <div className="container-fluid">
         <div className="card bg-light" id="postCard">
-        
+        <div className="container">
         {canEdit &&<div class="btn-group" id="editOptions">
         <button
           class="btn btn-success btn-sm dropdown-toggle"
@@ -67,7 +112,8 @@ const editEligble = () => {
             </button>
           </li>
           <li>
-            <button class="dropdown-item">
+            <button className="dropdown-item" onClick={() => setShowEdit(true)}>
+             
               Edit Post
             </button>
           </li>
@@ -86,12 +132,44 @@ const editEligble = () => {
               </h5>
             </div>
 
-            <span className="container-fluid fs-3 pb-5">{post.content}</span>
+            {!showEdit &&<span className="container-fluid fs-3 pb-5">{post.content}</span>}
+            {showEdit && <form id="textBoxPost" onSubmit={handleSubmit}>
+                <input
+                  name="postContent"
+                  value={postInput}
+                  onChange={handleChange}
+                  placeholder="Write your post here...."
+                  id="postInput"
+                ></input>
 
+                <div>
+                  <label htmlFor="fileInput" className="imageUpLabel">
+                    <h4>Upload An Image</h4>
+                  </label>
+                </div>
+                <input
+                  type="file"
+                  id="imageAdd"
+                  name="image"
+                  className="input"
+                  
+                  onChange={handleImageUpload}
+                />
+                
+                 <button
+                className="btn btn-success"
+                type="submit"
+                id="postEditConfirm"
+              >Confirm</button>
+              <button className="btn btn-outline-secondary" id="postEditCancelButton" onClick={() => setShowEdit(false)}>
+                  Cancel
+                </button>
+              </form>}
+            </div>
             <div className="ms-2 pt-2">
               <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
 
-              <span className="fs-4 ms-2">{likes}</span>
+              <span className="fs-4 ms-2">{likes}</span></div>
 
               <div className="text-end fs-4" id="commentCountText">
                 <button
@@ -101,10 +179,10 @@ const editEligble = () => {
                   {countComments} Comments
                 </button>
               </div>
-              <div className="container" id="imageContainer">
-                <img alt="" src={post.image} id="postImage" />
-              </div>
-              <div className="btn-group-lg text-center mt-3" role="group">
+
+             {!showEdit && <><div className="container" id="imageContainer">
+              <img alt="" src={post.image} id="postImage" />
+            </div><div className="btn-group-lg text-center mt-3" role="group">
                 <button
                   onClick={handleLikeClick}
                   ref={likeButtonRef}
@@ -117,21 +195,21 @@ const editEligble = () => {
                   <i className="me-2 bi bi-share-fill"></i>
                   Share
                 </button>
-              </div>
-            </div>
+              </div></>}
+            
           </div>
-          <AddComment
+          {!showEdit &&<AddComment
             post={post}
             setCommentList={setCommentList}
             commentList={commentList}
             setCommentCount={setCommentCount}
             countComments={countComments}
             setCommentShow={setCommentShow}
-          />
+          />}
+        </div>
         </div>
 
-        {commentShow && <CommentList post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
-      </div>
+        {commentShow && <CommentList key={post.id} post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
     </>
   );
 }

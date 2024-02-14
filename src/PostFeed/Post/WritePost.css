@@ -19,6 +19,14 @@
 #uploadInput{
     border-radius: 100px;
     padding: 2%;
+    
+}
+
+#uploadInput:hover{
+    border-radius: 100px;
+    padding: 2%;
+    border-color: rgb(232, 253, 232);
+    
 }
 
 #postUploadButton{

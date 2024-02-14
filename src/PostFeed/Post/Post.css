@@ -13,9 +13,10 @@
 
 
 .rounded-circle {
-    height: 75px;
-    width: 75px;
+    height: 90px;
+    width: 90px;
     align-self: start;
+    margin-left: 0%;
 }
 
 .fs-7 {
@@ -42,7 +43,13 @@
 }
 
 
+#editOptions {
+    margin: 1%;
+    margin-bottom: 0%;
+    float: right;
+    align-self: self-end;
 
+}
 
 
 
@@ -73,4 +80,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#postEditConfirm{
+    float: right;
+    width: 20%;
+}
+
+#postEditCancelButton{
+    float: right;
+    margin-right: 1%;
 }

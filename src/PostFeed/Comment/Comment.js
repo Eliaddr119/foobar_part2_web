@@ -27,25 +27,22 @@ function Comment({
   };
 
   const [canEdit, setCanEdit] = useState(editEligble);
-  const [editInput, setEditInput] = useState("");
-
+  const [showEdit, setShowEdit] = useState(false);
+  const [commentInput, setCommentInput] = useState(comment.content);
 
   const handleSubmit = (event) => {
-    console.log(editInput);
-    console.log(comment)
-    
     event.preventDefault();
-    if (editInput === "") {
+    if (commentInput === "") {
       return;
     }
-    
-    comment.content = editInput;
-    
-  };
+    comment.content = commentInput;
+    setCommentList(commentList);
+    setShowEdit(false);
 
+  };
   const handleChange = (event) => {
     const value = event.target.value;
-    setEditInput(value);
+    setCommentInput(value);
   };
 
   return (
@@ -103,6 +100,7 @@ function Comment({
     
     
     <div className="card text-bg-light" id="commentCard">
+      <div className="container">
         {canEdit && (
           <div class="btn-group" id="editOptions">
             <button
@@ -120,29 +118,59 @@ function Comment({
                 </button>
               </li>
               <li>
-                <button class="dropdown-item"
-                data-bs-toggle="modal"
-                data-bs-target="#commentEditModal">Edit Comment</button>
+                <button
+                  className="dropdown-item"
+                  onClick={() => setShowEdit(true)}
+                >
+                  Edit Comment
+                </button>
               </li>
             </ul>
           </div>
         )}
 
-        <div className="d-flex">
+        <div className="d-flex" id="commentBody">
           <img
             id="commentImage"
             className="rounded-circle"
             alt="avatar1"
-            src={comment.user.image} />
+            src={comment.user.image}
+          />
           <div className="fs-4 ms-2">
             {comment.user.displayName}
             <p className="fs-5 ">{comment.commentTime}</p>
           </div>
         </div>
 
-        <span className="container-fluid fs-4">{comment.content}</span>
+        {!showEdit && (
+          <span className="container-fluid fs-4">{comment.content}</span>
+        )}
+        {showEdit && (
+          <span className="container-fluid fs-4">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <input
+                name="commentContent"
+                id="commentEditInput"
+                value={commentInput}
+                onChange={handleChange}
+              ></input>
+              <button
+                className="btn btn-success"
+                type="submit"
+                id="commentEditConfirm"
+              >
+                Confirm
+              </button>
+              <button className="btn btn-outline-secondary" id="commentEditCancelButton" onClick={() => setShowEdit(false)}>
+                  Cancel
+                </button>
+            </form>
+          </span>
+        )}
+
         <div className="ms-2 pt-2"></div>
-      </div></>
+      </div>
+    </div>
   );
 }
 export default Comment;
