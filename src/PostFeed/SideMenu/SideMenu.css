@@ -18,5 +18,10 @@ width: 250 px;
 flex:auto;
 }
 
+#profilePic{
+    height: 45px;
+    width: 45px;
+}
+
 
 

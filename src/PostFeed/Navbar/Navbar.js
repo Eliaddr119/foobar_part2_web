@@ -11,7 +11,7 @@ function Navbar() {
             aria-label="Search"
             id="searchBar"
           />
-          <button className="btn btn-outline-light" type="submit">
+          <button className="btn btn-outline-light">
             Search
           </button>
         </form>

@@ -30,6 +30,7 @@ function Comment({
 
   return (
     <div className="card text-bg-light" id="commentCard">
+      <div className="container">
       {canEdit && (
         <div class="btn-group" id="editOptions">
           <button
@@ -53,7 +54,7 @@ function Comment({
         </div>
       )}
 
-      <div className="d-flex">
+      <div className="d-flex" id="commentBody">
         <img
           id="commentImage"
           className="rounded-circle"
@@ -68,6 +69,7 @@ function Comment({
 
       <span className="container-fluid fs-4">{comment.content}</span>
       <div className="ms-2 pt-2"></div>
+    </div>
     </div>
   );
 }

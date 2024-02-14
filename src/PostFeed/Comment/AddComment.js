@@ -23,7 +23,7 @@ function AddComment({
     }
     const todayDate = getTodayDate();
     const newComment = {
-      id: "c" + Number(post.commentsCount) + 1,
+      id: post.id + "c" + (Number(post.commentsCount) + 1),
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
