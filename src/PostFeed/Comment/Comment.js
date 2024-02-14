@@ -46,59 +46,6 @@ function Comment({
   };
 
   return (
-    <><div
-      className="modal fade"
-      id="commentEditModal"
-      tabindex="-1"
-      aria-labelledby="postModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-dialog-centered modal-lg">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id="postModalLabel">
-              Upload a post
-            </h1>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            <form id="textBoxPost" onSubmit={handleSubmit}>
-              <input
-                name="postContent"
-                value={editInput}
-                onChange={handleChange}
-                placeholder="Write your post here...."
-                id="editInput"
-              ></input>
-
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              className="btn btn-outline-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              className="btn btn-outline-success"
-              type="submit"
-              onClick={handleSubmit}
-              data-bs-dismiss="modal"
-            >
-              Publish
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    
     <div className="card text-bg-light" id="commentCard">
       <div className="container">
         {canEdit && (
@@ -170,7 +117,7 @@ function Comment({
 
         <div className="ms-2 pt-2"></div>
       </div>
-    </div></>
+    </div>
   );
 }
 export default Comment;
