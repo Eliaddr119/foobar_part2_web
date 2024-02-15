@@ -85,6 +85,11 @@ function Post({ post, postsList, setPostsList }) {
     reader.readAsDataURL(file);
   };
 
+  const handleEditCancel = () => {
+    setPostInput(post.content);
+    setShowEdit(false);
+  }
+
   return (
     <>
       <div className="container-fluid">
@@ -168,7 +173,7 @@ function Post({ post, postsList, setPostsList }) {
                   <button
                     className="btn btn-outline-secondary"
                     id="postEditCancelButton"
-                    onClick={() => setShowEdit(false)}
+                    onClick={handleEditCancel}
                   >
                     Cancel
                   </button>
