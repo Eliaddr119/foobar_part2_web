@@ -211,18 +211,20 @@ function Post({ post, postsList, setPostsList }) {
                     onClick={handleLikeClick}
                     ref={likeButtonRef}
                     className="btn btn-outline-success"
+                    id="btnGroupButton"
                   >
                     <i className="me-2 bi bi-hand-thumbs-up-fill"></i> Like
                   </button>
                   <button
                     type="button"
                     className="btn btn-outline-success"
+                    id="btnGroupButton"
                     onClick={() => setOpenWriteComment(!openWriteComment)}
                   >
                     <i className=" me-2 bi bi-chat-left-fill"></i>
                     Comment
                   </button>
-                  <button type="button" className="btn btn-outline-success" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" className="btn btn-outline-success" data-bs-toggle="dropdown" aria-expanded="false" id="btnGroupButton">
                     <i className="me-2 bi bi-share-fill"></i>
                     Share
                     <div className="dropdown">

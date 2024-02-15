@@ -93,3 +93,9 @@
     margin-right: 1%;
     margin-bottom: 5px;
 }
+
+#btnGroupButton{
+    border-color: transparent;
+    border-radius: 10px;
+}
+
