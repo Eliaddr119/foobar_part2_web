@@ -1,3 +1,4 @@
+import { passwordMatch, passwordStrength } from "../userService"
 test("password and confirmPassword should match", () => {
     const password = "password123";
     const confirmPassword = "password123";

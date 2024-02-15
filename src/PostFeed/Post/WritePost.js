@@ -129,6 +129,7 @@ function WritePost({postsList, setPostsList}) {
                 type="submit"
                 onClick={handleSubmit}
                 data-bs-dismiss="modal"
+                label="publishButton"
               >
                 Publish
               </button>

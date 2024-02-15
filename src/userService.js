@@ -41,3 +41,16 @@ export const getTodayDate = () => {
   const todayDateString = `${formattedDay}/${formattedMonth}/${year}`;
   return todayDateString;
 };
+
+export const passwordMatch = (password, confirmPassword) => {
+  return password === confirmPassword;
+}
+
+export const passwordStrength = (password) => {
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasLowercase = /[a-z]/.test(password);
+  const hasNumber = /\d/.test(password);
+  const hasMinLength = password.length >= 8;
+
+  return hasUppercase && hasLowercase && hasNumber && hasMinLength;
+};

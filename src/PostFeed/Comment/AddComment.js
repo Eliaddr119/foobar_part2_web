@@ -48,7 +48,7 @@ function AddComment({
   return (
       <span><img
       className="rounded-circle"
-      alt="avatar1"
+      alt=""
       src={currentUser.image}
       id="roundImg" /><form id="textBox" onSubmit={(e) => handleSubmit(e)}>
         <input
