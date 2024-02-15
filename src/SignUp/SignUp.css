@@ -12,9 +12,10 @@
     height: 100vh;
 }
 
-.header {
+#pageHead {
     margin-top: 40px;
     margin-bottom: 20px;
+    text-align: center;
     font-size: 75px;
     color: cadetblue;
 }

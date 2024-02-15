@@ -120,8 +120,9 @@ function SignUp() {
   return ( 
     <div id='signUpBody'>
     <div id="signUpContainer" className='container'>
-      <h1 className='header'>FOOBAR</h1>
+      
       <div className='registration-card-container'>
+      <h1  id="pageHead">FOOBAR</h1>
         <div className='registration-card'>
           <div className='card-header'>Create a new account</div>
           {isSuccess && <div className="success-message">Signup successful!</div>}
