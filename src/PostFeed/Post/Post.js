@@ -216,9 +216,16 @@ function Post({ post, postsList, setPostsList }) {
                     <i className=" me-2 bi bi-chat-left-fill"></i>
                     Comment
                   </button>
-                  <button type="button" className="btn btn-outline-success">
+                  <button type="button" className="btn btn-outline-success" data-bs-toggle="dropdown" aria-expanded="false">
                     <i className="me-2 bi bi-share-fill"></i>
                     Share
+                    <div className="dropdown">
+      <ul className="dropdown-menu">
+        <li><button className="dropdown-item"> <i class="bi bi-reply"></i> Share now (friends)</button></li>
+        <li><button className="dropdown-item"> <i class="bi bi-pencil-square"></i> Share to feed</button></li>
+        <li><button className="dropdown-item"> <i class="bi bi-link"></i>  Copy link</button></li>
+      </ul>     
+    </div>
                   </button>
                 </div>
               </>
