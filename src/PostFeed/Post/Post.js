@@ -195,12 +195,13 @@ function Post({ post, postsList, setPostsList }) {
               </span>
             </div>
 
-            
+
 
                 <div
                   className="btn-group-lg text-center mt-3 mb-3"
                   role="group"
                 >
+                  
                   <button
                     onClick={handleLikeClick}
                     ref={likeButtonRef}
