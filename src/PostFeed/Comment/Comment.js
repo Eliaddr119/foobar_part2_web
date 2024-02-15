@@ -13,6 +13,7 @@ function Comment({
   const currentUser = JSON.parse(storedUserObject);
 
   const deleteComment = () => {
+    console.log(commentList)
     setCommentList((prevList) =>
       prevList.filter((item) => item.id !== comment.id)
     );
