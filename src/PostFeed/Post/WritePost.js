@@ -1,4 +1,6 @@
 import "./WritePost.css";
+
+import { Modal } from "bootstrap";
 import  { getTodayDate } from "../..//userService";
 
 import { useState } from "react";
