@@ -1,4 +1,4 @@
-# Welcome to foobar! The most new and advanced social network.
+# Welcome to foobar! The most new and advanced social network !
 In this part we created the layout of the sign-up page, the sign-in page and the post feed.
 we used JS to create the logic of the user input validation and determine whether they can proceed or not.
 In the feed page we show a list of 10 posts with images that are being loaded from a JSON file, The user has the option the upload a post or a comment and delete or edit a post or comment he previously uploaded.
