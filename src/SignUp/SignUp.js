@@ -159,10 +159,12 @@ function SignUp() {
               <br />
               {image && <img src={image} alt='' className='uploaded-image' />}
               <button id="signUpButton" type='submit'>Sign Up</button>
+              <div className='text-center'>
               <text>Back to Sign In </text>
               <Link to="/SignIn">
                 <span className="click-here">click here</span>
               </Link>
+              </div>
             </form>
           </div>
         </div>
