@@ -108,6 +108,7 @@ button:hover {
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 10px;
+    margin-left: 27%;
 }
 
 .success-message {
