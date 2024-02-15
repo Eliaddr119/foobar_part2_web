@@ -1,4 +1,4 @@
-// src/userService.js
+
 
 // Function to get all registered users from localStorage
 export const getAllUsers = () => {
