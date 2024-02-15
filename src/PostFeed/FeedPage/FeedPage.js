@@ -4,7 +4,6 @@ import posts from "./posts.json";
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom"; 
-import { Modal } from "bootstrap";
 import WritePost from "../Post/WritePost";
 
 function FeedPage() {
@@ -16,18 +15,9 @@ function FeedPage() {
   }, []);
 
   const [postsList, setPostsList] = useState(posts);
-  const [postInput, setpostInput] = useState("");
   const [isDarkMode, setIsDarkMode] = useState("light");
 
-  const toggleDarkMode = () => {
-    if (isDarkMode === "light") {
-      setIsDarkMode("dark");
-    } else {
-      setIsDarkMode("light");
-    }
-  };
-
-
+  
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -44,33 +34,7 @@ function FeedPage() {
     return <Post post={post} key={post.id} postsList={postsList} setPostsList={setPostsList} />;
   });
 
-  const [postImage, setImage] = useState(null);
-  const [error, setError] = useState(null);
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-
-    if (!file) {
-      setImage(null);
-      return;
-    }
-    // Check if the file is an image
-    if (!file.type.startsWith("image/")) {
-      setError("Only image files are allowed.");
-      // Clear the error message after 3 seconds
-      setTimeout(() => setError(""), 3_000);
-      // Clear the file input
-      event.target.value = "";
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-
-    reader.readAsDataURL(file);
-  };
+  
   if (sessionStorage.getItem("current_usr") != null) {
     return (
       <body data-bs-theme={isDarkMode}>

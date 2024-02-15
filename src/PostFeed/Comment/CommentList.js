@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Comment from "../Comment/Comment.js";
 
 function CommentList(

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./SideMenu.css";
 
 function SideMenu() {

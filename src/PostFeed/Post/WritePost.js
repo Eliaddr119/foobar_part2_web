@@ -1,6 +1,4 @@
 import "./WritePost.css";
-
-import { Modal } from "bootstrap";
 import  { getTodayDate } from "../..//userService";
 
 import { useState } from "react";
@@ -8,7 +6,7 @@ import { useState } from "react";
 function WritePost({postsList, setPostsList}) {
   const [postInput, setpostInput] = useState("");
   const [postImage, setImage] = useState(null);
-  const [error, setError] = useState(null);
+  const [setError] = useState(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];

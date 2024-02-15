@@ -5,16 +5,16 @@ import { useRef } from "react";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
 
-function Post({post,postsList,setPostsList} ) {
-
+function Post({ post, postsList, setPostsList }) {
   const storedUserObject = sessionStorage.getItem("current_usr");
-    const currentUser = JSON.parse(storedUserObject);
+  const currentUser = JSON.parse(storedUserObject);
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
+  const [openWriteComment, setOpenWriteComment] = useState(false);
 
   const deletePost = () => {
-    setPostsList(prevList => prevList.filter(item => item.id !== post.id));
-  }
+    setPostsList((prevList) => prevList.filter((item) => item.id !== post.id));
+  };
 
   const [countComments, setCommentCount] = useState(Number(post.commentsCount));
 
@@ -22,8 +22,6 @@ function Post({post,postsList,setPostsList} ) {
   const [likes, setLikes] = useState(likeinit);
   const likeButtonRef = useRef(null);
   const handleLikeClick = () => {
-    {
-    }
     if (likes === post.likes) {
       setLikes(likes + 1);
       likeButtonRef.current.classList.toggle("active");
@@ -32,14 +30,14 @@ function Post({post,postsList,setPostsList} ) {
       likeButtonRef.current.classList.remove("active");
     }
   };
-const editEligble = () => {
-  if (currentUser.username === post.user.username) {
-    return true;
-  }
-  return false;
-}
+  const editEligble = () => {
+    if (currentUser.username === post.user.username) {
+      return true;
+    }
+    return false;
+  };
 
-  const[canEdit] = useState(editEligble);
+  const [canEdit] = useState(editEligble);
 
   const [showEdit, setShowEdit] = useState(false);
   const [postInput, setPostInput] = useState(post.content);
@@ -49,7 +47,7 @@ const editEligble = () => {
       return;
     }
     post.content = postInput;
-    post.image= postImage;
+    post.image = postImage;
     setPostsList(postsList);
     setShowEdit(false);
   };
@@ -58,10 +56,8 @@ const editEligble = () => {
     setPostInput(value);
   };
 
-
-
   const [postImage, setImage] = useState(post.image);
-  const [error, setError] = useState(null);
+  const [setError] = useState(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -88,128 +84,170 @@ const editEligble = () => {
 
     reader.readAsDataURL(file);
   };
-  
+
   return (
     <>
-    
       <div className="container-fluid">
         <div className="card bg-light" id="postCard">
-        <div className="container">
-        {canEdit &&<div class="btn-group" id="editOptions">
-        <button
-          class="btn btn-success btn-sm dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          
-          Post Options
-        </button>
-        <ul class="dropdown-menu text-center">
-          <li>
-            <button class="dropdown-item" onClick={deletePost} >
-              Delete Post
-            </button>
-          </li>
-          <li>
-            <button className="dropdown-item" onClick={() => setShowEdit(true)}>
-             
-              Edit Post
-            </button>
-          </li>
-        </ul>
-      </div>}
-          <div className="container-fluid">
-            <div className="d-flex">
-              <img
-                className="rounded-circle"
-                alt="avatar1"
-                src={post.user.image}
-              />
-              <h5 className="fs-2 ms-2 pb-4">
-                {post.user.displayName}
-                <p className="fs-5 ">{post.postTime}</p>
-              </h5>
-            </div>
-
-            {!showEdit &&<span className="container-fluid fs-3 pb-5">{post.content}</span>}
-            {showEdit && <form id="textBoxPost" onSubmit={handleSubmit}>
-                <input
-                  name="postContent"
-                  value={postInput}
-                  onChange={handleChange}
-                  placeholder="Write your post here...."
-                  id="postInput"
-                ></input>
-
-                <div>
-                  <label htmlFor="fileInput" className="imageUpLabel">
-                    <h4>Upload An Image</h4>
-                  </label>
-                </div>
-                <input
-                  type="file"
-                  id="imageAdd"
-                  name="image"
-                  className="input"
-                  
-                  onChange={handleImageUpload}
-                />
-                
-                 <button
-                className="btn btn-success"
-                type="submit"
-                id="postEditConfirm"
-              >Confirm</button>
-              <button className="btn btn-outline-secondary" id="postEditCancelButton" onClick={() => setShowEdit(false)}>
-                  Cancel
+          <div className="container">
+            {canEdit && (
+              <div class="btn-group" id="editOptions">
+                <button
+                  class="btn btn-success btn-sm dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Post Options
                 </button>
-              </form>}
+                <ul class="dropdown-menu text-center">
+                  <li>
+                    <button class="dropdown-item" onClick={deletePost}>
+                      Delete Post
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => setShowEdit(true)}
+                    >
+                      Edit Post
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+            <div className="container-fluid">
+              <div className="d-flex">
+                <img
+                  className="rounded-circle"
+                  alt="avatar1"
+                  src={post.user.image}
+                />
+                <h5 className="fs-2 ms-2 pb-4">
+                  {post.user.displayName}
+                  <p className="fs-5 ">{post.postTime}</p>
+                </h5>
+              </div>
+
+              {!showEdit && (
+                <span className="container-fluid fs-3 pb-5">
+                  {post.content}
+                </span>
+              )}
+              {showEdit && (
+                <form id="textBoxPost" onSubmit={handleSubmit}>
+                  <input
+                    name="postContent"
+                    value={postInput}
+                    onChange={handleChange}
+                    placeholder="Write your post here...."
+                    id="postInput"
+                  ></input>
+
+                  <div>
+                    <label htmlFor="fileInput" className="imageUpLabel">
+                      <h4>Upload An Image</h4>
+                    </label>
+                  </div>
+                  <input
+                    type="file"
+                    id="imageAdd"
+                    name="image"
+                    className="input"
+                    onChange={handleImageUpload}
+                  />
+
+                  <button
+                    className="btn btn-success"
+                    type="submit"
+                    id="postEditConfirm"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    className="btn btn-outline-secondary"
+                    id="postEditCancelButton"
+                    onClick={() => setShowEdit(false)}
+                  >
+                    Cancel
+                  </button>
+                </form>
+              )}
             </div>
-            <div className="ms-2 pt-2">
+
+            {!showEdit && (
+              <>
+                <div className="container" id="imageContainer">
+                  <img alt="" src={post.image} id="postImage" />
+                </div>
+                <div className="ms-2 pt-2">
               <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
 
-              <span className="fs-4 ms-2">{likes}</span></div>
-
-              <div className="text-end fs-4" id="commentCountText">
+              <span className="fs-4 ms-2">{likes}</span>
+              <span className="text-end fs-4" id="commentCountText">
                 <button
                   onClick={() => setCommentShow(!commentShow)}
                   id="commentsButton"
                 >
                   {countComments} Comments
                 </button>
-              </div>
+              </span>
+            </div>
 
-             {!showEdit && <><div className="container" id="imageContainer">
-              <img alt="" src={post.image} id="postImage" />
-            </div><div className="btn-group-lg text-center mt-3" role="group">
-                <button
-                  onClick={handleLikeClick}
-                  ref={likeButtonRef}
-                  className="btn btn-outline-success"
+            
+
+                <div
+                  className="btn-group-lg text-center mt-3 mb-3"
+                  role="group"
                 >
-                  <i className="me-2 bi bi-hand-thumbs-up-fill"></i> Like
-                </button>
-
-                <button type="button" className="btn btn-outline-success">
-                  <i className="me-2 bi bi-share-fill"></i>
-                  Share
-                </button>
-              </div></>}
+                  <button
+                    onClick={handleLikeClick}
+                    ref={likeButtonRef}
+                    className="btn btn-outline-success"
+                  >
+                    <i className="me-2 bi bi-hand-thumbs-up-fill"></i> Like
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-success"
+                    onClick={() => setOpenWriteComment(!openWriteComment)}
+                  >
+                    <i className=" me-2 bi bi-chat-left-fill"></i>
+                    Comment
+                  </button>
+                  <button type="button" className="btn btn-outline-success">
+                    <i className="me-2 bi bi-share-fill"></i>
+                    Share
+                  </button>
+                </div>
+              </>
+            )}
             
           </div>
-          {!showEdit &&<AddComment
-            post={post}
-            setCommentList={setCommentList}
-            commentList={commentList}
-            setCommentCount={setCommentCount}
-            countComments={countComments}
-            setCommentShow={setCommentShow}
-          />}
         </div>
-        </div>
-
-        {commentShow && <CommentList key={post.id} post={post} countComments={countComments} setCommentCount={setCommentCount} setCommentList={setCommentList} commentList={commentList}/>}
+      </div>
+      {!showEdit && openWriteComment && (
+        <AddComment
+          post={post}
+          setCommentList={setCommentList}
+          commentList={commentList}
+          setCommentCount={setCommentCount}
+          countComments={countComments}
+          setCommentShow={setCommentShow}
+          setOpenWriteComment={setOpenWriteComment}
+        />
+      )}
+      {commentShow && (
+        <CommentList
+          key={post.id}
+          post={post}
+          countComments={countComments}
+          setCommentCount={setCommentCount}
+          setCommentList={setCommentList}
+          commentList={commentList}
+        />
+      )}
     </>
   );
 }

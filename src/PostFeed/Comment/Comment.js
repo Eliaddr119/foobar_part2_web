@@ -26,7 +26,7 @@ function Comment({
     return false;
   };
 
-  const [canEdit, setCanEdit] = useState(editEligble);
+  const [canEdit] = useState(editEligble);
   const [showEdit, setShowEdit] = useState(false);
   const [commentInput, setCommentInput] = useState(comment.content);
 

@@ -9,7 +9,8 @@ function AddComment({
   countComments,
   setCommentCount,
   post,
-  setCommentShow
+  setCommentShow,
+  setOpenWriteComment
 }) {
   
   const [commentInput, setCommentInput] = useState("");
@@ -39,6 +40,7 @@ function AddComment({
     setCommentCount(countComments + 1);
     setCommentInput("");
     setCommentShow(true);
+    setOpenWriteComment(false);
   };
   const handleChange = (event) => {
     const value = event.target.value;
@@ -46,6 +48,7 @@ function AddComment({
   };
 
   return (
+    <div className="card bg-light" id="addCommentCard">
       <span><img
       className="rounded-circle"
       alt=""
@@ -61,7 +64,7 @@ function AddComment({
         <button id="commentPublishButton"className="btn btn-outline-success" type="submit">publish</button>
       </form>
       </span>
-    
+    </div>
 
     
     

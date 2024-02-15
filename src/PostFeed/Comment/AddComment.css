@@ -1,6 +1,6 @@
 #commentInput {
     
-    width: 75%;
+    width: 70%;
     margin: 2%;
     border-color: whitesmoke;
     border-radius: 15px;
@@ -17,10 +17,12 @@
     
     border-color: transparent;
     border-radius: 25px;
-    width: 70%;
-    padding: 1%;
+    width: 100%;
     border-style: ridge;
     align-self: start;
+    margin-top: 5px;
+    border-color: black;
+    padding: 1%;
     
 }
 
@@ -34,6 +36,6 @@
 }
 
 #commentPublishButton{
-    width: 12%;
+    width: 15%;
 }
 
