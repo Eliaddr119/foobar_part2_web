@@ -21,7 +21,8 @@
                 "commentTime": "2/3/2024",
                 "content": "I love rainy days too!"
             }
-        ]
+        ],
+        "image": "images/posts/p1.jpg"
     },
     {
         "id": "2",
@@ -36,7 +37,7 @@
         "commentsCount": "2",
         "comments": [
             {
-                "id": "c1",
+                "id": "c3",
                 "user": {
                     "username": "emma_davis",
                     "displayName": "Emma Davis",
@@ -46,7 +47,7 @@
                 "content": "I want to visit there too!"
             },
             {
-                "id": "c2",
+                "id": "c4",
                 "user": {
                     "username": "mike_smith",
                     "displayName": "Mike Smith",
@@ -55,7 +56,8 @@
                 "commentTime": "2/5/2024",
                 "content": "Amazing discovery, Sarah!"
             }
-        ]
+        ],
+        "image": "images/posts/p2.jpg"
     },
     {
         "id": "3",
@@ -70,7 +72,7 @@
         "commentsCount": "3",
         "comments": [
             {
-                "id": "c1",
+                "id": "c8",
                 "user": {
                     "username": "sophia_harris",
                     "displayName": "Sophia Harris",
@@ -80,7 +82,7 @@
                 "content": "Brunch is my favorite meal!"
             },
             {
-                "id": "c2",
+                "id": "c9",
                 "user": {
                     "username": "alex_turner",
                     "displayName": "Alex Turner",
@@ -90,7 +92,7 @@
                 "content": "Great choice, Mike!"
             },
             {
-                "id": "c3",
+                "id": "c10",
                 "user": {
                     "username": "natalie_brown",
                     "displayName": "Natalie Brown",
@@ -99,7 +101,8 @@
                 "commentTime": "2/8/2024",
                 "content": "What did you have for brunch?"
             }
-        ]
+        ],
+        "image": "images/posts/p3.jpg"
     },
     {
         "id": "4",
@@ -114,7 +117,7 @@
         "commentsCount": "5",
         "comments": [
             {
-                "id": "c1",
+                "id": "c11",
                 "user": {
                     "username": "chris_johnson",
                     "displayName": "Chris Johnson",
@@ -124,7 +127,7 @@
                 "content": "I love movie nights!"
             },
             {
-                "id": "c2",
+                "id": "c12",
                 "user": {
                     "username": "olivia_miller",
                     "displayName": "Olivia Miller",
@@ -134,7 +137,7 @@
                 "content": "What genre are you watching?"
             },
             {
-                "id": "c3",
+                "id": "c13",
                 "user": {
                     "username": "sarah_thompson",
                     "displayName": "Sarah Thompson",
@@ -144,7 +147,7 @@
                 "content": "Romantic comedies are my favorite!"
             },
             {
-                "id": "c4",
+                "id": "c14",
                 "user": {
                     "username": "josh_cohen",
                     "displayName": "Josh Cohen",
@@ -154,7 +157,7 @@
                 "content": "Classic films for me!"
             },
             {
-                "id": "c5",
+                "id": "c15",
                 "user": {
                     "username": "mike_smith",
                     "displayName": "Mike Smith",
@@ -163,7 +166,8 @@
                 "commentTime": "2/11/2024",
                 "content": "I like action movies!"
             }
-        ]
+        ],
+        "image": "images/posts/p4.jpg"
     },
     {
         "id": "5",
@@ -178,7 +182,7 @@
         "commentsCount": "1",
         "comments": [
             {
-                "id": "c1",
+                "id": "c18",
                 "user": {
                     "username": "emma_davis",
                     "displayName": "Emma Davis",
@@ -187,7 +191,8 @@
                 "commentTime": "2/9/2024",
                 "content": "Great dedication, Chris!"
             }
-        ]
+        ],
+        "image": "images/posts/p5.jpg"
     },
     {
         "id": "6",
@@ -202,7 +207,7 @@
         "commentsCount": "5",
         "comments": [
             {
-                "id": "c1",
+                "id": "c22",
                 "user": {
                     "username": "alex_turner",
                     "displayName": "Alex Turner",
@@ -212,7 +217,7 @@
                 "content": "Send some over, please!"
             },
             {
-                "id": "c2",
+                "id": "c23",
                 "user": {
                     "username": "sophia_harris",
                     "displayName": "Sophia Harris",
@@ -222,7 +227,7 @@
                 "content": "I love the smell of fresh cookies!"
             },
             {
-                "id": "c3",
+                "id": "c24",
                 "user": {
                     "username": "mike_smith",
                     "displayName": "Mike Smith",
@@ -232,7 +237,7 @@
                 "content": "What's your secret recipe?"
             },
             {
-                "id": "c4",
+                "id": "c25",
                 "user": {
                     "username": "chris_johnson",
                     "displayName": "Chris Johnson",
@@ -242,7 +247,7 @@
                 "content": "Cookies are the best!"
             },
             {
-                "id": "c5",
+                "id": "c26",
                 "user": {
                     "username": "natalie_brown",
                     "displayName": "Natalie Brown",
@@ -251,7 +256,8 @@
                 "commentTime": "2/15/2024",
                 "content": "I'm craving cookies now!"
             }
-        ]
+        ],
+        "image": "images/posts/p6.jpg"
     },
     {
         "id": "7",
@@ -266,7 +272,7 @@
         "commentsCount": "4",
         "comments": [
             {
-                "id": "c1",
+                "id": "c28",
                 "user": {
                     "username": "natalie_brown",
                     "displayName": "Natalie Brown",
@@ -276,7 +282,7 @@
                 "content": "What genre do you enjoy?"
             },
             {
-                "id": "c2",
+                "id": "c29",
                 "user": {
                     "username": "sophia_harris",
                     "displayName": "Sophia Harris",
@@ -286,7 +292,7 @@
                 "content": "Mystery novels are great for a quiet night."
             },
             {
-                "id": "c3",
+                "id": "c30",
                 "user": {
                     "username": "emma_davis",
                     "displayName": "Emma Davis",
@@ -296,7 +302,7 @@
                 "content": "Have you read any good books lately?"
             },
             {
-                "id": "c4",
+                "id": "c31",
                 "user": {
                     "username": "chris_johnson",
                     "displayName": "Chris Johnson",
@@ -305,7 +311,8 @@
                 "commentTime": "2/16/2024",
                 "content": "Reading anything interesting?"
             }
-        ]
+        ],
+        "image": "images/posts/p7.jpg"
     },
     {
         "id": "8",
@@ -320,7 +327,7 @@
         "commentsCount": "1",
         "comments": [
             {
-                "id": "c1",
+                "id": "c32",
                 "user": {
                     "username": "emma_davis",
                     "displayName": "Emma Davis",
@@ -329,7 +336,8 @@
                 "commentTime": "2/16/2024",
                 "content": "Happy birthday to your pet!"
             }
-        ]
+        ],
+        "image": "images/posts/p8.jpg"
     },
     {
         "id": "9",
@@ -344,7 +352,7 @@
         "commentsCount": "5",
         "comments": [
             {
-                "id": "c1",
+                "id": "c38",
                 "user": {
                     "username": "emma_davis",
                     "displayName": "Emma Davis",
@@ -354,7 +362,7 @@
                 "content": "Sunsets are magical!"
             },
             {
-                "id": "c2",
+                "id": "c39",
                 "user": {
                     "username": "chris_johnson",
                     "displayName": "Chris Johnson",
@@ -364,7 +372,7 @@
                 "content": "Where's your favorite sunset spot?"
             },
             {
-                "id": "c3",
+                "id": "c40",
                 "user": {
                     "username": "olivia_miller",
                     "displayName": "Olivia Miller",
@@ -374,7 +382,7 @@
                 "content": "Nature is indeed the best artist!"
             },
             {
-                "id": "c4",
+                "id": "c41",
                 "user": {
                     "username": "sarah_thompson",
                     "displayName": "Sarah Thompson",
@@ -384,7 +392,7 @@
                 "content": "I love watching the sunset too!"
             },
             {
-                "id": "c5",
+                "id": "c42",
                 "user": {
                     "username": "mike_smith",
                     "displayName": "Mike Smith",
@@ -393,7 +401,8 @@
                 "commentTime": "2/23/2024",
                 "content": "Sunsets are a beautiful reminder of how amazing our world is."
             }
-        ]
+        ],
+        "image": "images/posts/p9.jpg"
     },
     {
         "id": "10",
@@ -408,19 +417,17 @@
         "commentsCount": "3",
         "comments": [
             {
-                "id": "c1",
+                "id": "c43",
                 "user": {
                     "username": "olivia_miller",
                     "displayName": "Olivia Miller",
                     "image": "images/profiles/u8.jpg"
                 },
-               
-
- "commentTime": "2/21/2024",
+                "commentTime": "2/21/2024",
                 "content": "What are you cooking?"
             },
             {
-                "id": "c2",
+                "id": "c44",
                 "user": {
                     "username": "sarah_thompson",
                     "displayName": "Sarah Thompson",
@@ -430,7 +437,7 @@
                 "content": "Hope it turns out delicious!"
             },
             {
-                "id": "c3",
+                "id": "c45",
                 "user": {
                     "username": "chris_johnson",
                     "displayName": "Chris Johnson",
@@ -439,6 +446,7 @@
                 "commentTime": "2/23/2024",
                 "content": "Let us know how it goes!"
             }
-        ]
+        ],
+        "image": "images/posts/p10.jpg"
     }
 ]

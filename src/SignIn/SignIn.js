@@ -36,7 +36,7 @@ const SignIn = () => {
   return (
     <div id="signInBody">
     <div className='sign-in-container'>
-      <h1 className='header'>FOOBAR</h1>
+      <h1 className='header' id='pageHead'>FOOBAR</h1>
       <div className='registration-card-container'>
         <div className='registration-card' id='r-c'>
           <div className='card-header'>Sign In</div>
