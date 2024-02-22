@@ -12,7 +12,7 @@ One of the things we prevented from the user is to directly access the feed page
 
 In the project directory run:
 
-### 'npm install'
+### `npm install`
 To install all the app dependencies.
 
 ### `npm start`
