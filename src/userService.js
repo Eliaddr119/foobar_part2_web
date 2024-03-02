@@ -54,3 +54,5 @@ export const passwordStrength = (password) => {
 
   return hasUppercase && hasLowercase && hasNumber && hasMinLength;
 };
+
+export const serverURL = "http://localhost:8080";
