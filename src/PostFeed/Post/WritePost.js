@@ -1,20 +1,23 @@
 import "./WritePost.css";
 
 import { Modal } from "bootstrap";
-import  { getTodayDate } from "../..//userService";
-
+import { getTodayDate, serverURL } from "../..//userService";
 import { useState } from "react";
+import { json } from "react-router-dom";
 
-function WritePost({postsList, setPostsList}) {
+function WritePost({ postsList, setPostsList }) {
   const [postInput, setpostInput] = useState("");
-  const [postImage, setImage] = useState(null);
+  const [postImage, setImage] = useState("null");
   const [setError] = useState(null);
+
+  const storedUserObject = sessionStorage.getItem("currentUser");
+  const currentUser = JSON.parse(storedUserObject);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
 
     if (!file) {
-      setImage(null);
+      setImage("");
       return;
     }
     // Check if the file is an image
@@ -30,22 +33,31 @@ function WritePost({postsList, setPostsList}) {
     const reader = new FileReader();
 
     reader.onload = () => {
-      setImage(reader.result);
+      setImage("data:image/jpeg;base64," + reader.result.split(",")[1]);
     };
 
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (event) => {
-    const storedUserObject = sessionStorage.getItem("current_usr");
-    const currentUser = JSON.parse(storedUserObject);
+  const generateUniqueId = () => {
+    const timestamp = Date.now().toString(36); // Convert timestamp to base36
+    const randomNumber = Math.random().toString(36).substr(2, 5); // Generate random number
+
+    return `${timestamp}-${randomNumber}`;
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (postInput === "" && postImage === null) {
+    if (postInput === "" && postImage === "") {
       return;
     }
+    const token = localStorage.getItem("jwt");
+    const username = localStorage.getItem("username");
+    const currentUser = localStorage.getItem("currentUser");
     const todayDate = getTodayDate();
+    const postId  = generateUniqueId();
     const newPost = {
-      id: toString(postsList.length + 1),
+      id: postId,
       user: {
         username: currentUser.username,
         displayName: currentUser.displayName,
@@ -58,11 +70,17 @@ function WritePost({postsList, setPostsList}) {
       comments: [],
       image: postImage,
     };
-    const updatedPosts = [newPost,...postsList];
+    const res = await fetch(serverURL + `/api/users/${username}/posts`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPost),
+    });
 
-    setPostsList(updatedPosts);
     setpostInput("");
-    setImage(null);
+    setImage("");
   };
 
   const handleChange = (event) => {
@@ -93,7 +111,7 @@ function WritePost({postsList, setPostsList}) {
               ></button>
             </div>
             <div className="modal-body">
-              <form id="textBoxPost" onSubmit={handleSubmit}>
+              <form id="textBoxPost">
                 <input
                   name="postContent"
                   value={postInput}

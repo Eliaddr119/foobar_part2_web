@@ -1,11 +1,10 @@
 // src/components/SignIn.js
 import React, { useState } from "react";
-import { findUser, isUserRegistered } from "../userService";
 import { useNavigate, Link } from "react-router-dom";
 import userIcon from "../Assets/person.png";
 import passwordIcon from "../Assets/password.png";
 import "./SignIn.css";
-import "../userService";
+import { serverURL } from "../userService";
 
 function SignIn() {
   const [userName, setUserName] = useState("");
@@ -13,7 +12,7 @@ function SignIn() {
   const [errorMessage, setErrorMessage] = useState("");
   const Navigate = useNavigate();
   const handleSignIn = async function () {
-    const data = { username, password };
+    const data = { userName, password };
     const res = await fetch(serverURL + "/api/tokens", {
       method: "POST",
       headers: {
@@ -26,6 +25,7 @@ function SignIn() {
       console.log("Sign in successful!");
       const token = res.body.token;
       localStorage.setItem("jwt", token);
+      localStorage.setItem("username",userName);
       Navigate("/FeedPage");
     } else if(res.status === 404) {
       console.log("Invalid UserName or Password. Please try again.");

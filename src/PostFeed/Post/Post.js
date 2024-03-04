@@ -12,8 +12,14 @@ function Post({ post, postsList, setPostsList }) {
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
 
-  const deletePost = () => {
-    setPostsList((prevList) => prevList.filter((item) => item.id !== post.id));
+  const deletePost = async() => {
+    const res = await fetch(serverURL + `/api/users/${username}/posts/${post.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   const [countComments, setCommentCount] = useState(Number(post.commentsCount));
@@ -38,19 +44,29 @@ function Post({ post, postsList, setPostsList }) {
   };
 
   const [canEdit] = useState(editEligble);
-
   const [showEdit, setShowEdit] = useState(false);
   const [postInput, setPostInput] = useState(post.content);
-  const handleSubmit = (event) => {
+
+  const handleEdit = async (event) => {
     event.preventDefault();
     if (postInput === "") {
       return;
     }
-    post.content = postInput;
-    post.image = postImage;
-    setPostsList(postsList);
+    const postEditedDetails = {
+      content : postInput,
+      image : postImage,
+    }
+    const res = await fetch(serverURL + `/api/users/${username}/posts/${post.id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postEditedDetails),
+    });
     setShowEdit(false);
   };
+
   const handleChange = (event) => {
     const value = event.target.value;
     setPostInput(value);
@@ -63,23 +79,23 @@ function Post({ post, postsList, setPostsList }) {
     const file = event.target.files[0];
 
     if (!file) {
-      setImage(null);
+      setImage("")
       return;
     }
     // Check if the file is an image
-    if (!file.type.startsWith("image/")) {
-      setError("Only image files are allowed.");
+    if (!file.type.startsWith('image/')) {
+      setError('Only image files are allowed.');
       // Clear the error message after 3 seconds
-      setTimeout(() => setError(""), 3_000);
+      setTimeout(() => setError(''), 3_000);
       // Clear the file input
-      event.target.value = "";
+      event.target.value = '';
       return;
     }
 
     const reader = new FileReader();
 
     reader.onload = () => {
-      setImage(reader.result);
+      setImage("data:image/jpeg;base64,"+reader.result.split(',')[1]);
     };
 
     reader.readAsDataURL(file);
@@ -141,7 +157,7 @@ function Post({ post, postsList, setPostsList }) {
                 </span>
               )}
               {showEdit && (
-                <form id="textBoxPost" onSubmit={handleSubmit}>
+                <form id="textBoxPost" onSubmit={handleEdit}>
                   <input
                     name="postContent"
                     value={postInput}

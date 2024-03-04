@@ -42,7 +42,7 @@ function SignUp() {
     const reader = new FileReader();
 
     reader.onload = () => {
-      setImage(reader.result.split(',')[1]);
+      setImage("data:image/jpeg;base64,"+reader.result.split(',')[1]);
     };
 
     reader.readAsDataURL(file);
