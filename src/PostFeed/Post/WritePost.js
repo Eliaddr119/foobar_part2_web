@@ -53,7 +53,8 @@ function WritePost({ postsList, setPostsList }) {
     }
     const token = sessionStorage.getItem("jwt");
     const username = sessionStorage.getItem("username");
-    const currentUser = sessionStorage.getItem("currentUser");
+    const currentUserObject = sessionStorage.getItem("currentUser");
+    const currentUser = JSON.parse(currentUserObject);
     const todayDate = getTodayDate();
     const postId  = generateUniqueId();
     const newPost = {
