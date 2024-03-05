@@ -7,12 +7,12 @@ import "./SignIn.css";
 import { serverURL } from "../userService";
 
 function SignIn() {
-  const [userName, setUserName] = useState("");
+  const [username, setusername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const Navigate = useNavigate();
   const handleSignIn = async function () {
-    const data = { userName, password };
+    const data = { username, password };
     const res = await fetch(serverURL + "/api/tokens", {
       method: "POST",
       headers: {
@@ -23,13 +23,13 @@ function SignIn() {
 
     if (res.status === 200) {
       console.log("Sign in successful!");
-      const token = res.body.token;
+      const token = res.token;
       localStorage.setItem("jwt", token);
-      localStorage.setItem("username",userName);
+      localStorage.setItem("username",username);
       Navigate("/FeedPage");
     } else if(res.status === 404) {
-      console.log("Invalid UserName or Password. Please try again.");
-      setErrorMessage("Invalid UserName or Password. Please try again.");
+      console.log("Invalid username or Password. Please try again.");
+      setErrorMessage("Invalid username or Password. Please try again.");
     }
   };
 
@@ -58,8 +58,8 @@ function SignIn() {
                   type="text"
                   placeholder="User Name"
                   className="input-field"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
+                  value={username}
+                  onChange={(e) => setusername(e.target.value)}
                 />
                 <img src={userIcon} alt="User Icon" className="input-icon" />
               </div>

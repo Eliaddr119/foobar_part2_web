@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useRef } from "react";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
+import { serverURL } from "../../userService.js";
 
 function Post({ post, postsList, setPostsList }) {
-  const storedUserObject = sessionStorage.getItem("current_usr");
-  const currentUser = JSON.parse(storedUserObject);
+  const username = sessionStorage.getItem("username");
+  const token = sessionStorage.getItem("jwt");
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
@@ -37,7 +38,7 @@ function Post({ post, postsList, setPostsList }) {
     }
   };
   const editEligble = () => {
-    if (currentUser.username === post.user.username) {
+    if (username === post.user.username) {
       return true;
     }
     return false;
