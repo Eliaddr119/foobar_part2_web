@@ -70,7 +70,6 @@ function FeedPage() {
       <div className="row mt-5 mb-5 ">
         <div className="col-3" id="sideCol">
           <div className>
-            <SideMenu />
           </div>
         </div>
 

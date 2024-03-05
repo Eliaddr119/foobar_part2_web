@@ -38,7 +38,7 @@ function Post({ post, postsList, setPostsList }) {
     }
   };
   const editEligble = () => {
-    if (username === post.user.username) {
+    if (username === post.username) {
       return true;
     }
     return false;
