@@ -24,7 +24,7 @@ function SignIn() {
     if (res.status === 200) {
       console.log("Sign in successful!");
       const tokenRes = await res.json();
-      const token = zxc.token
+      const token = tokenRes.token;
       sessionStorage.setItem("jwt", token);
       sessionStorage.setItem("username",username);
       Navigate("/FeedPage");
