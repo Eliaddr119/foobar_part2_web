@@ -12,7 +12,7 @@ function SignIn() {
   const [errorMessage, setErrorMessage] = useState("");
   const Navigate = useNavigate();
   const handleSignIn = async function () {
-    const data = { username, password };
+    const data = {username: username, password:password };
     const res = await fetch(serverURL + "/api/tokens", {
       method: "POST",
       headers: {
@@ -23,7 +23,7 @@ function SignIn() {
 
     if (res.status === 200) {
       console.log("Sign in successful!");
-      const token = res.token;
+      const token = await res.json().token;
       localStorage.setItem("jwt", token);
       localStorage.setItem("username",username);
       Navigate("/FeedPage");

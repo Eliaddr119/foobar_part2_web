@@ -11,7 +11,7 @@ function FeedPage() {
   useEffect(() => {
     getCurrentUser();
     getPosts();
-  }, [location.pathname]);
+  }, []);
 
   const [postsList, setPostsList] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState("light");

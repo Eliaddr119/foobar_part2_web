@@ -64,7 +64,7 @@ function SignUp() {
       return;
     }
 
-    const user = { username, password, displayName, image };
+    const user = { username, password, displayName, profilePic:image };
 
     try {
       
