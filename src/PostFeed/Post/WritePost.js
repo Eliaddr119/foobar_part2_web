@@ -51,9 +51,9 @@ function WritePost({ postsList, setPostsList }) {
     if (postInput === "" && postImage === "") {
       return;
     }
-    const token = localStorage.getItem("jwt");
-    const username = localStorage.getItem("username");
-    const currentUser = localStorage.getItem("currentUser");
+    const token = sessionStorage.getItem("jwt");
+    const username = sessionStorage.getItem("username");
+    const currentUser = sessionStorage.getItem("currentUser");
     const todayDate = getTodayDate();
     const postId  = generateUniqueId();
     const newPost = {

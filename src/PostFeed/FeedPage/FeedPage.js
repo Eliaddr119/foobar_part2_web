@@ -27,7 +27,7 @@ function FeedPage() {
   };
 
   const getPosts = async () => {
-    const token = localStorage.getItem("jwt");
+    const token = sessionStorage.getItem("jwt");
     const res = await fetch(serverURL + "/api/posts", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,8 +39,8 @@ function FeedPage() {
   };
 
   const getCurrentUser = async () => {
-    const token = localStorage.getItem("jwt");
-    const username = localStorage.getItem("username");
+    const token = sessionStorage.getItem("jwt");
+    const username = sessionStorage.getItem("username");
     const res = await fetch(serverURL + `/api/users/${username}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ function FeedPage() {
       },
     });
     const currentUser = await res.json();
-    localStorage.setItem(currentUser,"currentUser");
+    sessionStorage.setItem(currentUser,"currentUser");
   };
 
   const listOfPosts = postsList.map((post) => {

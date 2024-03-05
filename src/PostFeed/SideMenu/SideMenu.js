@@ -2,11 +2,11 @@ import "./SideMenu.css";
 import { useNavigate } from "react-router-dom"; 
 
 function SideMenu() {
-  const storedUserObject = sessionStorage.getItem("current_usr");
+  const storedUserObject = sessionStorage.getItem("currentUser");
   const currentUser = JSON.parse(storedUserObject);
   const navigate = useNavigate();
   const handleLogout = () => {
-    sessionStorage.removeItem('current_usr');
+    sessionStorage.removeItem('currentUser');
     navigate("/");
   }
 

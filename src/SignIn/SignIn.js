@@ -24,8 +24,8 @@ function SignIn() {
     if (res.status === 200) {
       console.log("Sign in successful!");
       const token = await res.json().token;
-      localStorage.setItem("jwt", token);
-      localStorage.setItem("username",username);
+      sessionStorage.setItem("jwt", token);
+      sessionStorage.setItem("username",username);
       Navigate("/FeedPage");
     } else if(res.status === 404) {
       console.log("Invalid username or Password. Please try again.");
