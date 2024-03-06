@@ -71,7 +71,8 @@ function FeedPage() {
       <div className="row mt-5 mb-5"></div>
       <div className="row mt-5 mb-5 ">
         <div className="col-3" id="sideCol">
-          <div className></div>
+          <div className>
+          </div>
         </div>
 
         <div class="col-6" id="postCol">
