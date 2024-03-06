@@ -8,10 +8,13 @@ import { serverURL } from "../../userService";
 
 function FeedPage() {
   const location = useLocation();
+
   useEffect(() => {
-    getCurrentUser();
-    getPosts();
-  }, []);
+    if (location.pathname === "/FeedPage") {
+      getCurrentUser();
+      getPosts();
+    }
+  }, [location]);
 
   const [postsList, setPostsList] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState("light");
@@ -48,18 +51,17 @@ function FeedPage() {
       },
     });
     const currentUser = await res.json();
-    sessionStorage.setItem(currentUser,"currentUser");
+    const userObject = {
+      username: currentUser.username,
+      displayName: currentUser.displayName,
+      profilePic: currentUser.profilePic,
+    };
+    const userString = JSON.stringify(userObject);
+    sessionStorage.setItem("currentUser", userString);
   };
 
   const listOfPosts = postsList.map((post) => {
-    return (
-      <Post
-        post={post}
-        key={post.id}
-        postsList={postsList}
-        setPostsList={setPostsList}
-      />
-    );
+    return <Post post={post} />;
   });
 
   return (
@@ -69,13 +71,11 @@ function FeedPage() {
       <div className="row mt-5 mb-5"></div>
       <div className="row mt-5 mb-5 ">
         <div className="col-3" id="sideCol">
-          <div className>
-            <SideMenu />
-          </div>
+          <div className></div>
         </div>
 
         <div class="col-6" id="postCol">
-          <WritePost postsList={postsList} setPostsList={setPostsList} />
+          <WritePost />
           {listOfPosts}
         </div>
 

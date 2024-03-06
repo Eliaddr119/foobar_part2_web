@@ -5,13 +5,10 @@ import { getTodayDate, serverURL } from "../..//userService";
 import { useState } from "react";
 import { json } from "react-router-dom";
 
-function WritePost({ postsList, setPostsList }) {
+function WritePost() {
   const [postInput, setpostInput] = useState("");
   const [postImage, setImage] = useState("null");
   const [setError] = useState(null);
-
-  const storedUserObject = sessionStorage.getItem("currentUser");
-  const currentUser = JSON.parse(storedUserObject);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -53,25 +50,18 @@ function WritePost({ postsList, setPostsList }) {
     }
     const token = sessionStorage.getItem("jwt");
     const username = sessionStorage.getItem("username");
-    const currentUserObject = sessionStorage.getItem("currentUser");
-    const currentUser = JSON.parse(currentUserObject);
-    const todayDate = getTodayDate();
-    const postId  = generateUniqueId();
+    const currentUserString = sessionStorage.getItem("currentUser");
+    const currentUser = JSON.parse(currentUserString);
+    const postId = generateUniqueId();
     const newPost = {
       id: postId,
-      user: {
-        username: currentUser.username,
-        displayName: currentUser.displayName,
-        image: currentUser.image,
-      },
-      postTime: todayDate,
+      username: currentUser.username,
+      displayName: currentUser.displayName,
+      profilePic: currentUser.profilePic,
       content: postInput,
-      likes: 0,
-      commentsCount: "0",
-      comments: [],
       image: postImage,
     };
-    const res = await fetch(serverURL + `/api/users/${username}/posts`, {
+    const res = await fetch(serverURL + `/api/posts`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -82,6 +72,7 @@ function WritePost({ postsList, setPostsList }) {
 
     setpostInput("");
     setImage("");
+    window.location.reload();
   };
 
   const handleChange = (event) => {

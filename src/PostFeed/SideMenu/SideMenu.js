@@ -17,7 +17,7 @@ function SideMenu() {
           <img
             className="rounded-circle"
             alt="avatar1"
-            src={currentUser.image}
+            src={currentUser.profilePic}
             id="profilePic"
           />
           <span className="ms-3 fs-3">{currentUser.displayName}</span>

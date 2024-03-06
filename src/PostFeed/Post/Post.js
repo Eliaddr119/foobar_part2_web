@@ -1,17 +1,18 @@
 import "./Post.css";
 import "../Comment/Comment.js";
-import { useState } from "react";
-import { useRef } from "react";
+import { useState,useEffect,useRef } from "react";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
 import { serverURL } from "../../userService.js";
 
-function Post({ post, postsList, setPostsList }) {
+function Post(post) {
   const username = sessionStorage.getItem("username");
   const token = sessionStorage.getItem("jwt");
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
+  
+  
 
   const deletePost = async() => {
     const res = await fetch(serverURL + `/api/users/${username}/posts/${post.id}`, {
@@ -25,11 +26,11 @@ function Post({ post, postsList, setPostsList }) {
 
   const [countComments, setCommentCount] = useState(Number(post.commentsCount));
 
-  var likeinit = Number(post.likes);
+  var likeinit = Number(post.numlikes);
   const [likes, setLikes] = useState(likeinit);
   const likeButtonRef = useRef(null);
   const handleLikeClick = () => {
-    if (likes === post.likes) {
+    if (likes === post.numlikes) {
       setLikes(likes + 1);
       likeButtonRef.current.classList.toggle("active");
     } else {
@@ -38,7 +39,7 @@ function Post({ post, postsList, setPostsList }) {
     }
   };
   const editEligble = () => {
-    if (username === post.user.username) {
+    if (username === post.username) {
       return true;
     }
     return false;
@@ -144,11 +145,11 @@ function Post({ post, postsList, setPostsList }) {
                 <img
                   className="rounded-circle"
                   alt="avatar1"
-                  src={post.user.image}
+                  src={post.profilePic}
                 />
                 <h5 className="fs-2 ms-2 pb-4">
-                  {post.user.displayName}
-                  <p className="fs-5 ">{post.postTime}</p>
+                  {post.displayName}
+                  <p className="fs-5 ">{post.date}</p>
                 </h5>
               </div>
 
@@ -201,7 +202,7 @@ function Post({ post, postsList, setPostsList }) {
             {!showEdit && (
               <>
                 <div className="container" id="imageContainer">
-                  <img alt="" src={post.image} id="postImage" />
+                  <img alt="" src={postImage} id="postImage" />
                 </div>
                 <div className="ms-2 pt-2">
               <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
