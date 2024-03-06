@@ -1,22 +1,81 @@
-# Welcome to foobar! The most new and advanced social network !
-In this part we created the layout of the sign-up page, the sign-in page and the post feed.
-we used JS to create the logic of the user input validation and determine whether they can proceed or not.
-In the feed page we show a list of 10 posts with images that are being loaded from a JSON file, The user has the option the upload a post or a comment and delete or edit a post or comment he previously uploaded.
-We used useState and useRef to keep track of the states of the components and to re-render them when changes were made.
-We used router to navigate between the different app screens so the app only loads up once.
-We used components and tried to keep the as minimal has possible as we learned in class
+# Welcome to foobar! 🚀
 
-## How to run the app
+Foobar is a cutting-edge social network designed to provide users with a seamless experience for connecting, sharing, and interacting online. This React project encompasses various components, each serving a specific purpose to deliver an engaging user experience.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Implemented the layout and functionality of the sign-up and sign-in pages.
+- Developed JavaScript logic for user input validation to ensure data integrity.
+- Created a dynamic post feed displaying a list of 10 posts with images loaded from a JSON file.
+- Enabled users to upload posts, comment on posts, and manage their own content by allowing deletion and editing of posts and comments.
+- Utilized useState and useRef hooks to manage component states and trigger re-renders upon changes.
+- Implemented router for seamless navigation between different app screens, ensuring efficient loading of the application.
 
-The page will reload when you make changes.
+---
 
-### `npm test`
-To run the app tests
+## Components
+
+### SignIn 🔐
+- The SignIn component provides users with a form to sign in to their accounts.
+
+### SignUp 📝
+- The SignUp component allows users to register for a new account by filling out a registration form.
+
+### PostFeed 📰
+- The PostFeed component serves as the main feed where users can view posts uploaded by themselves and others.
+
+  #### Components Inside PostFeed:
+
+  - **Comment 💬**: The Comment component allows users to view and interact with comments on posts.
+  
+  - **FeedPage 📄**: The FeedPage component displays the main feed content, including posts and interactions.
+  
+  - **Navbar 🚀**: The Navbar component provides navigation links for easy access to different sections of the app.
+  
+  - **Post 📌**: The Post component renders individual posts with content uploaded by users.
+  
+  - **SideMenu 📚**: The SideMenu component offers additional navigation options and features accessible from the side of the feed.
+
+---
+
+## Full Application Pictures
+////
+////
+////
+---
+
+## How to Run the App
+
+To run the app locally, follow these steps:
+
+1. Clone the repository:
+
+git clone https://github.com/Eliaddr119/foobar_part2_web.git
+
+2. Navigate to the project directory:
+
+cd foobar
+
+3. Install dependencies:
+
+npm install
+
+4. Start the development server:
+
+npm start
+
+This command will run the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 
+The page will reload automatically when you make changes.
+
+---
+
+## Running Tests
+
+To run tests for the app, execute:
+
+npm test
+
+This command will run all tests associated with the application.
 
