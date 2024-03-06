@@ -61,7 +61,7 @@ function WritePost() {
       content: postInput,
       image: postImage,
     };
-    const res = await fetch(serverURL + `/api/posts`, {
+    const res = await fetch(serverURL + `/api/users/${username}/posts`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

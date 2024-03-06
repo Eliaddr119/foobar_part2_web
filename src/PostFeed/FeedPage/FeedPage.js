@@ -13,10 +13,11 @@ function FeedPage() {
     if (location.pathname === "/FeedPage") {
       getCurrentUser();
       getPosts();
+
     }
   }, [location]);
 
-  const [postsList, setPostsList] = useState([]);
+  const [postList, setPostList] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState("light");
   const [isChecked, setIsChecked] = useState(false);
 
@@ -38,7 +39,8 @@ function FeedPage() {
       },
     });
     const posts = await res.json();
-    setPostsList(posts);
+    setPostList(posts);
+    
   };
 
   const getCurrentUser = async () => {
@@ -60,8 +62,8 @@ function FeedPage() {
     sessionStorage.setItem("currentUser", userString);
   };
 
-  const listOfPosts = postsList.map((post) => {
-    return <Post post={post} />;
+  const listOfPosts = postList.map((post) => {
+    return <Post post={post} id={post.id} />;
   });
 
   return (
