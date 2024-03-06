@@ -1,43 +1,96 @@
 import "./Post.css";
 import "../Comment/Comment.js";
-import { useState,useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
 import { serverURL } from "../../userService.js";
 
-function Post(post) {
+function Post({ post }) {
   const username = sessionStorage.getItem("username");
   const token = sessionStorage.getItem("jwt");
   const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
-  
-  
+  const jsDate = new Date(post.date);
+  const formattedDate =
+    jsDate.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }) +
+    " " +
+    jsDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
 
-  const deletePost = async() => {
-    const res = await fetch(serverURL + `/api/users/${username}/posts/${post.id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+  useEffect(() => {
+    checkIfCurrentUserLiked();
+  }, []);
+
+  const [numlikes, setNumlikes] = useState(post.numlikes);
+  const [isLiked, setIsLiked] = useState(false);
+  const likeButtonRef = useRef(null);
+  const checkIfCurrentUserLiked = async () => {
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post.id}/like`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const likedByList = await res.json();
+    const found = likedByList.includes(username);
+    console.log("found:", post.id, found);
+    if (found) {
+      likeButtonRef.current.classList.add("active");
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+      likeButtonRef.current.classList.remove("active");
+    }
+  };
+
+  const handleLikeClick = async () => {
+    var serverCommand;
+    if (isLiked === false) {
+      serverCommand = "PATCH";
+      likeButtonRef.current.classList.toggle("active");
+      setNumlikes(numlikes + 1);
+      setIsLiked(true);
+    } else {
+      serverCommand = "DELETE";
+      likeButtonRef.current.classList.remove("active");
+      setNumlikes(numlikes - 1);
+      setIsLiked(false);
+    }
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post.id}/like`,
+      {
+        method: `${serverCommand}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
+
+  const deletePost = async () => {
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    window.location.reload();
   };
 
   const [countComments, setCommentCount] = useState(Number(post.commentsCount));
 
-  var likeinit = Number(post.numlikes);
-  const [likes, setLikes] = useState(likeinit);
-  const likeButtonRef = useRef(null);
-  const handleLikeClick = () => {
-    if (likes === post.numlikes) {
-      setLikes(likes + 1);
-      likeButtonRef.current.classList.toggle("active");
-    } else {
-      setLikes(likes - 1);
-      likeButtonRef.current.classList.remove("active");
-    }
-  };
   const editEligble = () => {
     if (username === post.username) {
       return true;
@@ -55,18 +108,22 @@ function Post(post) {
       return;
     }
     const postEditedDetails = {
-      content : postInput,
-      image : postImage,
-    }
-    const res = await fetch(serverURL + `/api/users/${username}/posts/${post.id}`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postEditedDetails),
-    });
+      content: postInput,
+      image: postImage,
+    };
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postEditedDetails),
+      }
+    );
     setShowEdit(false);
+    window.location.reload();
   };
 
   const handleChange = (event) => {
@@ -81,23 +138,23 @@ function Post(post) {
     const file = event.target.files[0];
 
     if (!file) {
-      setImage("")
+      setImage("");
       return;
     }
     // Check if the file is an image
-    if (!file.type.startsWith('image/')) {
-      setError('Only image files are allowed.');
+    if (!file.type.startsWith("image/")) {
+      setError("Only image files are allowed.");
       // Clear the error message after 3 seconds
-      setTimeout(() => setError(''), 3_000);
+      setTimeout(() => setError(""), 3_000);
       // Clear the file input
-      event.target.value = '';
+      event.target.value = "";
       return;
     }
 
     const reader = new FileReader();
 
     reader.onload = () => {
-      setImage("data:image/jpeg;base64,"+reader.result.split(',')[1]);
+      setImage("data:image/jpeg;base64," + reader.result.split(",")[1]);
     };
 
     reader.readAsDataURL(file);
@@ -106,7 +163,7 @@ function Post(post) {
   const handleEditCancel = () => {
     setPostInput(post.content);
     setShowEdit(false);
-  }
+  };
 
   return (
     <>
@@ -149,7 +206,7 @@ function Post(post) {
                 />
                 <h5 className="fs-2 ms-2 pb-4">
                   {post.displayName}
-                  <p className="fs-5 ">{post.date}</p>
+                  <p className="fs-5 ">{formattedDate}</p>
                 </h5>
               </div>
 
@@ -205,26 +262,23 @@ function Post(post) {
                   <img alt="" src={postImage} id="postImage" />
                 </div>
                 <div className="ms-2 pt-2">
-              <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
+                  <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
 
-              <span className="fs-4 ms-2">{likes}</span>
-              <span className="text-end fs-4" id="commentCountText">
-                <button
-                  onClick={() => setCommentShow(!commentShow)}
-                  id="commentsButton"
-                >
-                  {countComments} Comments
-                </button>
-              </span>
-            </div>
-
-
+                  <span className="fs-4 ms-2">{numlikes}</span>
+                  <span className="text-end fs-4" id="commentCountText">
+                    <button
+                      onClick={() => setCommentShow(!commentShow)}
+                      id="commentsButton"
+                    >
+                      {countComments} Comments
+                    </button>
+                  </span>
+                </div>
 
                 <div
                   className="btn-group-lg text-center mt-3 mb-3"
                   role="group"
                 >
-                  
                   <button
                     onClick={handleLikeClick}
                     ref={likeButtonRef}
@@ -242,21 +296,41 @@ function Post(post) {
                     <i className=" me-2 bi bi-chat-left-fill"></i>
                     Comment
                   </button>
-                  <button type="button" className="btn btn-outline-success" data-bs-toggle="dropdown" aria-expanded="false" id="btnGroupButton">
+                  <button
+                    type="button"
+                    className="btn btn-outline-success"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    id="btnGroupButton"
+                  >
                     <i className="me-2 bi bi-share-fill"></i>
                     Share
                     <div className="dropdown">
-      <ul className="dropdown-menu">
-        <li><button className="dropdown-item"> <i class="bi bi-reply"></i> Share now (friends)</button></li>
-        <li><button className="dropdown-item"> <i class="bi bi-pencil-square"></i> Share to feed</button></li>
-        <li><button className="dropdown-item"> <i class="bi bi-link"></i>  Copy link</button></li>
-      </ul>     
-    </div>
+                      <ul className="dropdown-menu">
+                        <li>
+                          <button className="dropdown-item">
+                            {" "}
+                            <i class="bi bi-reply"></i> Share now (friends)
+                          </button>
+                        </li>
+                        <li>
+                          <button className="dropdown-item">
+                            {" "}
+                            <i class="bi bi-pencil-square"></i> Share to feed
+                          </button>
+                        </li>
+                        <li>
+                          <button className="dropdown-item">
+                            {" "}
+                            <i class="bi bi-link"></i> Copy link
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
                   </button>
                 </div>
               </>
             )}
-            
           </div>
         </div>
       </div>
