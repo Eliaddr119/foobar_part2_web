@@ -125,19 +125,19 @@ To run the app locally, follow these steps:
 
 1. Clone the repository:
 
-git clone https://github.com/Eliaddr119/foobar_part2_web.git
+`git clone https://github.com/Eliaddr119/foobar_part2_web.git`
 
 2. Navigate to the project directory:
 
-cd foobar
+`cd foobar`
 
 3. Install dependencies:
 
-npm install
+`npm install`
 
 4. Start the development server:
 
-npm start
+`npm start`
 
 This command will run the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 
 The page will reload automatically when you make changes.
@@ -148,7 +148,7 @@ The page will reload automatically when you make changes.
 
 To run tests for the app, execute:
 
-npm test
+`npm test`
 
 This command will run all tests associated with the application.
 
