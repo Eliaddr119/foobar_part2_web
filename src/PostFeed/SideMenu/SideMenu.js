@@ -1,26 +1,36 @@
+import { useState } from "react";
 import "./SideMenu.css";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-function SideMenu() {
-  const storedUserObject = sessionStorage.getItem("currentUser");
-  const currentUser = JSON.parse(storedUserObject);
+function SideMenu({currentUsr}) {
+  useEffect(() => {
+  }, [currentUsr]);
+
   const navigate = useNavigate();
+  
   const handleLogout = () => {
-    sessionStorage.removeItem('currentUser');
+    sessionStorage.clear();
     navigate("/");
   }
 
+  const handleProfileNavigate = () => {
+    navigate("/UserProfile");
+  }
+  
+
+
   return (
     <div className="container-fluid" id="sideMenu">
-      <ul class="list-group-flush">
-        <li class="list-group-item d-flex align-items-start ms-3  pt-4 pb-4 ">
+      <ul className="list-group-flush">
+        <li className="list-group-item d-flex align-items-start ms-3  pt-4 pb-4 " onClick={handleProfileNavigate} >
           <img
             className="rounded-circle"
             alt="avatar1"
-            src={currentUser.profilePic}
+            src={currentUsr.profilePic}
             id="profilePic"
           />
-          <span className="ms-3 fs-3">{currentUser.displayName}</span>
+          <span className="ms-3 fs-3">{currentUsr.displayName}</span>
         </li>
         <li class="list-group-item d-flex align-items-start ms-3 pt-4 pb-4">
           <i class="ps-2 bi bi-house-fill"></i>
@@ -41,5 +51,6 @@ function SideMenu() {
     </div>
   );
 }
+
 
 export default SideMenu;

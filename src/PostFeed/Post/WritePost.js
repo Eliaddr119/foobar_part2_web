@@ -5,7 +5,7 @@ import { getTodayDate, serverURL } from "../..//userService";
 import { useState } from "react";
 import { json } from "react-router-dom";
 
-function WritePost() {
+function WritePost({currentUser}) {
   const [postInput, setpostInput] = useState("");
   const [postImage, setImage] = useState("null");
   const [setError] = useState(null);
@@ -50,8 +50,7 @@ function WritePost() {
     }
     const token = sessionStorage.getItem("jwt");
     const username = sessionStorage.getItem("username");
-    const currentUserString = sessionStorage.getItem("currentUser");
-    const currentUser = JSON.parse(currentUserString);
+    
     const postId = generateUniqueId();
     const newPost = {
       id: postId,

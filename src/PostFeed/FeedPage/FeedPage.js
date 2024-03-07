@@ -20,6 +20,7 @@ function FeedPage() {
   const [postList, setPostList] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState("light");
   const [isChecked, setIsChecked] = useState(false);
+  const [currentUser,setCurrentUser] = useState(null);
 
   const handleSwitchChange = () => {
     setIsChecked(!isChecked);
@@ -60,6 +61,7 @@ function FeedPage() {
     };
     const userString = JSON.stringify(userObject);
     sessionStorage.setItem("currentUser", userString);
+    setCurrentUser(userObject);
   };
 
   const listOfPosts = postList.map((post) => {
@@ -69,16 +71,15 @@ function FeedPage() {
   return (
     <body data-bs-theme={isDarkMode}>
       <Navbar />
-      <div className="row mt-5"></div>
-      <div className="row mt-5 mb-5"></div>
-      <div className="row mt-5 mb-5 ">
+      <div className="row mt-1 mb-5 ">
         <div className="col-3" id="sideCol">
           <div className>
+          {currentUser && <SideMenu currentUsr={currentUser}/>}
           </div>
         </div>
 
         <div class="col-6" id="postCol">
-          <WritePost />
+          <WritePost currentUser={currentUser} />
           {listOfPosts}
         </div>
 

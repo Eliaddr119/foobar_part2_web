@@ -1,7 +1,7 @@
 import "./Navbar.css"
 function Navbar() {
   return (
-    <nav className="navbar fixed-top bg-success ">
+    <nav className="navbar sticky-top bg-success ">
       <div className="container-fluid  ">
         <a className="navbar-brand "><h1 id="navHead">FooBar</h1></a>
         
