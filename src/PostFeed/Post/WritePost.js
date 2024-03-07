@@ -7,7 +7,7 @@ import { json } from "react-router-dom";
 
 function WritePost({currentUser}) {
   const [postInput, setpostInput] = useState("");
-  const [postImage, setImage] = useState("null");
+  const [postImage, setImage] = useState("");
   const [setError] = useState(null);
 
   const handleImageUpload = (event) => {

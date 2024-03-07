@@ -40,7 +40,6 @@ function Post({ post }) {
     );
     const likedByList = await res.json();
     const found = likedByList.includes(username);
-    console.log("found:", post.id, found);
     if (found) {
       likeButtonRef.current.classList.add("active");
       setIsLiked(true);

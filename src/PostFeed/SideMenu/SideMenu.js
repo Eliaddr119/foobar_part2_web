@@ -15,8 +15,8 @@ function SideMenu({currentUsr}) {
   }
 
   const handleProfileNavigate = () => {
-    navigate("/UserProfile");
-  }
+      navigate('/UserProfile', { state: { userString: JSON.stringify(currentUsr) } });
+  };
   
 
 
