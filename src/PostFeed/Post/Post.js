@@ -4,8 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
 import { serverURL } from "../../userService.js";
+import { useNavigate } from "react-router-dom";
+
 
 function Post({ post }) {
+  const navigate = useNavigate();
   const username = sessionStorage.getItem("username");
   const token = sessionStorage.getItem("jwt");
   const [commentList, setCommentList] = useState(post.comments);
@@ -164,6 +167,13 @@ function Post({ post }) {
     setShowEdit(false);
   };
 
+  const handleProfileNavigate = () => {
+    const currentUsr = {username:post.username,profilePic:post.profilePic,displayName:post.displayName};
+    navigate(`/UserProfile/${currentUsr.username}`, {
+      state: { userString: JSON.stringify(currentUsr) },
+    });
+  };
+
   return (
     <>
       <div className="container-fluid">
@@ -172,16 +182,16 @@ function Post({ post }) {
             {canEdit && (
               <div class="btn-group" id="editOptions">
                 <button
-                  class="btn btn-success btn-sm dropdown-toggle"
+                  className="btn btn-success btn-sm dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Post Options
                 </button>
-                <ul class="dropdown-menu text-center">
+                <ul className="dropdown-menu text-center">
                   <li>
-                    <button class="dropdown-item" onClick={deletePost}>
+                    <button className="dropdown-item" onClick={deletePost}>
                       Delete Post
                     </button>
                   </li>
@@ -197,7 +207,7 @@ function Post({ post }) {
               </div>
             )}
             <div className="container-fluid">
-              <div className="d-flex">
+              <div className="d-flex" onClick={handleProfileNavigate}>
                 <img
                   className="rounded-circle"
                   alt="avatar1"

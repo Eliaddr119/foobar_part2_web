@@ -13,7 +13,7 @@ function App() {
                 <Route path="/SignIn" element={<SignIn/>}/>
                 <Route path="/SignUp" element={<SignUp/>}/>
                 <Route path="/FeedPage" element={<FeedPage/>}/>
-                <Route path="/UserProfile" element={<UserProfile/>}/>
+                <Route path="/UserProfile/:username" element={<UserProfile />} />
             </Routes>
         </BrowserRouter>
     );

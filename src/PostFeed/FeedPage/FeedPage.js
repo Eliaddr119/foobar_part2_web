@@ -61,6 +61,7 @@ function FeedPage() {
     };
     const userString = JSON.stringify(userObject);
     sessionStorage.setItem("currentUser", userString);
+    sessionStorage.setItem("username", userObject.username);
     setCurrentUser(userObject);
   };
 
