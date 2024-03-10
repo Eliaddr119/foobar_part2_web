@@ -36,12 +36,6 @@ function WritePost({currentUser}) {
     reader.readAsDataURL(file);
   };
 
-  const generateUniqueId = () => {
-    const timestamp = Date.now().toString(36); // Convert timestamp to base36
-    const randomNumber = Math.random().toString(36).substr(2, 5); // Generate random number
-
-    return `${timestamp}-${randomNumber}`;
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,9 +45,7 @@ function WritePost({currentUser}) {
     const token = sessionStorage.getItem("jwt");
     const username = sessionStorage.getItem("username");
     
-    const postId = generateUniqueId();
     const newPost = {
-      id: postId,
       username: currentUser.username,
       displayName: currentUser.displayName,
       profilePic: currentUser.profilePic,

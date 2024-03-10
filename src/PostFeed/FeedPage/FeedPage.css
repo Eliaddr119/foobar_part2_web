@@ -11,7 +11,6 @@ div.sticky {
 
 
 #writePostRectangle{
-    margin-top: 100px;
     margin-bottom: 50%;
     background-color: rgb(232, 253, 232);
     padding: 50px;
@@ -46,7 +45,6 @@ div.sticky {
 
 #postCol{
     align-self: center;
-    margin-top: 150px;
 }
 
 #addPostCont{

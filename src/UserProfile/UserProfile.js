@@ -6,10 +6,14 @@ import { useEffect, useState } from "react";
 import Post from "../PostFeed/Post/Post";
 import FriendList from "./Friend/FriendList";
 import SideMenu from "../PostFeed/SideMenu/SideMenu";
+import FriendRequest from "./Friend/FriendRequestList";
+import { Fade } from "react-bootstrap";
+
 function UserProfile() {
   const [userPosts, setUserPosts] = useState([]);
   const [friendList, setFriendList] = useState([]);
   const [areFriends, setAreFriends] = useState(false);
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
   const location = useLocation();
 
   const { userString } = location.state;
@@ -18,8 +22,9 @@ function UserProfile() {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
   useEffect(() => {
+    checkIfCurrentUserProfile();
     getFriends();
-    if (areFriends||profileUser.username==currentUser.username) {
+    if (areFriends || profileUser.username === currentUser.username) {
       getUserPosts();
     }
   }, [username]);
@@ -59,15 +64,36 @@ function UserProfile() {
     }
   };
 
+  const handleFriendAdd = async () => {
+    const token = sessionStorage.getItem("jwt");
+    const res = await fetch(serverURL + `/api/users/${profileUser.username}/friends`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
   const listOfPosts = userPosts.map((post) => {
     return <Post post={post} id={post.id} />;
   });
 
   const ifNoPosts = () => {
-    if (userPosts.length === 0) {
+    if (areFriends && userPosts.length === 0) {
       return <h2>No posts yet</h2>;
     }
   };
+
+  const checkIfCurrentUserProfile = () =>{
+    if(currentUser.username == profileUser.username) {
+      setIsCurrentUser(true);
+    }
+    else {
+      setIsCurrentUser(false);
+    }
+  }
+  
 
   return (
     <>
@@ -87,13 +113,18 @@ function UserProfile() {
               <h5 className=" ms-2 pb-4" id="profile-display-name">
                 {profileUser.displayName}
               </h5>
+              {!areFriends && (
+                <button onClick={handleFriendAdd}>Add Friend</button>
+              )}
             </div>
             {listOfPosts}
             {ifNoPosts}
           </div>
 
           <div className="col-3" id="friendsCol">
-            {areFriends && <FriendList friendList={friendList} />}
+          {isCurrentUser && <FriendRequest username={profileUser.username} key={profileUser.username}/>}
+            {areFriends && <FriendList friendList={friendList} profileUser={profileUser} />}
+            
           </div>
         </div>
       </div>

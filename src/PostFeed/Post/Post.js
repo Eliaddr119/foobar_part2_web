@@ -33,7 +33,7 @@ function Post({ post }) {
   const likeButtonRef = useRef(null);
   const checkIfCurrentUserLiked = async () => {
     const res = await fetch(
-      serverURL + `/api/users/${username}/posts/${post.id}/like`,
+      serverURL + `/api/users/${post.username}/posts/${post._id}/like`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ function Post({ post }) {
       setIsLiked(false);
     }
     const res = await fetch(
-      serverURL + `/api/users/${username}/posts/${post.id}/like`,
+      serverURL + `/api/users/${username}/posts/${post._id}/like`,
       {
         method: `${serverCommand}`,
         headers: {
@@ -79,7 +79,7 @@ function Post({ post }) {
 
   const deletePost = async () => {
     const res = await fetch(
-      serverURL + `/api/users/${username}/posts/${post.id}`,
+      serverURL + `/api/users/${username}/posts/${post._id}`,
       {
         method: "DELETE",
         headers: {
@@ -114,7 +114,7 @@ function Post({ post }) {
       image: postImage,
     };
     const res = await fetch(
-      serverURL + `/api/users/${username}/posts/${post.id}`,
+      serverURL + `/api/users/${username}/posts/${post._id}`,
       {
         method: "PATCH",
         headers: {
@@ -207,7 +207,7 @@ function Post({ post }) {
               </div>
             )}
             <div className="container-fluid">
-              <div className="d-flex" onClick={handleProfileNavigate}>
+              <div className="d-flex" id="profileNavigate" onClick={handleProfileNavigate}>
                 <img
                   className="rounded-circle"
                   alt="avatar1"
