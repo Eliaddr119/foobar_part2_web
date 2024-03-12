@@ -1,29 +1,31 @@
 import "./AddComment.css";
 import { useState } from "react";
 import { serverURL } from "../../userService";
-import { toHaveDescription } from "@testing-library/jest-dom/dist/matchers";
 
-function AddComment({ post,setOpenWriteComment }) {
+function AddComment({ post, setOpenWriteComment }) {
   const [commentInput, setCommentInput] = useState("");
   const username = sessionStorage.getItem("username");
-  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
   const handleSubmit = async () => {
     if (commentInput === "") {
       return;
     }
-    const newComment = {
-      content:commentInput
-    };
     const token = sessionStorage.getItem("jwt");
-    const res = await fetch(serverURL + `/api/users/${username}/posts/${post._id}/comment`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newComment),
-    });
+    const newComment = {
+      content: commentInput,
+    };
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post._id}/comment`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newComment),
+      }
+    );
     setCommentInput("");
     setOpenWriteComment(false);
   };

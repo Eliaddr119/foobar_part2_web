@@ -6,12 +6,11 @@ import CommentList from "../Comment/CommentList.js";
 import { serverURL } from "../../userService.js";
 import { useNavigate } from "react-router-dom";
 
-
 function Post({ post }) {
   const navigate = useNavigate();
   const username = sessionStorage.getItem("username");
   const token = sessionStorage.getItem("jwt");
-  const [commentList, setCommentList] = useState([]);
+  const [commentList, setCommentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
   const jsDate = new Date(post.date);
@@ -26,11 +25,12 @@ function Post({ post }) {
 
   useEffect(() => {
     checkIfCurrentUserLiked();
-  }, []);
+  },);
 
   const [numlikes, setNumlikes] = useState(post.numlikes);
   const [isLiked, setIsLiked] = useState(false);
   const likeButtonRef = useRef(null);
+
   const checkIfCurrentUserLiked = async () => {
     const res = await fetch(
       serverURL + `/api/users/${post.username}/posts/${post._id}/like`,
@@ -77,6 +77,7 @@ function Post({ post }) {
     );
   };
 
+
   const deletePost = async () => {
     const res = await fetch(
       serverURL + `/api/users/${username}/posts/${post._id}`,
@@ -91,7 +92,6 @@ function Post({ post }) {
     window.location.reload();
   };
 
-  const [countComments, setCommentCount] = useState(Number(post.commentsCount));
 
   const editEligble = () => {
     if (username === post.username) {
@@ -168,7 +168,11 @@ function Post({ post }) {
   };
 
   const handleProfileNavigate = () => {
-    const currentUsr = {username:post.username,profilePic:post.profilePic,displayName:post.displayName};
+    const currentUsr = {
+      username: post.username,
+      profilePic: post.profilePic,
+      displayName: post.displayName,
+    };
     navigate(`/UserProfile/${currentUsr.username}`, {
       state: { userString: JSON.stringify(currentUsr) },
     });
@@ -207,7 +211,11 @@ function Post({ post }) {
               </div>
             )}
             <div className="container-fluid">
-              <div className="d-flex" id="profileNavigate" onClick={handleProfileNavigate}>
+              <div
+                className="d-flex"
+                id="profileNavigate"
+                onClick={handleProfileNavigate}
+              >
                 <img
                   className="rounded-circle"
                   alt="avatar1"
@@ -275,10 +283,7 @@ function Post({ post }) {
 
                   <span className="fs-4 ms-2">{numlikes}</span>
                   <span className="text-end fs-4" id="commentCountText">
-                    <button
-                      onClick={() => setCommentShow(!commentShow)}
-                      id="commentsButton"
-                    >
+                    <button onClick={()=>setCommentShow(!commentShow)} id="commentsButton">
                       {post.numComments} Comments
                     </button>
                   </span>
@@ -344,17 +349,12 @@ function Post({ post }) {
         </div>
       </div>
       {!showEdit && openWriteComment && (
-        <AddComment
-          post={post} setOpenWriteComment={setOpenWriteComment}
-        />
+        <AddComment post={post} setOpenWriteComment={setOpenWriteComment} />
       )}
       {commentShow && (
         <CommentList
           key={post.id}
           post={post}
-          countComments={countComments}
-          setCommentCount={setCommentCount}
-          setCommentList={setCommentList}
           commentList={commentList}
         />
       )}
