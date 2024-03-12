@@ -180,9 +180,9 @@ function Post({ post }) {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid" >
         <div className="card bg-light" id="postCard">
-          <div className="container">
+          <div className="container" id="contentContainer">
             {canEdit && (
               <div class="btn-group" id="editOptions">
                 <button
@@ -228,7 +228,7 @@ function Post({ post }) {
               </div>
 
               {!showEdit && (
-                <span className="container-fluid fs-3 pb-5">
+                <span className="container-fluid fs-4 pb-5" id="contentContainer">
                   {post.content}
                 </span>
               )}
@@ -288,9 +288,9 @@ function Post({ post }) {
                     </button>
                   </span>
                 </div>
-
+                <hr className="my-2" id="divider"/>
                 <div
-                  className="btn-group-lg text-center mt-3 mb-3"
+                  className="btn-group-lg text-center mb-1"
                   role="group"
                 >
                   <button

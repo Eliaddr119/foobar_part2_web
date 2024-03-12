@@ -113,7 +113,7 @@ function UserProfile() {
             <SideMenu currentUsr={currentUser} />
           </div>
           <div className="col-6">
-            <div className="container d-flex align-items-center">
+            <div className="container d-flex align-items-center" id="nameAndPicContainer">
               <div className="imageContainer">
                 <img
                   alt=""
@@ -186,7 +186,7 @@ function UserProfile() {
               )}
 
               {!areFriends && (
-                <button onClick={handleFriendAdd}>Add Friend</button>
+                <button className="btn btn-light" onClick={handleFriendAdd}><i className="bi bi-person-add me-2"></i>Add Friend</button>
               )}
             </div>
             {listOfPosts}

@@ -72,14 +72,14 @@ function FeedPage() {
   return (
     <body data-bs-theme={isDarkMode}>
       <Navbar />
-      <div className="row mt-1 mb-5 ">
-        <div className="col-3" id="sideCol">
+      <div className="row ">
+        <div className="col-4" id="sideCol">
           <div className>
           {currentUser && <SideMenu currentUsr={currentUser}/>}
           </div>
         </div>
 
-        <div class="col-6" id="postCol">
+        <div class="col-4" id="postCol">
           <WritePost currentUser={currentUser} />
           {listOfPosts}
         </div>

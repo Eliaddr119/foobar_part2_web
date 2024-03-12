@@ -80,11 +80,11 @@ function WritePost({currentUser}) {
         aria-labelledby="postModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="postModalLabel">
-                Upload a post
+        <div className="modal-dialog modal-dialog-centered modal-lg ">
+          <div className="modal-content ">
+            <div className="modal-header text-center">
+              <h1 className="modal-title fs-3 " id="postModalLabel">
+                Create post
               </h1>
               <button
                 type="button"
@@ -112,7 +112,7 @@ function WritePost({currentUser}) {
                   type="file"
                   id="imageAdd"
                   name="image"
-                  className="input"
+                  className="btn"
                   required
                   onChange={handleImageUpload}
                 />

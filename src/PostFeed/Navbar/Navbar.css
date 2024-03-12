@@ -1,9 +1,11 @@
 #navHead{
     color: white;
     font-size:50pt;
-    font-family:sans-serif-klavika;
+    font-family:sans-serif-klavika; 
 }
-
+.navbar-brand{
+    padding-left: 1%;
+}
 #formBar {
     width: 50%;
     margin-right: 1%;
@@ -13,4 +15,8 @@
 #searchBar{
     width: 30%;
     text-align: start;
+}
+
+#navForm{
+    margin-right: 79%;
 }

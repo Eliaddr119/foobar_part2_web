@@ -26,6 +26,8 @@
 .imageContainer {
   position: relative;
   display: inline-block;
+  margin-right: 5%;
+  margin-top: 2%;
 }
 
 
@@ -53,4 +55,8 @@
   cursor: pointer;
   background-color: whitesmoke;
 
+}
+
+#nameAndPicContainer{
+  margin-left: 20%;
 }
