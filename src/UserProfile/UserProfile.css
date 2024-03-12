@@ -22,3 +22,35 @@
     align-self: center;
     position: sticky;
 }
+
+.imageContainer {
+  position: relative;
+  display: inline-block;
+}
+
+
+#editPicButton
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+
+#editDropdown {
+  min-width: 180px;
+}
+#editProfileBtn:hover {
+  cursor: pointer;
+  background-color: whitesmoke;
+
+}
