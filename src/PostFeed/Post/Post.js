@@ -11,7 +11,7 @@ function Post({ post }) {
   const navigate = useNavigate();
   const username = sessionStorage.getItem("username");
   const token = sessionStorage.getItem("jwt");
-  const [commentList, setCommentList] = useState(post.comments);
+  const [commentList, setCommentList] = useState([]);
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
   const jsDate = new Date(post.date);
@@ -279,7 +279,7 @@ function Post({ post }) {
                       onClick={() => setCommentShow(!commentShow)}
                       id="commentsButton"
                     >
-                      {countComments} Comments
+                      {post.numComments} Comments
                     </button>
                   </span>
                 </div>
@@ -345,13 +345,7 @@ function Post({ post }) {
       </div>
       {!showEdit && openWriteComment && (
         <AddComment
-          post={post}
-          setCommentList={setCommentList}
-          commentList={commentList}
-          setCommentCount={setCommentCount}
-          countComments={countComments}
-          setCommentShow={setCommentShow}
-          setOpenWriteComment={setOpenWriteComment}
+          post={post} setOpenWriteComment={setOpenWriteComment}
         />
       )}
       {commentShow && (

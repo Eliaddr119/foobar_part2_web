@@ -1,45 +1,30 @@
-import "./AddComment.css"
-import  { getTodayDate } from "../..//userService";
+import "./AddComment.css";
 import { useState } from "react";
+import { serverURL } from "../../userService";
+import { toHaveDescription } from "@testing-library/jest-dom/dist/matchers";
 
-
-function AddComment({
-  commentList,
-  setCommentList,
-  countComments,
-  setCommentCount,
-  post,
-  setCommentShow,
-  setOpenWriteComment
-}) {
-  
+function AddComment({ post,setOpenWriteComment }) {
   const [commentInput, setCommentInput] = useState("");
-  const storedUserObject = sessionStorage.getItem("current_usr");
-  const currentUser = JSON.parse(storedUserObject);
-  const handleSubmit = (event) => {
-    
-    event.preventDefault();
+  const username = sessionStorage.getItem("username");
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+
+  const handleSubmit = async () => {
     if (commentInput === "") {
       return;
     }
-    const todayDate = getTodayDate();
     const newComment = {
-      id:"c" + (Number(countComments) + 1),
-      user: {
-        username: currentUser.username,
-        displayName: currentUser.displayName,
-        image: currentUser.image,
-      },
-      commentTime: todayDate,
-      content: commentInput,
+      content:commentInput
     };
-
-    const updatedComments = [...commentList,newComment];
-
-    setCommentList(updatedComments);
-    setCommentCount(countComments + 1);
+    const token = sessionStorage.getItem("jwt");
+    const res = await fetch(serverURL + `/api/users/${username}/posts/${post._id}/comment`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newComment),
+    });
     setCommentInput("");
-    setCommentShow(true);
     setOpenWriteComment(false);
   };
   const handleChange = (event) => {
@@ -49,26 +34,32 @@ function AddComment({
 
   return (
     <div className="card bg-light" id="addCommentCard">
-      <span><img
-      className="rounded-circle"
-      alt=""
-      src={currentUser.image}
-      id="roundImg" /><form id="textBox" onSubmit={(e) => handleSubmit(e)}>
-        <input
-          name="commentContent"
-          value={commentInput}
-          onChange={handleChange}
-          placeholder="Comment on post..."
-          id="commentInput"
-        ></input>
-        <button id="commentPublishButton"className="btn btn-outline-success" type="submit">publish</button>
-      </form>
+      <span>
+        <img
+          className="rounded-circle"
+          alt=""
+          src={currentUser.profilePic}
+          id="roundImg"
+        />
+        <form>
+          <input
+            name="commentContent"
+            value={commentInput}
+            onChange={handleChange}
+            placeholder="Comment on post..."
+            id="commentInput"
+          ></input>
+          <button
+            id="commentPublishButton"
+            className="btn btn-outline-success"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            publish
+          </button>
+        </form>
       </span>
     </div>
-
-    
-    
-    
   );
 }
 export default AddComment;
