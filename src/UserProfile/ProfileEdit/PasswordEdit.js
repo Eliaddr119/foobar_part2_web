@@ -62,7 +62,7 @@ function PasswordEdit({ currentUser }) {
             <form id="textBoxPost">
             <label className="form-label">New password</label>
             <input type='password' placeholder='Password' className="form-control" required value={password} onChange={(e) => setPassword(e.target.value)} />
-            <label className="form-label">Confirm password</label>
+            <label className="form-label">Confirm new password</label>
             <input type='password' placeholder='Confirm password' className="form-control" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             {error && <div className="error-message">{error}</div>}
             </form>
