@@ -1,123 +1,53 @@
 # Welcome to foobar! 🚀
 
-Foobar is a cutting-edge social network designed to provide users with a seamless experience for connecting, sharing, and interacting online. This React project encompasses various components, each serving a specific purpose to deliver an engaging user experience.
-
+Foobar is a cutting-edge social network designed to provide users with a seamless experience for connecting, sharing, and interacting online. Foobar is built using React for the frontend and is connected to a server for data storage and retrieval. Users can create profiles, make posts, comment on posts, and connect with other users. FooBar provides a fast and responsive social networking experience, making it easy for users to stay connected and share their thoughts and experiences with others.
+If you would like to check the server code and run it check this following GitHub repository and follow the READEME file : https://github.com/Eliaddr119/Foobar-Server
 ---
-
-## Features
-
-- Implemented the layout and functionality of the sign-up and sign-in pages.
-- Developed JavaScript logic for user input validation to ensure data integrity.
-- Created a dynamic post feed displaying a list of 10 posts with images loaded from a JSON file.
-- Enabled users to upload posts, comment on posts, and manage their own content by allowing deletion and editing of posts and comments.
-- Utilized useState and useRef hooks to manage component states and trigger re-renders upon changes.
-- Implemented router for seamless navigation between different app screens, ensuring efficient loading of the application.
-
----
-
-## Components
-
-### SignIn 🔐
-- The SignIn component provides users with a form to sign in to their accounts.
+## These following components form the FooBar platform, providing essential features for user authentication, post and comments uploading, and social interaction:
+### SignUp 📝 
+The SignUp component allows new users to create an account on the platform. It presents a form with fields for entering a username, password, display name and a profile picture. After successful registration, users are directed to the Sign-in page.
+![Screenshot 2024-03-14 224057](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/73c4e5ea-a98e-4620-af41-c79de55638f1)
 
 ### SignUp 📝
-- The SignUp component allows users to register for a new account by filling out a registration form.
+The SignIn component provides a form for users to authenticate themselves and access the platform. It includes fields for entering their username and password. Upon successful authentication, users are redirected to the FeedPage.
 
 ### FeedPage 📰
-- The FeedPage component serves as the main feed where users can view posts uploaded by themselves and others.
-
-  #### Components Inside PostFeed:
-
-  - **Comment 💬**: The Comment component allows users to view and interact with comments on posts.
-  
-  - **FeedPage 📄**: The FeedPage component displays the main feed content, including posts and interactions.
-  
-  - **Navbar 🚀**: The Navbar component provides navigation links for easy access to different sections of the app.
-  
-  - **Post 📌**: The Post component renders individual posts with content uploaded by users.
-  
-  - **SideMenu 📚**: The SideMenu component offers additional navigation options and features accessible from the side of the feed.
-
----
-
-## Full Application Pictures
-
-### SignUp 📝
-
-*here we can see the "cilck here" can move us to the sign In page*
-
-![Screenshot 2024-03-06 224822](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/6873fee3-2623-4882-b06b-72ba31de9042)
-
-*here we can see the we must fill all the filed on the SignUp page*
-
-![Screenshot 2024-03-06 230217](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/5bbe7666-9020-45a4-b14a-be485767826d)
-
-*here we can see that the password must match*
-
-![Screenshot 2024-03-06 224953](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/ab6ebd4f-6220-4aef-bdf1-17284e345abb)
-
-*here we can see that the password must contain at least one upercase lowercase letter, one number, and characters*
-
-![Screenshot 2024-03-06 2249asda23](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/65078c84-03c4-4d59-b2e2-d912056f371b)
-
-### SignIn 🔐
-
-*here we can see the "cilck here" can move us to the sign Up page to make a new account*
-
-![Screenshot 2024-03-06 224813](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/dac339df-73f0-4b80-b9d8-a88425640688)
-
-*here we can see that we must have an account, and that the password must match the password you entered when you created the account*
-
-![Screenshot 2024-03-06 225020](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/0ef6562f-1648-4346-85d8-243ac5d9a44b)
-
-### FeedPage 📰
-
-*here we can see all the FeedPage*
-
-![Screenshot 2024-03-06 225033](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/47d867e2-ae5b-4856-bdd2-165c2324384a)
-
-*here we can see the Log Out button*
-
-![Screenshot 2024-03-06 225033124](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/daa9d441-e8fa-4463-b34d-292bb029b0de)
-
-*here we can se three options "add a like button" that increase the number in the left by 1*
-*"comments button" that by clicking on it will open a box to add a comment to the post*
-*and a "share button" that open a menu* 
-
-![Screenshot 2024-03-06 225118](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/e4bf8d94-b51e-4103-9fee-5edd5b8020be)
-
-*add a like button*
-
-![Screenshot 2024-03-06 225129](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/7b94d872-3221-4d29-bf9f-bbc45956c7a9)
-
-*clicking on the number of comments on the right will open the comment list*
-
-![Screenshot 2024-03-06 234214](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/56a543ff-1713-443d-a595-d78fa9b92824)
+The FeedPage is the central component where users can view a feed of posts from themselves and their friends. It includes functionalities for creating new posts, liking and commenting on posts, and viewing profiles.
+The FeedPage component in FooBar displays a dynamic feed of posts, showing up to 20 posts from friends and up to 5 posts from users who are not friends of the current user. This design ensures that users stay connected with their friends' activities while also discovering new content from other users in order to make new connctions. The feed is designed to provide a balanced mix of familiar and fresh content, enhancing the overall social networking experience on the platform.
+![Screenshot 2024-03-14 225700](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/d7811ada-7ce8-4f82-bd97-4a6774396699)
 
 
-*comments button*
+#### Main features of the feed
+- Dark mode - Dark mode is a feature in the FeedPage component of FooBar that provides users with an alternative color scheme for the interface. When enabled, the dark mode changes the background color of the feed page to a dark shade.
+ ![Screenshot 2024-03-14 225725](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/6947e118-c9ef-4f67-b6e8-33e5d66d572e)
+- Upload a post - This component is appearing first in the page so the user can quickly share thoughts with his friends.
+- ![Screenshot 2024-03-14 230437](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/561f07f9-7a58-43c7-b9b6-1a5e961fa013)
+- The posts list - When loading the feed page, 25 fresh posts are fetched from the foobar server and are shown to the user.
+- Comment on posts - The user can press the comment button to comment on posts. The new comments are saver on the server.
+- Pressing the comments amount will open the comments section.
+  ![Screenshot 2024-03-14 230542](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/f5974164-91c4-4d1a-9958-093d04653343)
+  ![Screenshot 2024-03-14 230557](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/7f3b9c12-a094-481e-8111-4cad1dd0deee)
+- Notice that only the user who wrote the post or comment can edit and delete what he uploaded.
+![Screenshot 2024-03-14 230805](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/ed208da4-be84-4196-af1c-3ff187bdee63)
+- Liking a post - Like any social networks Foobar lets the user to like posts from other users, the likes are also sent and saved by the server, so when you login to the app at a later date you can see which posts you liked.
+![Screenshot 2024-03-14 231106](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/f599efa0-861d-4d4d-b22a-a0a1c1d775b9)
+- Pressing the user's name or picture of any post will direct the user to the user's profile
 
-![Screenshot 2024-03-06 225137](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/b5897df0-b218-4f84-b1e3-3c6f0367dbfb)
+## UserProfile
+The UserProfile component displays information about a specific user. It includes the user's profile picture, name, and a feed of their posts. Users can also see their friends list and other relevant information. The UserProfile component allows users to customize their profile.
+![Screenshot 2024-03-14 231414](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/4c7e0024-d013-4511-92f0-7a564b8d87aa)
 
-*comments option-> you can edit or delete the comment* 
-*take notice that you can only edit or delete a comment that your account make*
+#### Main features of the feed
+- Seeing friends and friend requests.
+- If the two users are friends, the profile will display the user's posts and friends. However, if they are not friends, the profile will show an "Add Friend" button instead. This feature encourages users to connect with each other and fosters a sense of community within the platform.
+![Screenshot 2024-03-14 231735](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/c192138c-2023-4755-8562-ff71742333cd)
+Now we can see that Yael got the friend request from Eliad.
+![Screenshot 2024-03-14 231928](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/7e5b54c4-a69f-4943-b1c9-db85c9783bca)
+When Yael accepts the friend request, she can see Eliad's posts and he also shows up in her friends.
+![Screenshot 2024-03-14 232042](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/88d25cd0-9288-44ed-9666-c94c1bbcdd4d)
+if Yael will go to Eliad's profile she can see his posts an friends
+![Screenshot 2024-03-14 232239](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/671d9e97-ad15-4d45-b124-d0ee48dca387)
 
-![Screenshot 2024-03-06 230834](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/6c329f03-b875-4c0c-870a-28d89f9c72af)
-
-*here we can see how to upload a new post*
-*clicking on the "write about something !" will open a box with the option to upload a post*
-
-![Screenshot 2024-03-06 22503qe3](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/4d801f42-83fe-4f5c-81b2-718e321d7f35)
-
-*here we can see the post upload box*
-
-![Screenshot 2024-03-06 225224](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/593028bc-baab-42e2-bfdb-fe27e320932a)
-
-*here we can see that the psot we upload have the option to edit the post or delete it*
-
-![Screenshot 2024-03-06 225238](https://github.com/Eliaddr119/foobar_part2_web/assets/113431442/e232d4be-35a2-45f2-a239-f99aea3f7362)
-
----
 
 ## How to Run the App
 
