@@ -21,7 +21,7 @@ The FeedPage component in FooBar displays a dynamic feed of posts, showing up to
 - Dark mode - Dark mode is a feature in the FeedPage component of FooBar that provides users with an alternative color scheme for the interface. When enabled, the dark mode changes the background color of the feed page to a dark shade.
  ![Screenshot 2024-03-14 225725](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/6947e118-c9ef-4f67-b6e8-33e5d66d572e)
 - Upload a post - This component is appearing first in the page so the user can quickly share thoughts with his friends.
-- ![Screenshot 2024-03-14 230437](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/561f07f9-7a58-43c7-b9b6-1a5e961fa013)
+  ![Screenshot 2024-03-14 230437](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/561f07f9-7a58-43c7-b9b6-1a5e961fa013)
 - The posts list - When loading the feed page, 25 fresh posts are fetched from the foobar server and are shown to the user.
 - Comment on posts - The user can press the comment button to comment on posts. The new comments are saver on the server.
 - Pressing the comments amount will open the comments section.
