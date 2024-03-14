@@ -71,6 +71,7 @@ To run the app locally, follow these steps:
 
 This command will run the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 
 The page will reload automatically when you make changes.
+You will also need to run the server and Mongo DB
 
 ---
 
