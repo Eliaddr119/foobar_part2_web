@@ -5,10 +5,11 @@ import Navbar from "../Navbar/Navbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import WritePost from "../Post/WritePost";
 import { serverURL } from "../../userService";
+import { Modal } from "bootstrap";
 
 function FeedPage() {
   const location = useLocation();
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (location.pathname === "/FeedPage") {
       getCurrentUser();
@@ -39,6 +40,12 @@ function FeedPage() {
         "Content-Type": "application/json",
       },
     });
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+  }
     const posts = await res.json();
     setPostList(posts);
     
@@ -53,6 +60,12 @@ function FeedPage() {
         "Content-Type": "application/json",
       },
     });
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+  }
     const currentUser = await res.json();
     const userObject = {
       username: currentUser.username,
@@ -73,13 +86,13 @@ function FeedPage() {
     <body data-bs-theme={isDarkMode}>
       <Navbar />
       <div className="row ">
-        <div className="col-4" id="sideCol">
+        <div className="col-3" id="sideCol">
           <div className>
           {currentUser && <SideMenu currentUsr={currentUser}/>}
           </div>
         </div>
 
-        <div class="col-4" id="postCol">
+        <div class="col-6" id="postCol">
           <WritePost currentUser={currentUser} />
           {listOfPosts}
         </div>

@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../PostFeed/Navbar/Navbar";
 import "./UserProfile.css";
 import { serverURL } from "../userService";
@@ -13,6 +13,7 @@ import PasswordEdit from "./ProfileEdit/PasswordEdit";
 import UserDelete from "./ProfileEdit/UserDelete";
 
 function UserProfile() {
+  const navigate = useNavigate();
   const location = useLocation();
   const { userString } = location.state;
   const [userPosts, setUserPosts] = useState([]);
@@ -26,11 +27,11 @@ function UserProfile() {
 
   useEffect(() => {
     checkIfCurrentUserProfile();
-    getFriends();
-    if (areFriends || profileUser.username === currentUser.username) {
+    const currentUserIsFriend=getFriends();
+    if (currentUserIsFriend || profileUser.username === currentUser.username) {
       getUserPosts();
     }
-  }, [username]);
+  }, [username,location]);
 
   const getUserPosts = async () => {
     const token = sessionStorage.getItem("jwt");
@@ -60,10 +61,12 @@ function UserProfile() {
     );
     if (res.status === 409) {
       setAreFriends(false);
+      return false;
     } else {
       const friends = await res.json();
       setFriendList(friends);
       setAreFriends(true);
+      return true;
     }
   };
 
@@ -79,10 +82,16 @@ function UserProfile() {
         },
       }
     );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
   };
 
   const listOfPosts = userPosts.map((post) => {
-    return <Post post={post} id={post.id} />;
+    return <Post post={post} key={post._id} />;
   });
 
   const ifNoPosts = () => {
@@ -92,7 +101,7 @@ function UserProfile() {
   };
 
   const checkIfCurrentUserProfile = () => {
-    if (currentUser.username == profileUser.username) {
+    if (currentUser.username === profileUser.username) {
       setIsCurrentUser(true);
       setProfileUser(currentUser);
     } else {
@@ -113,7 +122,10 @@ function UserProfile() {
             <SideMenu currentUsr={currentUser} />
           </div>
           <div className="col-6">
-            <div className="container d-flex align-items-center" id="nameAndPicContainer">
+            <div
+              className="container d-flex align-items-center"
+              id="nameAndPicContainer"
+            >
               <div className="imageContainer">
                 <img
                   alt=""
@@ -186,7 +198,9 @@ function UserProfile() {
               )}
 
               {!areFriends && (
-                <button className="btn btn-light" onClick={handleFriendAdd}><i className="bi bi-person-add me-2"></i>Add Friend</button>
+                <button className="btn btn-light" onClick={handleFriendAdd}>
+                  <i className="bi bi-person-add me-2"></i>Add Friend
+                </button>
               )}
             </div>
             {listOfPosts}

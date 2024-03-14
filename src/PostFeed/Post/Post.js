@@ -10,7 +10,7 @@ function Post({ post }) {
   const navigate = useNavigate();
   const username = sessionStorage.getItem("username");
   const token = sessionStorage.getItem("jwt");
-  const [commentList, setCommentList] = useState(post.comments);
+  const [commentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
   const jsDate = new Date(post.date);
@@ -25,7 +25,7 @@ function Post({ post }) {
 
   useEffect(() => {
     checkIfCurrentUserLiked();
-  },);
+  });
 
   const [numlikes, setNumlikes] = useState(post.numlikes);
   const [isLiked, setIsLiked] = useState(false);
@@ -44,11 +44,11 @@ function Post({ post }) {
     const likedByList = await res.json();
     const found = likedByList.includes(username);
     if (found) {
-      likeButtonRef.current.classList.add("active");
+      likeButtonRef.current?.classList.add("active");
       setIsLiked(true);
     } else {
       setIsLiked(false);
-      likeButtonRef.current.classList.remove("active");
+      likeButtonRef.current?.classList.remove("active");
     }
   };
 
@@ -75,8 +75,13 @@ function Post({ post }) {
         },
       }
     );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
   };
-
 
   const deletePost = async () => {
     const res = await fetch(
@@ -89,9 +94,14 @@ function Post({ post }) {
         },
       }
     );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
     window.location.reload();
   };
-
 
   const editEligble = () => {
     if (username === post.username) {
@@ -124,6 +134,12 @@ function Post({ post }) {
         body: JSON.stringify(postEditedDetails),
       }
     );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
     setShowEdit(false);
     window.location.reload();
   };
@@ -180,7 +196,7 @@ function Post({ post }) {
 
   return (
     <>
-      <div className="container-fluid" >
+      <div className="container-fluid" id="postContainer">
         <div className="card bg-light" id="postCard">
           <div className="container" id="contentContainer">
             {canEdit && (
@@ -228,7 +244,10 @@ function Post({ post }) {
               </div>
 
               {!showEdit && (
-                <span className="container-fluid fs-4 pb-5" id="contentContainer">
+                <span
+                  className="container-fluid fs-4 pb-5"
+                  id="contentContainer"
+                >
                   {post.content}
                 </span>
               )}
@@ -283,16 +302,16 @@ function Post({ post }) {
 
                   <span className="fs-4 ms-2">{numlikes}</span>
                   <span className="text-end fs-4" id="commentCountText">
-                    <button onClick={()=>setCommentShow(!commentShow)} id="commentsButton">
+                    <button
+                      onClick={() => setCommentShow(!commentShow)}
+                      id="commentsButton"
+                    >
                       {post.numComments} Comments
                     </button>
                   </span>
                 </div>
-                <hr className="my-2" id="divider"/>
-                <div
-                  className="btn-group-lg text-center mb-1"
-                  role="group"
-                >
+                <hr className="my-2" id="divider" />
+                <div className="btn-group-lg text-center mb-1" role="group">
                   <button
                     onClick={handleLikeClick}
                     ref={likeButtonRef}
@@ -352,11 +371,7 @@ function Post({ post }) {
         <AddComment post={post} setOpenWriteComment={setOpenWriteComment} />
       )}
       {commentShow && (
-        <CommentList
-          key={post.id}
-          post={post}
-          commentList={commentList}
-        />
+        <CommentList key={post.id} post={post} commentList={commentList} />
       )}
     </>
   );

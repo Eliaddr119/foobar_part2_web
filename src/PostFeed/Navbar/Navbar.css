@@ -1,22 +1,24 @@
-#navHead{
+#navHead {
     color: white;
-    font-size:50pt;
-    font-family:sans-serif-klavika; 
+    font-size: 50px; /* Adjust the font size as needed */
+    font-family: sans-serif-klavika; 
 }
-.navbar-brand{
-    padding-left: 1%;
+
+.navbar-brand {
+    padding-left: 0; 
 }
+
 #formBar {
     width: 50%;
     margin-right: 1%;
     text-align: end;
 }
 
-#searchBar{
+#searchBar {
     width: 30%;
     text-align: start;
 }
 
-#navForm{
-    margin-right: 79%;
+#navForm {
+    margin-right: 1%;
 }

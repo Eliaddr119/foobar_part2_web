@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { serverURL } from "../../userService";
-function ImageEdit({currentUser}) {
+import { useNavigate } from "react-router-dom";
+
+function ImageEdit({ currentUser }) {
   const [profileImage, setImage] = useState(currentUser.profilePic);
   const [setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -41,10 +44,20 @@ function ImageEdit({currentUser}) {
       },
       body: JSON.stringify(newPic),
     });
-    
-    const currentUserFromStorage = JSON.parse(sessionStorage.getItem("currentUser"));
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
+    const currentUserFromStorage = JSON.parse(
+      sessionStorage.getItem("currentUser")
+    );
     currentUserFromStorage.profilePic = profileImage;
-    sessionStorage.setItem('currentUser',  JSON.stringify(currentUserFromStorage));
+    sessionStorage.setItem(
+      "currentUser",
+      JSON.stringify(currentUserFromStorage)
+    );
     window.location.reload();
   };
   return (
@@ -72,15 +85,15 @@ function ImageEdit({currentUser}) {
                 <h4>New profile picture</h4>
               </label>
               <input
-              type="file"
-              id="imageAdd"
-              name="image"
-              className="input"
-              required
-              onChange={handleImageUpload}
-            />
+                type="file"
+                id="imageAdd"
+                name="image"
+                className="input"
+                required
+                onChange={handleImageUpload}
+              />
             </div>
-            
+
             <img alt="" src={profileImage} className="round-image" />
           </div>
           <div className="modal-footer">

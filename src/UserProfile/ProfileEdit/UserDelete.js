@@ -12,6 +12,12 @@ function UserDelete({ currentUser }) {
         "Content-Type": "application/json",
       },
     });
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
     sessionStorage.clear();
     navigate("/");
   };
@@ -50,7 +56,11 @@ function UserDelete({ currentUser }) {
             >
               Close
             </button>
-            <button className="btn btn-danger" onClick={handleUserDelete} data-bs-dismiss="modal">
+            <button
+              className="btn btn-danger"
+              onClick={handleUserDelete}
+              data-bs-dismiss="modal"
+            >
               Yes, Delete my account
             </button>
           </div>

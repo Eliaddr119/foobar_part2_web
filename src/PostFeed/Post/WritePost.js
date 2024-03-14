@@ -1,11 +1,11 @@
 import "./WritePost.css";
-
-import { Modal } from "bootstrap";
-import { getTodayDate, serverURL } from "../..//userService";
+import { useNavigate } from "react-router-dom";
+import { serverURL } from "../..//userService";
 import { useState } from "react";
-import { json } from "react-router-dom";
+
 
 function WritePost({currentUser}) {
+  const navigate = useNavigate();
   const [postInput, setpostInput] = useState("");
   const [postImage, setImage] = useState("");
   const [setError] = useState(null);
@@ -60,6 +60,12 @@ function WritePost({currentUser}) {
       },
       body: JSON.stringify(newPost),
     });
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+  }
 
     setpostInput("");
     setImage("");

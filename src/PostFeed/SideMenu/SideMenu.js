@@ -17,6 +17,7 @@ function SideMenu({ currentUsr }) {
     navigate(`/UserProfile/${currentUsr.username}`, {
       state: { userString: JSON.stringify(currentUsr) },
     });
+    window.location.reload();
   };
   const handleNavigateToFeed = () => {
     navigate("/FeedPage");

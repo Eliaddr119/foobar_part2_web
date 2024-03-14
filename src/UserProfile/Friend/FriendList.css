@@ -1,7 +1,6 @@
 .FriendList {
     background-color: whitesmoke;
-    border-color: #000000;
-    border-style: outset;
+    
     border-radius: 15px;
     padding: 10px;
 
@@ -9,8 +8,7 @@
 
 .FriendReqList {
     background-color: whitesmoke;
-    border-color: #000000;
-    border-style: outset;
+    
     border-radius: 15px;
     margin-bottom: 50px;
     padding: 10px;

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { serverURL } from "../../userService";
-function DisplayNameEdit({ currentUser }) {
-  const [displayName, setDisplayName] = useState(currentUser.displayName);
+import { useNavigate } from "react-router-dom";
 
+function DisplayNameEdit({ currentUser }) {
+  const navigate = useNavigate();
+  const [displayName, setDisplayName] = useState(currentUser.displayName);
   const handleChange = (event) => {
     const value = event.target.value;
     setDisplayName(value);
@@ -19,9 +21,20 @@ function DisplayNameEdit({ currentUser }) {
       },
       body: JSON.stringify(newDisplayName),
     });
-    const currentUserFromStorage = JSON.parse(sessionStorage.getItem("currentUser"));
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
+    const currentUserFromStorage = JSON.parse(
+      sessionStorage.getItem("currentUser")
+    );
     currentUserFromStorage.displayName = displayName;
-    sessionStorage.setItem('currentUser',  JSON.stringify(currentUserFromStorage));
+    sessionStorage.setItem(
+      "currentUser",
+      JSON.stringify(currentUserFromStorage)
+    );
     window.location.reload();
   };
   return (
@@ -44,7 +57,7 @@ function DisplayNameEdit({ currentUser }) {
             ></button>
           </div>
           <div className="modal-body">
-          <label className="form-label">New display name</label>
+            <label className="form-label">New display name</label>
             <form id="textBoxPost">
               <input
                 className="form-control"

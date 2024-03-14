@@ -3,7 +3,7 @@
     width: 70%;
     margin: 2%;
     border-color: whitesmoke;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 1%;
 
 }
@@ -17,12 +17,13 @@
     
     border-color: transparent;
     border-radius: 25px;
-    width: 100%;
-    border-style: ridge;
+    width: 70%;
+    border-style:initial;
     align-self: start;
     margin-top: 5px;
-    border-color: black;
+    border-color: whitesmoke;
     padding: 1%;
+    border-style:ridge;
     
 }
 

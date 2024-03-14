@@ -19,6 +19,12 @@ const currentUser = JSON.parse(currentUserString);
         "Content-Type": "application/json",
       },
     });
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+  }
     const friendFromServer = await res.json();
     setFriendObject(friendFromServer);
   }
@@ -32,13 +38,19 @@ const currentUser = JSON.parse(currentUserString);
         "Content-Type": "application/json",
       },
     });
+    if (res.status === 401) {
+        window.alert("There was a problem with your account,please login again");
+        sessionStorage.clear();
+        navigate("/");
+        return;
+    }
     window.location.reload();
   }
 
   useEffect(() => {
     getFriend(friend);
     CheckifCurrentUserProfile();
-  }, [friend]);
+  }, );
 
   const CheckifCurrentUserProfile = () => {
     if (currentUser.username === profileUser.username) {
@@ -50,13 +62,14 @@ const currentUser = JSON.parse(currentUserString);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`/UserProfile/${friend}`, {
+    navigate(`/UserProfile/${friendObject.username}`, {
       state: { userString: JSON.stringify(friendObject) },
     });
+    window.location.reload();
   };
   return friendObject ? (
-    <>
-      <span className="friendListItem" onClick={handleNavigate}>
+    <div className="friendListItem">
+      <span  onClick={handleNavigate}>
         <span>
           <img alt="" src={friendObject.profilePic} className="friend-image" />
           <span className="ms-2">{friendObject.displayName}</span>
@@ -76,7 +89,7 @@ const currentUser = JSON.parse(currentUserString);
             <button className="btn btn-light">No</button>
           </div>
         </ul></>}
-    </>
+    </div>
   ) : (
     <p>Loading...</p>
   );

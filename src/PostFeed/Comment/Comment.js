@@ -10,6 +10,16 @@ function Comment({ comment, post }) {
   const [commentInput, setCommentInput] = useState(comment.content);
   const [commentUser, setCommentUser] = useState(null);
 
+  const jsDate = new Date(comment.date);
+  const formattedDate =
+    jsDate.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }) +
+    " " +
+    jsDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+
   useEffect(() => {
     getCommentUser();
     editEligble();
@@ -56,7 +66,7 @@ function Comment({ comment, post }) {
       return;
     }
     const token = sessionStorage.getItem("jwt");
-    const commentEdit = { commentId: comment._id,content:commentInput };
+    const commentEdit = { commentId: comment._id, content: commentInput };
     const res = await fetch(
       serverURL + `/api/users/${comment.username}/posts/${post._id}/comment`,
       {
@@ -115,7 +125,10 @@ function Comment({ comment, post }) {
             alt="avatar1"
             src={commentUser.profilePic}
           />
-          <div className="fs-4 ms-2">{commentUser.displayName}</div>
+          <div className="fs-4 ms-2">
+            {commentUser.displayName}
+            <p className="fs-7 ">{formattedDate}</p>
+          </div>
         </div>
 
         {!showEdit && (
