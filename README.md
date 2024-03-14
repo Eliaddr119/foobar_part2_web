@@ -8,7 +8,7 @@ If you would like to check the server code and run it check this following GitHu
 The SignUp component allows new users to create an account on the platform. It presents a form with fields for entering a username, password, display name and a profile picture. After successful registration, users are directed to the Sign-in page.
 ![Screenshot 2024-03-14 224057](https://github.com/Eliaddr119/foobar_part2_web/assets/120579427/73c4e5ea-a98e-4620-af41-c79de55638f1)
 
-### SignUp 📝
+### SignIn 🔐
 The SignIn component provides a form for users to authenticate themselves and access the platform. It includes fields for entering their username and password. Upon successful authentication, users are redirected to the FeedPage.
 
 ### FeedPage 📰
