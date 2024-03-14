@@ -82,7 +82,6 @@ function WritePost({currentUser}) {
       <div
         className="modal fade"
         id="postModal"
-        tabindex="-1"
         aria-labelledby="postModalLabel"
         aria-hidden="true"
       >

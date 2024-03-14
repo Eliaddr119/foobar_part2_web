@@ -101,7 +101,7 @@ function FeedPage() {
   };
 
   const listOfPosts = postList.map((post) => {
-    return <Post post={post} id={post.id} />;
+    return <Post post={post} key={post._id} />;
   });
 
   return (
@@ -109,12 +109,12 @@ function FeedPage() {
       <Navbar />
       <div className="row ">
         <div className="col-3" id="sideCol">
-          <div className>
+          <div >
             {currentUser && <SideMenu currentUsr={currentUser} />}
           </div>
         </div>
 
-        <div class="col-6" id="postCol">
+        <div className="col-6" id="postCol">
           <WritePost currentUser={currentUser} />
           {listOfPosts}
         </div>
@@ -128,7 +128,7 @@ function FeedPage() {
               checked={isChecked}
               onChange={handleSwitchChange}
             />
-            <label class="form-check-label" for="flexSwitchCheckDefault">
+            <label className="form-check-label" >
               dark Mode
             </label>
           </div>

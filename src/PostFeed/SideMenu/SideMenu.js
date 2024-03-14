@@ -42,7 +42,7 @@ function SideMenu({ currentUsr }) {
           className="list-group-item d-flex align-items-start ms-3 pt-4 pb-4"
           onClick={handleNavigateToFeed}
         >
-          <i class="ps-2 bi bi-house-fill"></i>
+          <i className="ps-2 bi bi-house-fill"></i>
           <span className="ms-3 fs-3">Home</span>
         </li>
         <li className="list-group-item d-flex align-items-start ms-3  pt-4 pb-4">

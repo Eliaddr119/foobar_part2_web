@@ -200,7 +200,7 @@ function Post({ post }) {
         <div className="card bg-light" id="postCard">
           <div className="container" id="contentContainer">
             {canEdit && (
-              <div class="btn-group" id="editOptions">
+              <div className="btn-group" id="editOptions">
                 <button
                   className="btn btn-success btn-sm dropdown-toggle"
                   type="button"
@@ -262,7 +262,7 @@ function Post({ post }) {
                   ></input>
 
                   <div>
-                    <label htmlFor="fileInput" className="imageUpLabel">
+                    <label  className="imageUpLabel">
                       <h4>Upload An Image</h4>
                     </label>
                   </div>
@@ -368,10 +368,10 @@ function Post({ post }) {
         </div>
       </div>
       {commentShow && (
-        <CommentList key={post.id} post={post} commentList={commentList} />
+        <CommentList key={post._id} post={post} commentList={commentList} />
       )}
       {!showEdit && openWriteComment && (
-        <AddComment post={post} setOpenWriteComment={setOpenWriteComment} />
+        <AddComment key={post._id} post={post} setOpenWriteComment={setOpenWriteComment} />
       )}
       
     </>
