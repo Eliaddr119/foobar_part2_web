@@ -131,7 +131,7 @@ function UserProfile() {
       <Navbar />
       <div className="container-fluid">
         <div className="row">
-          <div className="col">
+          <div className="col-3">
             <SideMenu currentUsr={currentUser} />
           </div>
           <div className="col-6">
