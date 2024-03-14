@@ -1,11 +1,13 @@
 import "./AddComment.css";
 import { useState } from "react";
 import { serverURL } from "../../userService";
+import { useNavigate } from "react-router-dom";
 
 function AddComment({ post, setOpenWriteComment }) {
   const [commentInput, setCommentInput] = useState("");
   const username = sessionStorage.getItem("username");
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (commentInput === "") {
@@ -26,6 +28,12 @@ function AddComment({ post, setOpenWriteComment }) {
         body: JSON.stringify(newComment),
       }
     );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
     setCommentInput("");
     setOpenWriteComment(false);
   };
@@ -54,7 +62,7 @@ function AddComment({ post, setOpenWriteComment }) {
           <button
             id="commentPublishButton"
             className="btn btn-outline-success"
-            type="submit"
+            type="button"
             onClick={handleSubmit}
           >
             publish

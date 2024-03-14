@@ -367,12 +367,13 @@ function Post({ post }) {
           </div>
         </div>
       </div>
-      {!showEdit && openWriteComment && (
-        <AddComment post={post} setOpenWriteComment={setOpenWriteComment} />
-      )}
       {commentShow && (
         <CommentList key={post.id} post={post} commentList={commentList} />
       )}
+      {!showEdit && openWriteComment && (
+        <AddComment post={post} setOpenWriteComment={setOpenWriteComment} />
+      )}
+      
     </>
   );
 }

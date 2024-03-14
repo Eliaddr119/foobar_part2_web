@@ -21,17 +21,28 @@ function UserProfile() {
   const [areFriends, setAreFriends] = useState(false);
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [profileUser, setProfileUser] = useState(JSON.parse(userString));
+  const [isDarkMode, setIsDarkMode] = useState("light");
+  const [isChecked, setIsChecked] = useState(false);
 
   const { username } = useParams();
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
   useEffect(() => {
     checkIfCurrentUserProfile();
-    const currentUserIsFriend=getFriends();
+    const currentUserIsFriend = getFriends();
     if (currentUserIsFriend || profileUser.username === currentUser.username) {
       getUserPosts();
     }
-  }, [username,location]);
+  }, [username, location]);
+
+  const handleSwitchChange = () => {
+    setIsChecked(!isChecked);
+    if (!isChecked) {
+      setIsDarkMode("dark");
+    } else {
+      setIsDarkMode("light");
+    }
+  };
 
   const getUserPosts = async () => {
     const token = sessionStorage.getItem("jwt");
@@ -59,6 +70,12 @@ function UserProfile() {
         },
       }
     );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
     if (res.status === 409) {
       setAreFriends(false);
       return false;
@@ -90,10 +107,6 @@ function UserProfile() {
     }
   };
 
-  const listOfPosts = userPosts.map((post) => {
-    return <Post post={post} key={post._id} />;
-  });
-
   const ifNoPosts = () => {
     if (areFriends && userPosts.length === 0) {
       return <h2>No posts yet</h2>;
@@ -110,7 +123,7 @@ function UserProfile() {
   };
 
   return (
-    <>
+    <body data-bs-theme={isDarkMode}>
       <ImageEdit currentUser={currentUser}></ImageEdit>
       <DisplayNameEdit currentUser={currentUser}></DisplayNameEdit>
       <PasswordEdit currentUser={currentUser}></PasswordEdit>
@@ -145,7 +158,7 @@ function UserProfile() {
                 )}
               </div>
 
-              <h5 className=" ms-2 pb-4" id="profile-display-name">
+              <h5 className="ms-2 pb-4" id="profile-display-name">
                 {profileUser.displayName}
               </h5>
 
@@ -203,11 +216,25 @@ function UserProfile() {
                 </button>
               )}
             </div>
-            {listOfPosts}
-            {ifNoPosts}
+            {areFriends &&
+              userPosts.map((post) => <Post post={post} key={post._id} />)}
+
+            {ifNoPosts()}
           </div>
 
           <div className="col-3" id="friendsCol">
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="switch"
+                checked={isChecked}
+                onChange={handleSwitchChange}
+              />
+              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+                Dark Mode
+              </label>
+            </div>
             {isCurrentUser && (
               <FriendRequest
                 username={profileUser.username}
@@ -220,7 +247,7 @@ function UserProfile() {
           </div>
         </div>
       </div>
-    </>
+    </body>
   );
 }
 export default UserProfile;

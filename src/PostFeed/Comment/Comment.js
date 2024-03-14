@@ -2,8 +2,10 @@ import "./Comment.css";
 import "../Post/Post";
 import { useState, useEffect } from "react";
 import { serverURL } from "../../userService";
+import { useNavigate } from "react-router-dom";
 
 function Comment({ comment, post }) {
+  const navigate = useNavigate();
   const currentUsername = sessionStorage.getItem("username");
   const [canEdit, setCanEdit] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -78,6 +80,12 @@ function Comment({ comment, post }) {
         body: JSON.stringify(commentEdit),
       }
     );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
     window.location.reload();
     setShowEdit(false);
   };

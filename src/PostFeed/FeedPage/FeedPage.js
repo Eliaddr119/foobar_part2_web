@@ -5,23 +5,46 @@ import Navbar from "../Navbar/Navbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import WritePost from "../Post/WritePost";
 import { serverURL } from "../../userService";
+import FriendRequest from "../../UserProfile/Friend/FriendRequestList";
+import FriendList from "../../UserProfile/Friend/FriendList";
 import { Modal } from "bootstrap";
 
 function FeedPage() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [friendList, setFriendList] = useState([]);
+  const username = sessionStorage.getItem("username");
+
   useEffect(() => {
     if (location.pathname === "/FeedPage") {
       getCurrentUser();
+      getFriends();
       getPosts();
-
     }
   }, [location]);
+
+  const getFriends = async () => {
+    const token = sessionStorage.getItem("jwt");
+    const res = await fetch(serverURL + `/api/users/${username}/friends`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
+    const friends = await res.json();
+    setFriendList(friends);
+  };
 
   const [postList, setPostList] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState("light");
   const [isChecked, setIsChecked] = useState(false);
-  const [currentUser,setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const handleSwitchChange = () => {
     setIsChecked(!isChecked);
@@ -45,10 +68,9 @@ function FeedPage() {
       sessionStorage.clear();
       navigate("/");
       return;
-  }
+    }
     const posts = await res.json();
     setPostList(posts);
-    
   };
 
   const getCurrentUser = async () => {
@@ -65,7 +87,7 @@ function FeedPage() {
       sessionStorage.clear();
       navigate("/");
       return;
-  }
+    }
     const currentUser = await res.json();
     const userObject = {
       username: currentUser.username,
@@ -88,7 +110,7 @@ function FeedPage() {
       <div className="row ">
         <div className="col-3" id="sideCol">
           <div className>
-          {currentUser && <SideMenu currentUsr={currentUser}/>}
+            {currentUser && <SideMenu currentUsr={currentUser} />}
           </div>
         </div>
 
@@ -97,7 +119,7 @@ function FeedPage() {
           {listOfPosts}
         </div>
 
-        <div className="col-3" id="darkModeSwitch">
+        <div className="col-3" id="friendsCol">
           <div className="form-check form-switch">
             <input
               className="form-check-input"
@@ -110,6 +132,11 @@ function FeedPage() {
               dark Mode
             </label>
           </div>
+          <FriendRequest
+            username={username}
+            key={username}
+          />
+          <FriendList friendList={friendList} profileUser={currentUser} />
         </div>
       </div>
     </body>
