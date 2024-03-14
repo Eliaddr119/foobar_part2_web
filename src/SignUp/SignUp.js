@@ -4,6 +4,8 @@ import passwordIcon from '../Assets/password.png';
 import imgIcon from '../Assets/image.svg';
 import { useNavigate, Link } from 'react-router-dom';
 import './SignUp.css';
+import '../userService';
+import { serverURL } from '../userService';
 
 function SignUp() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -11,7 +13,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [error, setError] = useState(null);
   const nevigate = useNavigate();
   useEffect(() => {
@@ -24,7 +26,7 @@ function SignUp() {
     const file = event.target.files[0];
 
     if (!file) {
-      setImage(null)
+      setImage("")
       return;
     }
     // Check if the file is an image
@@ -40,13 +42,13 @@ function SignUp() {
     const reader = new FileReader();
 
     reader.onload = () => {
-      setImage(reader.result);
+      setImage("data:image/jpeg;base64,"+reader.result.split(',')[1]);
     };
 
     reader.readAsDataURL(file);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async function(event)  {
     event.preventDefault();
 
     const isPasswordIsStrong = passwordStrength(password);
@@ -62,23 +64,21 @@ function SignUp() {
       return;
     }
 
-    const user = { username, password, displayName, image };
+    const user = { username, password, displayName, profilePic:image };
 
     try {
-      // Retrieve the users array from session storage
-      const storedUsers = JSON.parse(sessionStorage.getItem('users')) || [];
-
-      // Check if the username already exists
-      const existingUser = storedUsers.find(user => user.username === username);
-      if (existingUser) {
+      
+      const res = await fetch(serverURL+"/api/users", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+      if (res.status === 409) {
         setError('Username already exists.');
         return;
       }
-      // Add the new user to the array
-      storedUsers.push(user);
-
-      // Save the updated users array to local storage
-      sessionStorage.setItem('users', JSON.stringify(storedUsers));
 
       setIsSuccess(true);
       // Handle successful signup
@@ -92,7 +92,7 @@ function SignUp() {
       setPassword('');
       setConfirmPassword('');
       setDisplayName('');
-      setImage(null);
+      setImage("");
       nevigate('/SignIn');
 
       // ... (e.g., redirect to a different page or display a success message)
@@ -127,7 +127,7 @@ function SignUp() {
           <div className='card-header'>Create a new account</div>
           {isSuccess && <div className="success-message">Signup successful!</div>}
           <div className='card-body'>
-            <form onSubmit={onSubmit}>
+            <form action='/api/users' method='post'>
               {error && <div className="error-message">{error}</div>}
               <div className="input-wrapper">
                 <input type='text' placeholder='Username' className='input-field' required value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -158,7 +158,7 @@ function SignUp() {
               </div>
               <br />
               {image && <img src={image} alt='' className='uploaded-image' />}
-              <button id="signUpButton" type='submit'>Sign Up</button>
+              <button id="signUpButton" onClick={onSubmit}>Sign Up</button>
               <div className='text-center'>
               <text>Back to Sign In </text>
               <Link to="/SignIn">

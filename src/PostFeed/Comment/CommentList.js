@@ -1,20 +1,8 @@
 import Comment from "../Comment/Comment.js";
 
-function CommentList(
-  {post,
-  countComments,
-  setCommentCount,
-  setCommentList,
-  commentList,
-}
-) {
-
-
-  
-
+function CommentList({ post, commentList }) {
   return commentList.map((comment) => (
-
-      <Comment key={comment.id} commentList={commentList} setCommentList={setCommentList} countComments={countComments} setCommentCount={setCommentCount} comment={comment} />
+    <Comment key={comment._id} comment={comment} post={post} />
   ));
 }
 export default CommentList;
