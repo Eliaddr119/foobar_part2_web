@@ -52,7 +52,7 @@
 
 }
 
-#profileNavigate:hover{
+#profileNavigate:hover {
     cursor: pointer;
 }
 
@@ -64,55 +64,56 @@
     padding-top: 1%;
     padding-bottom: 0px;
     border-radius: 10px;
-    border-style:ridge;
+    border-style: ridge;
     color: black;
-    
-    
-}
-
-
-#postImage {
-    object-fit: contain;
-    /* Or "contain" or "fill" */
-    width: 100%;
-    height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 #imageContainer {
+    flex: 1;
+    overflow: hidden;
     margin-top: 1%;
-    width: 100% ;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0px;
 }
 
-#postEditConfirm{
+#postImage {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Maintain aspect ratio and fit within the container */
+}
+
+#postEditConfirm {
     float: right;
     width: 20%;
 }
 
-#postEditCancelButton{
+#postEditCancelButton {
     float: right;
     margin-right: 1%;
     margin-bottom: 5px;
 }
 
-#btnGroupButton{
+#btnGroupButton {
     border-color: transparent;
     border-radius: 10px;
 }
 
-#contentContainer{
+#contentContainer {
     padding: 0%;
 }
 
-#divider{
+#divider {
     width: 97%;
     margin: 0 auto;
 }
 
-#postContainer{
+#postContainer {
     padding: 0%;
 }
-

@@ -36,6 +36,7 @@ function AddComment({ post, setOpenWriteComment }) {
     }
     setCommentInput("");
     setOpenWriteComment(false);
+    window.location.reload();
   };
   const handleChange = (event) => {
     const value = event.target.value;
