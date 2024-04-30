@@ -140,6 +140,12 @@ function Post({ post }) {
       navigate("/");
       return;
     }
+    if (res.status === 410) {
+      window.alert(
+        "Alert: The following post was denied due to containing a dangerous link"
+      );
+      return;
+    }
     setShowEdit(false);
     window.location.reload();
   };
@@ -262,7 +268,7 @@ function Post({ post }) {
                   ></input>
 
                   <div>
-                    <label  className="imageUpLabel">
+                    <label className="imageUpLabel">
                       <h4>Upload An Image</h4>
                     </label>
                   </div>
@@ -371,9 +377,12 @@ function Post({ post }) {
         <CommentList key={post._id} post={post} commentList={commentList} />
       )}
       {!showEdit && openWriteComment && (
-        <AddComment key={post._id} post={post} setOpenWriteComment={setOpenWriteComment} />
+        <AddComment
+          key={post._id}
+          post={post}
+          setOpenWriteComment={setOpenWriteComment}
+        />
       )}
-      
     </>
   );
 }

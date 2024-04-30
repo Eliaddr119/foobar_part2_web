@@ -67,6 +67,11 @@ function WritePost({currentUser}) {
       return;
   }
 
+  if (res.status === 410) {
+    window.alert("Alert: The following post was denied due to containing a dangerous link");
+    return;
+}
+
     setpostInput("");
     setImage("");
     window.location.reload();
