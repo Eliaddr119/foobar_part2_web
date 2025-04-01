@@ -44,7 +44,7 @@ export const getTodayDate = () => {
 
 export const passwordMatch = (password, confirmPassword) => {
   return password === confirmPassword;
-}
+};
 
 export const passwordStrength = (password) => {
   const hasUppercase = /[A-Z]/.test(password);
@@ -54,3 +54,6 @@ export const passwordStrength = (password) => {
 
   return hasUppercase && hasLowercase && hasNumber && hasMinLength;
 };
+
+export const serverURL = "http://localhost:8080";
+

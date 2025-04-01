@@ -1,56 +1,155 @@
 import "./Post.css";
 import "../Comment/Comment.js";
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import AddComment from "../Comment/AddComment.js";
 import CommentList from "../Comment/CommentList.js";
+import { serverURL } from "../../userService.js";
+import { useNavigate } from "react-router-dom";
 
-function Post({ post, postsList, setPostsList }) {
-  const storedUserObject = sessionStorage.getItem("current_usr");
-  const currentUser = JSON.parse(storedUserObject);
-  const [commentList, setCommentList] = useState(post.comments);
+function Post({ post }) {
+  const navigate = useNavigate();
+  const username = sessionStorage.getItem("username");
+  const token = sessionStorage.getItem("jwt");
+  const [commentList] = useState(post.comments);
   const [commentShow, setCommentShow] = useState(false);
   const [openWriteComment, setOpenWriteComment] = useState(false);
+  const jsDate = new Date(post.date);
+  const formattedDate =
+    jsDate.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }) +
+    " " +
+    jsDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
 
-  const deletePost = () => {
-    setPostsList((prevList) => prevList.filter((item) => item.id !== post.id));
-  };
+  useEffect(() => {
+    checkIfCurrentUserLiked();
+  });
 
-  const [countComments, setCommentCount] = useState(Number(post.commentsCount));
-
-  var likeinit = Number(post.likes);
-  const [likes, setLikes] = useState(likeinit);
+  const [numlikes, setNumlikes] = useState(post.numlikes);
+  const [isLiked, setIsLiked] = useState(false);
   const likeButtonRef = useRef(null);
-  const handleLikeClick = () => {
-    if (likes === post.likes) {
-      setLikes(likes + 1);
-      likeButtonRef.current.classList.toggle("active");
+
+  const checkIfCurrentUserLiked = async () => {
+    const res = await fetch(
+      serverURL + `/api/users/${post.username}/posts/${post._id}/like`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const likedByList = await res.json();
+    const found = likedByList.includes(username);
+    if (found) {
+      likeButtonRef.current?.classList.add("active");
+      setIsLiked(true);
     } else {
-      setLikes(likes - 1);
-      likeButtonRef.current.classList.remove("active");
+      setIsLiked(false);
+      likeButtonRef.current?.classList.remove("active");
     }
   };
+
+  const handleLikeClick = async () => {
+    var serverCommand;
+    if (isLiked === false) {
+      serverCommand = "PATCH";
+      likeButtonRef.current.classList.toggle("active");
+      setNumlikes(numlikes + 1);
+      setIsLiked(true);
+    } else {
+      serverCommand = "DELETE";
+      likeButtonRef.current.classList.remove("active");
+      setNumlikes(numlikes - 1);
+      setIsLiked(false);
+    }
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post._id}/like`,
+      {
+        method: `${serverCommand}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
+  };
+
+  const deletePost = async () => {
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
+    window.location.reload();
+  };
+
   const editEligble = () => {
-    if (currentUser.username === post.user.username) {
+    if (username === post.username) {
       return true;
     }
     return false;
   };
 
   const [canEdit] = useState(editEligble);
-
   const [showEdit, setShowEdit] = useState(false);
   const [postInput, setPostInput] = useState(post.content);
-  const handleSubmit = (event) => {
+
+  const handleEdit = async (event) => {
     event.preventDefault();
     if (postInput === "") {
       return;
     }
-    post.content = postInput;
-    post.image = postImage;
-    setPostsList(postsList);
+    const postEditedDetails = {
+      content: postInput,
+      image: postImage,
+    };
+    const res = await fetch(
+      serverURL + `/api/users/${username}/posts/${post._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postEditedDetails),
+      }
+    );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
+    if (res.status === 410) {
+      window.alert(
+        "Alert: The following post was denied due to containing a dangerous link"
+      );
+      return;
+    }
     setShowEdit(false);
+    window.location.reload();
   };
+
   const handleChange = (event) => {
     const value = event.target.value;
     setPostInput(value);
@@ -63,7 +162,7 @@ function Post({ post, postsList, setPostsList }) {
     const file = event.target.files[0];
 
     if (!file) {
-      setImage(null);
+      setImage("");
       return;
     }
     // Check if the file is an image
@@ -79,7 +178,7 @@ function Post({ post, postsList, setPostsList }) {
     const reader = new FileReader();
 
     reader.onload = () => {
-      setImage(reader.result);
+      setImage("data:image/jpeg;base64," + reader.result.split(",")[1]);
     };
 
     reader.readAsDataURL(file);
@@ -88,26 +187,37 @@ function Post({ post, postsList, setPostsList }) {
   const handleEditCancel = () => {
     setPostInput(post.content);
     setShowEdit(false);
-  }
+  };
+
+  const handleProfileNavigate = () => {
+    const currentUsr = {
+      username: post.username,
+      profilePic: post.profilePic,
+      displayName: post.displayName,
+    };
+    navigate(`/UserProfile/${currentUsr.username}`, {
+      state: { userString: JSON.stringify(currentUsr) },
+    });
+  };
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid" id="postContainer">
         <div className="card bg-light" id="postCard">
-          <div className="container">
+          <div className="container" id="contentContainer">
             {canEdit && (
-              <div class="btn-group" id="editOptions">
+              <div className="btn-group" id="editOptions">
                 <button
-                  class="btn btn-success btn-sm dropdown-toggle"
+                  className="btn btn-success btn-sm dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Post Options
                 </button>
-                <ul class="dropdown-menu text-center">
+                <ul className="dropdown-menu text-center">
                   <li>
-                    <button class="dropdown-item" onClick={deletePost}>
+                    <button className="dropdown-item" onClick={deletePost}>
                       Delete Post
                     </button>
                   </li>
@@ -123,25 +233,32 @@ function Post({ post, postsList, setPostsList }) {
               </div>
             )}
             <div className="container-fluid">
-              <div className="d-flex">
+              <div
+                className="d-flex"
+                id="profileNavigate"
+                onClick={handleProfileNavigate}
+              >
                 <img
                   className="rounded-circle"
                   alt="avatar1"
-                  src={post.user.image}
+                  src={post.profilePic}
                 />
                 <h5 className="fs-2 ms-2 pb-4">
-                  {post.user.displayName}
-                  <p className="fs-5 ">{post.postTime}</p>
+                  {post.displayName}
+                  <p className="fs-5 ">{formattedDate}</p>
                 </h5>
               </div>
 
               {!showEdit && (
-                <span className="container-fluid fs-3 pb-5">
+                <span
+                  className="container-fluid fs-4 pb-5"
+                  id="contentContainer"
+                >
                   {post.content}
                 </span>
               )}
               {showEdit && (
-                <form id="textBoxPost" onSubmit={handleSubmit}>
+                <form id="textBoxPost" onSubmit={handleEdit}>
                   <input
                     name="postContent"
                     value={postInput}
@@ -151,7 +268,7 @@ function Post({ post, postsList, setPostsList }) {
                   ></input>
 
                   <div>
-                    <label htmlFor="fileInput" className="imageUpLabel">
+                    <label className="imageUpLabel">
                       <h4>Upload An Image</h4>
                     </label>
                   </div>
@@ -184,29 +301,23 @@ function Post({ post, postsList, setPostsList }) {
             {!showEdit && (
               <>
                 <div className="container" id="imageContainer">
-                  <img alt="" src={post.image} id="postImage" />
+                  <img alt="" src={postImage} id="postImage" />
                 </div>
                 <div className="ms-2 pt-2">
-              <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
+                  <i className="fs-4 bi bi-hand-thumbs-up-fill"></i>
 
-              <span className="fs-4 ms-2">{likes}</span>
-              <span className="text-end fs-4" id="commentCountText">
-                <button
-                  onClick={() => setCommentShow(!commentShow)}
-                  id="commentsButton"
-                >
-                  {countComments} Comments
-                </button>
-              </span>
-            </div>
-
-
-
-                <div
-                  className="btn-group-lg text-center mt-3 mb-3"
-                  role="group"
-                >
-                  
+                  <span className="fs-4 ms-2">{numlikes}</span>
+                  <span className="text-end fs-4" id="commentCountText">
+                    <button
+                      onClick={() => setCommentShow(!commentShow)}
+                      id="commentsButton"
+                    >
+                      {post.numComments} Comments
+                    </button>
+                  </span>
+                </div>
+                <hr className="my-2" id="divider" />
+                <div className="btn-group-lg text-center mb-1" role="group">
                   <button
                     onClick={handleLikeClick}
                     ref={likeButtonRef}
@@ -224,43 +335,52 @@ function Post({ post, postsList, setPostsList }) {
                     <i className=" me-2 bi bi-chat-left-fill"></i>
                     Comment
                   </button>
-                  <button type="button" className="btn btn-outline-success" data-bs-toggle="dropdown" aria-expanded="false" id="btnGroupButton">
+                  <button
+                    type="button"
+                    className="btn btn-outline-success"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    id="btnGroupButton"
+                  >
                     <i className="me-2 bi bi-share-fill"></i>
                     Share
                     <div className="dropdown">
-      <ul className="dropdown-menu">
-        <li><button className="dropdown-item"> <i class="bi bi-reply"></i> Share now (friends)</button></li>
-        <li><button className="dropdown-item"> <i class="bi bi-pencil-square"></i> Share to feed</button></li>
-        <li><button className="dropdown-item"> <i class="bi bi-link"></i>  Copy link</button></li>
-      </ul>     
-    </div>
+                      <ul className="dropdown-menu">
+                        <li>
+                          <button className="dropdown-item">
+                            {" "}
+                            <i class="bi bi-reply"></i> Share now (friends)
+                          </button>
+                        </li>
+                        <li>
+                          <button className="dropdown-item">
+                            {" "}
+                            <i class="bi bi-pencil-square"></i> Share to feed
+                          </button>
+                        </li>
+                        <li>
+                          <button className="dropdown-item">
+                            {" "}
+                            <i class="bi bi-link"></i> Copy link
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
                   </button>
                 </div>
               </>
             )}
-            
           </div>
         </div>
       </div>
+      {commentShow && (
+        <CommentList key={post._id} post={post} commentList={commentList} />
+      )}
       {!showEdit && openWriteComment && (
         <AddComment
+          key={post._id}
           post={post}
-          setCommentList={setCommentList}
-          commentList={commentList}
-          setCommentCount={setCommentCount}
-          countComments={countComments}
-          setCommentShow={setCommentShow}
           setOpenWriteComment={setOpenWriteComment}
-        />
-      )}
-      {commentShow && (
-        <CommentList
-          key={post.id}
-          post={post}
-          countComments={countComments}
-          setCommentCount={setCommentCount}
-          setCommentList={setCommentList}
-          commentList={commentList}
         />
       )}
     </>

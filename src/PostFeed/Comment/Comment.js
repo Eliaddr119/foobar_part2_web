@@ -1,52 +1,101 @@
 import "./Comment.css";
 import "../Post/Post";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { serverURL } from "../../userService";
+import { useNavigate } from "react-router-dom";
 
-function Comment({
-  commentList,
-  setCommentList,
-  countComments,
-  setCommentCount,
-  comment,
-}) {
-  const storedUserObject = sessionStorage.getItem("current_usr");
-  const currentUser = JSON.parse(storedUserObject);
+function Comment({ comment, post }) {
+  const navigate = useNavigate();
+  const currentUsername = sessionStorage.getItem("username");
+  const [canEdit, setCanEdit] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [commentInput, setCommentInput] = useState(comment.content);
+  const [commentUser, setCommentUser] = useState(null);
 
-  const deleteComment = () => {
-    console.log(commentList)
-    setCommentList((prevList) =>
-      prevList.filter((item) => item.id !== comment.id)
+  const jsDate = new Date(comment.date);
+  const formattedDate =
+    jsDate.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }) +
+    " " +
+    jsDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+
+  useEffect(() => {
+    getCommentUser();
+    editEligble();
+  }, []);
+
+  const getCommentUser = async () => {
+    const token = sessionStorage.getItem("jwt");
+    const res = await fetch(serverURL + `/api/users/${comment.username}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const userFromServer = await res.json();
+    setCommentUser(userFromServer);
+  };
+
+  const deleteComment = async () => {
+    const token = sessionStorage.getItem("jwt");
+    const commentId = { commentId: comment._id };
+    const res = await fetch(
+      serverURL + `/api/users/${comment.username}/posts/${post._id}/comment`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentId),
+      }
     );
-    setCommentCount(countComments - 1);
+    window.location.reload();
   };
 
   const editEligble = () => {
-    if (currentUser.username === comment.user.username) {
-      return true;
+    if (currentUsername === comment.username) {
+      return setCanEdit(true);
     }
-    return false;
+    return setCanEdit(false);
   };
 
-  const [canEdit] = useState(editEligble);
-  const [showEdit, setShowEdit] = useState(false);
-  const [commentInput, setCommentInput] = useState(comment.content);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleCommentEdit = async () => {
     if (commentInput === "") {
       return;
     }
-    comment.content = commentInput;
-    setCommentList(commentList);
+    const token = sessionStorage.getItem("jwt");
+    const commentEdit = { commentId: comment._id, content: commentInput };
+    const res = await fetch(
+      serverURL + `/api/users/${comment.username}/posts/${post._id}/comment`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentEdit),
+      }
+    );
+    if (res.status === 401) {
+      window.alert("There was a problem with your account,please login again");
+      sessionStorage.clear();
+      navigate("/");
+      return;
+    }
+    window.location.reload();
     setShowEdit(false);
-
   };
+
   const handleChange = (event) => {
     const value = event.target.value;
     setCommentInput(value);
   };
 
-  return (
+  return commentUser ? (
     <div className="card text-bg-light" id="commentCard">
       <div className="container">
         {canEdit && (
@@ -82,11 +131,11 @@ function Comment({
             id="commentImage"
             className="rounded-circle"
             alt="avatar1"
-            src={comment.user.image}
+            src={commentUser.profilePic}
           />
           <div className="fs-4 ms-2">
-            {comment.user.displayName}
-            <p className="fs-5 ">{comment.commentTime}</p>
+            {commentUser.displayName}
+            <p className="fs-7 ">{formattedDate}</p>
           </div>
         </div>
 
@@ -95,7 +144,7 @@ function Comment({
         )}
         {showEdit && (
           <span className="container-fluid fs-4">
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={handleCommentEdit}>
               <input
                 name="commentContent"
                 id="commentEditInput"
@@ -109,9 +158,13 @@ function Comment({
               >
                 Confirm
               </button>
-              <button className="btn btn-outline-secondary" id="commentEditCancelButton" onClick={() => setShowEdit(false)}>
-                  Cancel
-                </button>
+              <button
+                className="btn btn-outline-secondary"
+                id="commentEditCancelButton"
+                onClick={() => setShowEdit(false)}
+              >
+                Cancel
+              </button>
             </form>
           </span>
         )}
@@ -119,6 +172,8 @@ function Comment({
         <div className="ms-2 pt-2"></div>
       </div>
     </div>
+  ) : (
+    <p>Loading comment...</p>
   );
 }
 export default Comment;

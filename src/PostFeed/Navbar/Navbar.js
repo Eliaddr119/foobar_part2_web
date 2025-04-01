@@ -1,21 +1,20 @@
-import "./Navbar.css"
+import "./Navbar.css";
 function Navbar() {
   return (
-    <nav className="navbar fixed-top bg-success ">
-      <div className="container-fluid  ">
-        <a className="navbar-brand "><h1 id="navHead">FooBar</h1></a>
-        
-        <form className= " me-2 form-control-lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example" role="search" id="formBar">
+    <nav className="navbar sticky-top bg-success">
+      <a className="navbar-brand">
+        <h1 id="navHead">FooBar</h1>
+      </a>
+      <div className="d-flex align-items-center">
+        <form className="d-flex align-items-center" id="navForm">
           <input
+            className="form-control me-2"
             type="search"
             placeholder="Search FooBar"
             aria-label="Search"
-            id="searchBar"
-          />
-          <button className="btn btn-outline-light">
-            Search
-          </button>
+          ></input>
         </form>
+        <button className="btn btn-outline-light">Search</button>
       </div>
     </nav>
   );
